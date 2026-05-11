@@ -72,10 +72,10 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--sans);backgro
 .SBAV{width:32px;height:32px;border-radius:50%;background:rgba(52,131,250,.15);border:1px solid rgba(52,131,250,.3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--b);font-family:var(--mono);flex-shrink:0;}
 .SBUN{font-size:11px;font-weight:600;color:var(--t1);}
 .SBBG{display:inline-block;background:rgba(29,158,117,.12);color:#1D9E75;border-radius:3px;padding:1px 5px;font-size:9px;font-family:var(--mono);font-weight:700;margin-top:2px;}
-.NS{padding:3px 12px 2px;font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.3);letter-spacing:.1em;text-transform:uppercase;margin-top:10px;font-weight:700;}
-.NI{display:flex;align-items:center;gap:7px;padding:7px 12px;font-size:11px;color:var(--t3);cursor:pointer;border-left:2px solid transparent;transition:all .12s;font-weight:500;user-select:none;}
+.NS{padding:3px 12px 2px;font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.55);letter-spacing:.1em;text-transform:uppercase;margin-top:10px;font-weight:700;}
+.NI{display:flex;align-items:center;gap:7px;padding:7px 12px;font-size:11px;color:#8AAAC8;cursor:pointer;border-left:2px solid transparent;transition:all .12s;font-weight:500;user-select:none;}
 .NI:hover,.NI.on{color:var(--b);background:rgba(52,131,250,.06);border-left-color:var(--b);}
-.NSU{padding:4px 12px 4px 30px;font-size:10px;color:#263545;cursor:pointer;transition:color .1s;}
+.NSU{padding:4px 12px 4px 30px;font-size:10px;color:#5A7A9A;cursor:pointer;transition:color .1s;}
 .NSU:hover{color:var(--b);}
 .NSEP{height:.5px;background:rgba(52,131,250,.09);margin:8px 0;}
 .SBF{margin-top:auto;padding:10px;border-top:.5px solid var(--bdr);}
@@ -332,6 +332,9 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--sans);backgro
       <div class="NSU" onclick="go('acc')">↳ Service Accounts</div>
       <div class="NSU" onclick="go('acc')">↳ Shield tickets</div>
       <div class="NI" onclick="go('n8n')">🔄 Flujos n8n</div>
+      <div class="NI" onclick="go('portal')">🌐 Portal BI</div>
+      <div class="NI" onclick="go('prompts')">🧠 Prompts</div>
+      <div class="NI" onclick="go('transporte')">🚛 Transporte</div>
       <div class="NSU" onclick="go('n8n')">↳ Pegar Semana Actual AJ</div>
       <div class="NSEP"></div>
       <div class="NS">Recursos</div>
@@ -488,6 +491,218 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--sans);backgro
         </div>
       </div>
 
+
+      
+      <!-- PORTAL BI -->
+      <div class="SEC" id="S-portal">
+        <div class="PT">🌐 <span>Portal BI</span></div>
+        <div class="PS">Infraestructura y recursos del equipo · Business Intelligence · TA</div>
+
+        <!-- Card principal -->
+        <div style="background:rgba(4,10,28,.85);border:.5px solid rgba(52,131,250,.3);border-radius:12px;padding:20px 24px;margin-bottom:18px;max-width:640px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+            <span style="font-size:28px;">🌐</span>
+            <div>
+              <div style="font-size:14px;font-weight:700;color:var(--t1);">Portal BI — Documentación Talent Acquisition</div>
+              <div style="font-size:11px;color:var(--t2);font-family:var(--mono);">Versión actual en producción · GitHub Pages</div>
+            </div>
+          </div>
+          <div style="font-size:11px;font-family:var(--mono);color:var(--t2);margin-bottom:14px;line-height:1.7;">
+            Portal web completo con login, catálogo de tablas BigQuery, dashboards, manuales, flujo de reclutamiento, control de acceso y workflows n8n. Archivo HTML único (single file, ~142KB).
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="https://extjehasiel-gif.github.io/portal-bi" target="_blank"
+               style="display:inline-flex;align-items:center;gap:6px;background:var(--b);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:11px;font-weight:700;font-family:var(--mono);">
+              🚀 Abrir Portal
+            </a>
+            <a href="https://drive.google.com/drive/folders/1DdGzLA7AVVCA8BW_qdPK_feAyf-Ic_sh" target="_blank"
+               style="display:inline-flex;align-items:center;gap:6px;background:rgba(52,131,250,.1);border:.5px solid rgba(52,131,250,.3);color:var(--b);padding:8px 16px;border-radius:8px;text-decoration:none;font-size:11px;font-weight:700;font-family:var(--mono);">
+              📂 Carpeta Drive
+            </a>
+          </div>
+        </div>
+
+        <!-- Archivos en la carpeta -->
+        <div style="font-size:10px;font-family:var(--mono);color:rgba(52,131,250,.5);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:10px;">📁 Archivos en esta carpeta</div>
+        <div style="display:flex;flex-direction:column;gap:8px;max-width:640px;">
+
+          <div style="background:rgba(4,10,28,.7);border:.5px solid rgba(52,131,250,.15);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
+            <span style="font-size:22px;flex-shrink:0;">📘</span>
+            <div style="flex:1;">
+              <div style="font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px;">Bitácora de Conocimiento — Portal BI</div>
+              <div style="font-size:10px;font-family:var(--mono);color:var(--t2);line-height:1.5;">Errores encontrados, soluciones aplicadas y decisiones de arquitectura durante el desarrollo del portal. Incluye arquitectura de capas, sistema de login, módulo admin y deploy en GitHub Pages.</div>
+              <div style="margin-top:8px;display:flex;gap:6px;">
+                <span style="font-size:9px;font-family:var(--mono);padding:2px 7px;border-radius:3px;background:rgba(52,131,250,.1);color:rgba(52,131,250,.7);">DOCX</span>
+                <span style="font-size:9px;font-family:var(--mono);padding:2px 7px;border-radius:3px;background:rgba(29,158,117,.1);color:#1D9E75;">Bitácora</span>
+              </div>
+            </div>
+            <a href="https://drive.google.com/file/d/1ESlwDGQm_sERn15pFxgUX2SIXQPE0YjK/view" target="_blank"
+               style="flex-shrink:0;background:rgba(52,131,250,.1);border:.5px solid rgba(52,131,250,.25);color:var(--b);padding:7px 13px;border-radius:7px;text-decoration:none;font-size:10px;font-weight:700;font-family:var(--mono);">
+              Abrir →
+            </a>
+          </div>
+
+          <div style="background:rgba(4,10,28,.7);border:.5px solid rgba(52,131,250,.15);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
+            <span style="font-size:22px;flex-shrink:0;">🌐</span>
+            <div style="flex:1;">
+              <div style="font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px;">index.html — Portal BI (código fuente)</div>
+              <div style="font-size:10px;font-family:var(--mono);color:var(--t2);line-height:1.5;">Archivo fuente completo del portal. HTML + CSS + JS en un solo archivo. Incluye login, whitelist de usuarios, módulo admin, catálogo de tablas BigQuery, dashboards, manuales y workflows n8n.</div>
+              <div style="margin-top:8px;display:flex;gap:6px;">
+                <span style="font-size:9px;font-family:var(--mono);padding:2px 7px;border-radius:3px;background:rgba(232,194,0,.1);color:#E8C200;">HTML</span>
+                <span style="font-size:9px;font-family:var(--mono);padding:2px 7px;border-radius:3px;background:rgba(52,131,250,.1);color:rgba(52,131,250,.7);">~142KB</span>
+              </div>
+            </div>
+            <a href="https://drive.google.com/file/d/1JGkk9Kqw__qZfNVX-0mARsPH7VSQ19Tl/view" target="_blank"
+               style="flex-shrink:0;background:rgba(52,131,250,.1);border:.5px solid rgba(52,131,250,.25);color:var(--b);padding:7px 13px;border-radius:7px;text-decoration:none;font-size:10px;font-weight:700;font-family:var(--mono);">
+              Abrir →
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Info técnica -->
+        <div style="margin-top:18px;background:rgba(4,10,28,.7);border:.5px solid rgba(52,131,250,.1);border-radius:10px;padding:16px 18px;max-width:640px;">
+          <div style="font-size:10px;font-family:var(--mono);color:rgba(52,131,250,.45);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:10px;">⚙️ Info técnica</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+            <div style="font-size:10px;font-family:var(--mono);color:var(--t2);">URL producción</div>
+            <div style="font-size:10px;font-family:var(--mono);color:var(--b);">extjehasiel-gif.github.io/portal-bi</div>
+            <div style="font-size:10px;font-family:var(--mono);color:var(--t2);">Repositorio</div>
+            <div style="font-size:10px;font-family:var(--mono);color:var(--t1);">github.com/extjehasiel-gif/portal-bi</div>
+            <div style="font-size:10px;font-family:var(--mono);color:var(--t2);">Stack</div>
+            <div style="font-size:10px;font-family:var(--mono);color:var(--t1);">HTML + CSS + JS puro (sin frameworks)</div>
+            <div style="font-size:10px;font-family:var(--mono);color:var(--t2);">Admin</div>
+            <div style="font-size:10px;font-family:var(--mono);color:var(--t1);">ext_jehasiel@mercadolibre.com.mx</div>
+          </div>
+        </div>
+      </div>
+
+
+      
+      <!-- PROMPTS -->
+      <div class="SEC" id="S-prompts">
+        <div class="PT">🧠 <span>Prompts BI</span></div>
+        <div class="PS">Biblioteca de prompts para Claude y herramientas IA · Equipo BI</div>
+
+        <!-- Card principal -->
+        <div style="background:rgba(4,10,28,.85);border:.5px solid rgba(127,119,221,.3);border-radius:12px;padding:20px 24px;margin-bottom:18px;max-width:640px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+            <span style="font-size:28px;">🧠</span>
+            <div>
+              <div style="font-size:14px;font-weight:700;color:var(--t1);">Biblioteca de Prompts — Equipo BI</div>
+              <div style="font-size:11px;color:var(--t2);font-family:var(--mono);">Claude · Automatización · Análisis de datos</div>
+            </div>
+          </div>
+          <div style="font-size:11px;font-family:var(--mono);color:var(--t2);margin-bottom:14px;line-height:1.7;">
+            Colección de prompts utilizados por el equipo BI para construir herramientas, automatizar procesos, analizar datos y generar reportes usando Claude (Anthropic).
+          </div>
+          <a href="https://drive.google.com/drive/folders/1YRuN04TnoVAAvPM-QAyRkDuxMnPbKK42" target="_blank"
+             style="display:inline-flex;align-items:center;gap:6px;background:#7F77DD;color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:11px;font-weight:700;font-family:var(--mono);">
+            📂 Abrir carpeta Drive
+          </a>
+        </div>
+
+        <!-- Archivos -->
+        <div style="font-size:10px;font-family:var(--mono);color:rgba(127,119,221,.6);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:10px;">📁 Archivos en esta carpeta</div>
+        <div style="display:flex;flex-direction:column;gap:8px;max-width:640px;">
+
+          <div style="background:rgba(4,10,28,.7);border:.5px solid rgba(127,119,221,.2);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
+            <span style="font-size:22px;flex-shrink:0;">📄</span>
+            <div style="flex:1;">
+              <div style="font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px;">Prompt — Cómo replicar el Portal BI</div>
+              <div style="font-size:10px;font-family:var(--mono);color:var(--t2);line-height:1.5;">Guía completa para solicitar a Claude la construcción de un portal de documentación similar. Incluye prompt principal, especificaciones por módulo, instrucciones de capas Z-Index, errores comunes y flujo de trabajo recomendado.</div>
+              <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
+                <span style="font-size:9px;font-family:var(--mono);padding:2px 7px;border-radius:3px;background:rgba(127,119,221,.15);color:#7F77DD;">DOCX</span>
+                <span style="font-size:9px;font-family:var(--mono);padding:2px 7px;border-radius:3px;background:rgba(52,131,250,.1);color:rgba(52,131,250,.7);">Portal BI</span>
+                <span style="font-size:9px;font-family:var(--mono);padding:2px 7px;border-radius:3px;background:rgba(29,158,117,.1);color:#1D9E75;">Claude</span>
+              </div>
+            </div>
+            <a href="https://drive.google.com/file/d/19mGZ8sEUZrt7fO09T8LQJOXvkvUIqKB1/view" target="_blank"
+               style="flex-shrink:0;background:rgba(127,119,221,.15);border:.5px solid rgba(127,119,221,.3);color:#7F77DD;padding:7px 13px;border-radius:7px;text-decoration:none;font-size:10px;font-weight:700;font-family:var(--mono);">
+              Abrir →
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Cómo usar prompts -->
+        <div style="margin-top:18px;background:rgba(4,10,28,.7);border:.5px solid rgba(127,119,221,.15);border-radius:10px;padding:16px 18px;max-width:640px;">
+          <div style="font-size:10px;font-family:var(--mono);color:rgba(127,119,221,.5);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:10px;">💡 Cómo usar esta biblioteca</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <span style="font-size:14px;flex-shrink:0;">1️⃣</span>
+              <div style="font-size:11px;font-family:var(--mono);color:var(--t2);line-height:1.5;">Abre el documento del prompt que necesitas desde Drive</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <span style="font-size:14px;flex-shrink:0;">2️⃣</span>
+              <div style="font-size:11px;font-family:var(--mono);color:var(--t2);line-height:1.5;">Copia el prompt principal y pégalo en <span style="color:#7F77DD;">claude.ai</span></div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <span style="font-size:14px;flex-shrink:0;">3️⃣</span>
+              <div style="font-size:11px;font-family:var(--mono);color:var(--t2);line-height:1.5;">Adapta los parámetros a tu caso (equipo, datos, colores)</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <span style="font-size:14px;flex-shrink:0;">4️⃣</span>
+              <div style="font-size:11px;font-family:var(--mono);color:var(--t2);line-height:1.5;">Sigue el flujo de trabajo recomendado en el documento</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- TRANSPORTE -->
+      <div class="SEC" id="S-transporte">
+        <div class="PT">🚛 <span>Transporte</span></div>
+        <div class="PS">Recursos operativos · Headcount y planificación · MX</div>
+        <div style="background:rgba(4,10,28,.85);border:.5px solid rgba(255,140,0,.3);border-radius:12px;padding:20px 24px;margin-bottom:18px;max-width:640px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+            <span style="font-size:28px;">🚛</span>
+            <div>
+              <div style="font-size:14px;font-weight:700;color:var(--t1);">Transporte — Recursos BI</div>
+              <div style="font-size:11px;color:var(--t2);font-family:var(--mono);">Headcount operativo · Planificación · MX</div>
+            </div>
+          </div>
+          <div style="font-size:11px;font-family:var(--mono);color:var(--t2);margin-bottom:14px;line-height:1.7;">Archivos de headcount operativo y planificación para el área de Transporte en México. Incluye tracker de ingresos, requerimientos por CAD y plan de ingresos TTE 2026.</div>
+          <a href="https://drive.google.com/drive/folders/1pJReVIoBhAvOqV-3vMW6rBEPDJ1lgsMP" target="_blank"
+             style="display:inline-flex;align-items:center;gap:6px;background:#FF8C00;color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:11px;font-weight:700;font-family:var(--mono);">📂 Abrir carpeta Drive</a>
+        </div>
+        <div style="font-size:10px;font-family:var(--mono);color:rgba(255,140,0,.5);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:10px;">📁 Archivos en esta carpeta</div>
+        <div style="display:flex;flex-direction:column;gap:8px;max-width:640px;">
+          <div style="background:rgba(4,10,28,.7);border:.5px solid rgba(255,140,0,.2);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
+            <span style="font-size:22px;flex-shrink:0;">📊</span>
+            <div style="flex:1;">
+              <div style="font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px;">[BI] - MX CADs Reqs-HC Total OPERATIVO</div>
+              <div style="font-size:10px;font-family:var(--mono);color:var(--t2);line-height:1.5;">Tracker de requerimientos y headcount total operativo por CAD para México. Seguimiento de ingresos y cobertura por site de Transporte.</div>
+              <div style="margin-top:8px;display:flex;gap:6px;">
+                <span style="font-size:9px;padding:2px 7px;border-radius:3px;background:rgba(255,140,0,.12);color:#FF8C00;font-family:var(--mono);">Tracker</span>
+                <span style="font-size:9px;padding:2px 7px;border-radius:3px;background:rgba(52,131,250,.1);color:rgba(52,131,250,.7);font-family:var(--mono);">MX</span>
+                <span style="font-size:9px;padding:2px 7px;border-radius:3px;background:rgba(29,158,117,.1);color:#1D9E75;font-family:var(--mono);">Operativo</span>
+              </div>
+            </div>
+            <a href="https://drive.google.com/file/d/1etejGAbNPi1SRS4p4f76S57tUzPVzBwQ/view" target="_blank"
+               style="flex-shrink:0;background:rgba(255,140,0,.12);border:.5px solid rgba(255,140,0,.3);color:#FF8C00;padding:7px 13px;border-radius:7px;text-decoration:none;font-size:10px;font-weight:700;font-family:var(--mono);">Abrir →</a>
+          </div>
+          <div style="background:rgba(4,10,28,.7);border:.5px solid rgba(255,140,0,.2);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
+            <span style="font-size:22px;flex-shrink:0;">📋</span>
+            <div style="flex:1;">
+              <div style="font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px;">Plan de ingresos TTE 2026</div>
+              <div style="font-size:10px;font-family:var(--mono);color:var(--t2);line-height:1.5;">Archivo principal del plan de ingresos Transporte 2026. Hoja Daily Plan TTE 2026 con HC Plan S&amp;OP (col AJ) automatizado vía n8n cada jueves 6PM. Semana actual en celda AK2.</div>
+              <div style="margin-top:8px;display:flex;gap:6px;">
+                <span style="font-size:9px;padding:2px 7px;border-radius:3px;background:rgba(255,140,0,.12);color:#FF8C00;font-family:var(--mono);">Plan 2026</span>
+                <span style="font-size:9px;padding:2px 7px;border-radius:3px;background:rgba(232,194,0,.1);color:#E8C200;font-family:var(--mono);">n8n auto</span>
+                <span style="font-size:9px;padding:2px 7px;border-radius:3px;background:rgba(52,131,250,.1);color:rgba(52,131,250,.7);font-family:var(--mono);">Sheets</span>
+              </div>
+            </div>
+            <a href="https://drive.google.com/file/d/1CbhVG0tGl_Zy2Se2lxNL-SD3yExpByKU/view" target="_blank"
+               style="flex-shrink:0;background:rgba(255,140,0,.12);border:.5px solid rgba(255,140,0,.3);color:#FF8C00;padding:7px 13px;border-radius:7px;text-decoration:none;font-size:10px;font-weight:700;font-family:var(--mono);">Abrir →</a>
+          </div>
+        </div>
+        <div style="margin-top:18px;background:rgba(4,10,28,.7);border:.5px solid rgba(232,194,0,.2);border-radius:10px;padding:14px 18px;max-width:640px;">
+          <div style="font-size:10px;font-family:var(--mono);color:rgba(232,194,0,.5);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:8px;">⚡ Automatización activa</div>
+          <div style="font-size:11px;font-family:var(--mono);color:var(--t2);line-height:1.6;">El archivo <span style="color:#E8C200;">Plan de ingresos TTE 2026</span> se actualiza automáticamente cada jueves 6PM vía workflow n8n. Pega valores de HC Plan S&amp;OP (col AJ→AL). <span onclick="go('n8n')" style="color:var(--b);cursor:pointer;text-decoration:underline;margin-left:4px;">Ver workflow n8n →</span></div>
+        </div>
+      </div>
+
+
     </div><!-- .MA -->
   </div><!-- .PB -->
 </div><!-- #P -->
@@ -536,7 +751,16 @@ var DOCS=[
    tg:['Acceso','Shield','PII','SA'],up:'10/05/2026',url:'https://docs.google.com/spreadsheets/d/1NtGDRfzVLnToKZy0DT7sLQ96zOn2GgubNKr6mF-dUw8'},
   {t:'Cobertura Semanal Shipping',s:'Files 2026',ic:'📦',cl:'#D85A30',it:'dash',
    d:'Archivos de cobertura semanal para operaciones Shipping 2026. Headcount por site para fill rate y planificación operativa.',
-   tg:['Shipping','Cobertura','Semanal','2026'],up:'20/04/2026',url:'https://drive.google.com/drive/folders/1pRPR9NcYrScKNcqSrW8hh-Fn-wf33c5p'}
+   tg:['Shipping','Cobertura','Semanal','2026'],up:'20/04/2026',url:'https://drive.google.com/drive/folders/1pRPR9NcYrScKNcqSrW8hh-Fn-wf33c5p'},
+  {t:'Portal BI',s:'Recursos y documentación del equipo',ic:'🌐',cl:'#3483FA',it:'lck',
+   d:'Carpeta principal del Portal BI con todos los recursos del equipo: dashboards, manuales, workflows, trackers y documentación técnica.',
+   tg:['Portal','BI','Recursos','Drive'],up:'11/05/2026',url:'https://drive.google.com/drive/folders/1DdGzLA7AVVCA8BW_qdPK_feAyf-Ic_sh'},
+  {t:'Prompts BI',s:'Biblioteca de prompts Claude',ic:'🧠',cl:'#7F77DD',it:'faq',
+   d:'Colección de prompts utilizados por el equipo BI para automatización, análisis de datos y generación de reportes con Claude.',
+   tg:['Prompts','Claude','IA','Automatización'],up:'11/05/2026',url:'https://drive.google.com/drive/folders/1YRuN04TnoVAAvPM-QAyRkDuxMnPbKK42'},
+  {t:'Transporte',s:'Operaciones y headcount',ic:'🚛',cl:'#FF8C00',it:'dash',
+   d:'Carpeta de recursos para el área de Transporte. Incluye trackers, headcount operativo y archivos de planificación.',
+   tg:['Transporte','Operaciones','Headcount','MX'],up:'17/04/2026',url:'https://drive.google.com/drive/folders/1pJReVIoBhAvOqV-3vMW6rBEPDJ1lgsMP'}
 ];
 
 var DM=[
@@ -942,8 +1166,8 @@ function zOpen(idx){
   var rgb=hRGB(d.cl);
   var abg='rgba('+rgb.r+','+rgb.g+','+rgb.b+',.1)';
   var abr='rgba('+rgb.r+','+rgb.g+','+rgb.b+',.3)';
-  var MOD={'TA Data Model':'dm','Workflow n8n · Semana Actual':'n8n','Script Auditoría BigQuery':'acc','Control de Accesos BigQuery':'acc','Mapeo Columnas Tracker 2026':'dm','Listado Trackers BR · MX':'dm','Formato Solicitud Dashboard':'dash','Cobertura Semanal Shipping':'dash','Manual Accesos Tableau':'man'};
-  var MLBL={'dm':'→ Ver Catálogo de Tablas','n8n':'→ Ver Flujos n8n','acc':'→ Ver Control de Acceso','dash':'→ Ver Dashboards','man':'→ Ver Manuales'};
+  var MOD={'TA Data Model':'dm','Workflow n8n · Semana Actual':'n8n','Script Auditoría BigQuery':'acc','Control de Accesos BigQuery':'acc','Mapeo Columnas Tracker 2026':'dm','Listado Trackers BR · MX':'dm','Formato Solicitud Dashboard':'dash','Cobertura Semanal Shipping':'dash','Manual Accesos Tableau':'man','Portal BI':'portal','Prompts BI':'prompts','Transporte':'transporte'};
+  var MLBL={'dm':'→ Ver Catálogo de Tablas','n8n':'→ Ver Flujos n8n','acc':'→ Ver Control de Acceso','dash':'→ Ver Dashboards','man':'→ Ver Manuales','portal':'→ Ver Portal BI','prompts':'→ Ver Prompts','transporte':'→ Ver Transporte'};
   var ms=MOD[d.t];
   var zc=document.getElementById('ZC');
   zc.style.cssText='width:300px;max-width:88%;transform:scale(0.4);opacity:0;transition:transform .42s cubic-bezier(.15,1.4,.3,1),opacity .3s;cursor:default;border-radius:16px;overflow:hidden;border:1.5px solid '+d.cl+';background:rgba(3,8,22,.98);box-shadow:0 0 60px rgba('+rgb.r+','+rgb.g+','+rgb.b+',.22);';
@@ -1765,11 +1989,11 @@ function setTheme(t){
     r.style.setProperty('--t2','#7A90A8');
     r.style.setProperty('--t3','#3A5070');
     r.style.setProperty('--bdr','rgba(52,131,250,.18)');
-    document.getElementById('P').style.background='#020818';
+    document.getElementById('P').style.background='transparent';
     document.getElementById('P').style.color='#E8EAED';
-    document.querySelectorAll('.SEC').forEach(function(s){s.style.background='#020818';});
-    document.querySelector('.SB').style.background='rgba(2,5,16,.97)';
-    document.querySelector('.MA').style.background='#020818';
+    document.querySelectorAll('.SEC').forEach(function(s){s.style.background='rgba(2,8,24,0.75)';});
+    document.querySelector('.SB').style.background='rgba(2,5,16,.82)';
+    document.querySelector('.MA').style.background='transparent';
   }
   // Update config buttons state
   var bd=document.getElementById('cfgBDK');
