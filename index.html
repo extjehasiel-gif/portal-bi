@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Documentación BI · Talent Acquisition · Mercado Libre</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--y:#FFE600;--b:#3483FA;--dk:#020818;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;--t1:#E8EAED;--t2:#7A90A8;--t3:#3A5070;--bdr:rgba(52,131,250,0.18);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;font-family:var(--sans);background:var(--dk);}
+
+/* ── LOGIN ── */
+#LS{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;transition:opacity .6s,transform .6s;background:transparent;}
+#LS.hide{opacity:0;transform:scale(1.04);pointer-events:none;}
+#LBG{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.LC{position:relative;z-index:2;}
+.LB{width:380px;background:rgba(3,8,22,.93);border:1px solid rgba(52,131,250,.3);border-radius:20px;padding:36px 32px 28px;backdrop-filter:blur(20px);}
+.LLOGO{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:22px;}
+.LLC{width:52px;height:52px;background:var(--y);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.LH1{font-size:26px;font-weight:800;color:#fff;text-align:center;margin-bottom:5px;letter-spacing:-.02em;}
+.LH1 b{color:var(--b);}
+.LS2{font-size:12px;color:var(--t2);text-align:center;margin-bottom:14px;}
+.LBDG{display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(52,131,250,.08);border:1px solid rgba(52,131,250,.2);border-radius:6px;padding:4px 12px;font-size:10px;font-family:var(--mono);color:var(--b);margin-bottom:22px;font-weight:700;}
+.LL{font-size:10px;font-family:var(--mono);color:var(--t3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;font-weight:700;}
+.FW{position:relative;margin-bottom:14px;}
+.FI{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none;z-index:1;}
+.LIN{width:100%;background:rgba(1,4,16,.9);border:1px solid rgba(52,131,250,.2);border-radius:10px;padding:11px 14px 11px 38px;font-size:13px;color:var(--t1);font-family:var(--sans);outline:none;transition:border-color .2s;}
+.LIN:focus{border-color:var(--b);}
+.LIN::placeholder{color:var(--t3);}
+.EYE{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:14px;cursor:pointer;background:none;border:none;}
+.LBT{width:100%;background:var(--y);color:#1A1400;border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:800;cursor:pointer;font-family:var(--sans);transition:all .18s;margin-top:2px;}
+.LBT:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(255,230,0,.22);}
+.LDIV{display:flex;align-items:center;gap:8px;margin:16px 0 12px;}
+.LDIV::before,.LDIV::after{content:'';flex:1;height:.5px;background:rgba(52,131,250,.14);}
+.LDIV span{font-size:11px;color:var(--t3);font-family:var(--mono);}
+.SSO{width:100%;background:transparent;border:1px solid rgba(52,131,250,.22);border-radius:10px;padding:11px;font-size:13px;color:var(--t1);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);}
+.SSO:hover{background:rgba(52,131,250,.07);}
+.LF{display:flex;justify-content:space-between;margin-top:16px;}
+.LLK{font-size:11px;color:rgba(52,131,250,.55);cursor:pointer;font-family:var(--mono);}
+#LLOAD{display:none;flex-direction:column;align-items:center;gap:10px;padding:22px 0;}
+#LLOAD.on{display:flex;}
+.SP{width:34px;height:34px;border:3px solid rgba(52,131,250,.2);border-top-color:var(--b);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ST{font-size:11px;font-family:var(--mono);color:var(--b);letter-spacing:.08em;}
+
+/* ── PORTAL ── */
+#P{position:fixed;inset:0;z-index:5;display:none;flex-direction:column;background:transparent;}
+#P.on{display:flex;}
+
+/* Topbar */
+.TB{background:var(--y);height:50px;display:flex;align-items:center;padding:0 18px;gap:0;flex-shrink:0;z-index:20;position:relative;}
+.TBL{display:flex;align-items:center;gap:7px;flex-shrink:0;}
+.TBLC{width:30px;height:30px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.TBLT{font-size:11px;font-weight:800;color:#1A1400;line-height:1.2;}
+.TBSP{width:1.5px;height:22px;background:rgba(0,0,0,.15);margin:0 12px;}
+.TBTI{font-size:13px;font-weight:700;color:#1A1400;}
+.TBSR{flex:1;margin:0 18px;background:rgba(0,0,0,.1);border-radius:6px;height:30px;display:flex;align-items:center;padding:0 11px;gap:7px;font-size:12px;color:rgba(26,20,0,.4);border:1px solid rgba(0,0,0,.08);}
+.TBR{display:flex;align-items:center;gap:9px;margin-left:auto;}
+.TBLG{font-size:10px;font-weight:700;color:#1A1400;font-family:var(--mono);background:rgba(0,0,0,.1);padding:4px 8px;border-radius:4px;cursor:pointer;border:none;}
+.TBDV{width:.5px;height:16px;background:rgba(0,0,0,.2);}
+.TBAV{width:30px;height:30px;border-radius:50%;background:#0D1B2E;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--y);font-family:var(--mono);}
+
+/* Portal body */
+.PB{display:flex;flex:1;overflow:hidden;}
+
+/* Sidebar */
+.SB{width:192px;min-width:192px;flex-shrink:0;background:rgba(2,5,16,.82);border-right:.5px solid var(--bdr);display:flex;flex-direction:column;overflow-y:auto;backdrop-filter:blur(4px);}
+.SB::-webkit-scrollbar{width:2px;}
+.SB::-webkit-scrollbar-thumb{background:rgba(52,131,250,.25);}
+.SBU{display:flex;align-items:center;gap:8px;padding:12px;border-bottom:.5px solid var(--bdr);}
+.SBAV{width:32px;height:32px;border-radius:50%;background:rgba(52,131,250,.15);border:1px solid rgba(52,131,250,.3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--b);font-family:var(--mono);flex-shrink:0;}
+.SBUN{font-size:11px;font-weight:600;color:var(--t1);}
+.SBBG{display:inline-block;background:rgba(29,158,117,.12);color:#1D9E75;border-radius:3px;padding:1px 5px;font-size:9px;font-family:var(--mono);font-weight:700;margin-top:2px;}
+.NS{padding:3px 12px 2px;font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.3);letter-spacing:.1em;text-transform:uppercase;margin-top:10px;font-weight:700;}
+.NI{display:flex;align-items:center;gap:7px;padding:7px 12px;font-size:11px;color:var(--t3);cursor:pointer;border-left:2px solid transparent;transition:all .12s;font-weight:500;user-select:none;}
+.NI:hover,.NI.on{color:var(--b);background:rgba(52,131,250,.06);border-left-color:var(--b);}
+.NSU{padding:4px 12px 4px 30px;font-size:10px;color:#263545;cursor:pointer;transition:color .1s;}
+.NSU:hover{color:var(--b);}
+.NSEP{height:.5px;background:rgba(52,131,250,.09);margin:8px 0;}
+.SBF{margin-top:auto;padding:10px;border-top:.5px solid var(--bdr);}
+.SBFT{font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.22);text-align:center;line-height:1.7;}
+
+/* Main area */
+.MA{flex:1;min-width:0;overflow:hidden;display:flex;flex-direction:column;background:transparent;}
+
+/* ── SECTIONS ── KEY: display:none / display:flex ── */
+.SEC{display:none;flex-direction:column;width:100%;height:100%;overflow-y:auto;padding:22px 28px;background:rgba(2,8,24,0.75);backdrop-filter:blur(2px);}
+.SEC.on{display:flex;}
+.SEC::-webkit-scrollbar{width:3px;}
+.SEC::-webkit-scrollbar-thumb{background:rgba(52,131,250,.2);}
+
+/* Home special */
+#S-home{padding:0;overflow:hidden;position:relative;background:transparent !important;}
+
+/* Section content */
+.PT{font-size:20px;font-weight:700;color:var(--t1);margin-bottom:5px;letter-spacing:-.02em;flex-shrink:0;}
+.PT span{color:var(--b);}
+.PS{font-size:12px;color:var(--t2);margin-bottom:16px;line-height:1.6;flex-shrink:0;}
+.CG{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;}
+.DC{background:rgba(4,10,28,.9);border:.5px solid var(--bdr);border-radius:10px;cursor:pointer;transition:all .2s;overflow:hidden;}
+.DC:hover{border-color:rgba(52,131,250,.5);transform:translateY(-2px);}
+.DCB2{height:3px;}
+.DCB{padding:12px 14px;}
+.DCI{font-size:22px;margin-bottom:7px;}
+.DCT{font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px;}
+.DCS{font-size:10px;color:var(--t2);font-family:var(--mono);margin-bottom:7px;}
+.DCTG{display:inline-block;font-size:9px;font-family:var(--mono);padding:2px 6px;border-radius:3px;font-weight:700;}
+.TR{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;border-radius:7px;border:.5px solid var(--bdr);margin-bottom:6px;cursor:pointer;transition:border-color .15s;background:rgba(2,6,16,.8);}
+.TR:hover{border-color:rgba(52,131,250,.4);}
+.TD{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.TN{font-size:11px;font-family:var(--mono);font-weight:700;color:var(--t1);}
+.TFN{font-size:9px;font-family:var(--mono);color:rgba(180,200,220,.4);margin-bottom:2px;}
+.TTY{font-size:9px;font-family:var(--mono);margin-bottom:3px;}
+.TDE{font-size:10px;color:var(--t2);line-height:1.5;}
+.BTG{font-size:9px;font-family:var(--mono);padding:1px 5px;border-radius:3px;font-weight:700;}
+.BG{background:rgba(29,158,117,.1);color:#1D9E75;border:.5px solid rgba(29,158,117,.3);border-radius:5px;padding:3px 9px;font-size:9px;font-family:var(--mono);cursor:pointer;font-weight:700;}
+.BG:hover{background:rgba(29,158,117,.2);}
+.BB{background:rgba(52,131,250,.1);color:var(--b);border:.5px solid rgba(52,131,250,.3);border-radius:5px;padding:3px 9px;font-size:9px;font-family:var(--mono);cursor:pointer;font-weight:700;}
+.BB:hover{background:rgba(52,131,250,.2);}
+.SAB{background:rgba(52,131,250,.06);border:.5px solid var(--bdr);border-radius:8px;padding:11px 13px;margin-bottom:10px;}
+.SAE{font-size:10px;font-family:var(--mono);color:var(--b);word-break:break-all;line-height:1.5;}
+.ATR{display:flex;align-items:center;gap:9px;padding:9px 13px;background:rgba(2,6,16,.8);border:.5px solid var(--bdr);border-radius:8px;margin-bottom:6px;}
+.ATN{font-size:12px;font-weight:600;color:var(--t1);flex:1;}
+.ATD{font-size:10px;font-family:var(--mono);color:var(--t2);}
+.AL{font-size:10px;font-family:var(--mono);padding:3px 8px;border-radius:4px;background:rgba(52,131,250,.1);color:var(--b);border:.5px solid rgba(52,131,250,.25);text-decoration:none;}
+.ALR{background:rgba(226,75,74,.1);color:#E24B4A;border-color:rgba(226,75,74,.25);}
+.PW{display:flex;align-items:center;gap:7px;background:rgba(226,75,74,.07);border:.5px solid rgba(226,75,74,.2);border-radius:7px;padding:9px 11px;margin-bottom:12px;}
+.PWT{font-size:11px;color:#E24B4A;line-height:1.5;}
+.NG{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.NN{background:rgba(4,10,28,.8);border:.5px solid var(--bdr);border-radius:7px;padding:9px 11px;}
+.NNN{font-size:9px;font-family:var(--mono);font-weight:700;margin-bottom:2px;}
+.NT{font-size:11px;font-weight:700;color:var(--t1);margin-bottom:2px;}
+.ND{font-size:10px;color:var(--t2);}
+.BACK{background:rgba(52,131,250,.1);border:.5px solid rgba(52,131,250,.25);color:var(--b);border-radius:5px;padding:4px 10px;font-size:11px;font-family:var(--mono);cursor:pointer;font-weight:700;}
+.FTR{display:grid;grid-template-columns:210px 90px 1fr 55px;padding:7px 12px;border-bottom:.5px solid rgba(52,131,250,.06);gap:8px;align-items:start;}
+.FTH{background:rgba(52,131,250,.08);font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.5);text-transform:uppercase;letter-spacing:.06em;font-weight:700;}
+.FN{font-size:10px;font-family:var(--mono);color:var(--t1);font-weight:600;}
+.FTP{font-size:9px;font-family:var(--mono);padding:1px 5px;border-radius:3px;font-weight:700;}
+.FDE{font-size:10px;color:var(--t2);line-height:1.5;}
+.MTX{width:100%;border-collapse:collapse;font-size:10px;}
+.MTX th{padding:7px 10px;text-align:left;font-family:var(--mono);color:rgba(52,131,250,.45);font-weight:700;border-bottom:.5px solid rgba(52,131,250,.15);font-size:9px;text-transform:uppercase;}
+.MTX td{padding:7px 10px;border-bottom:.5px solid rgba(52,131,250,.07);}
+.FL{display:flex;align-items:center;min-width:760px;}
+.FLS{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+.FLSC{border-radius:7px;padding:7px 9px;text-align:center;min-width:80px;}
+.FLARR{display:flex;flex-direction:column;align-items:center;width:40px;flex-shrink:0;}
+.CFG{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.CFGC{background:rgba(4,10,28,.8);border:.5px solid var(--bdr);border-radius:10px;padding:13px 15px;}
+.CFGT{font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.45);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:9px;}
+.CFGRK{color:rgba(52,131,250,.55);font-family:var(--mono);font-size:10px;}
+.CFGRV{color:#E8EAED !important;font-family:var(--mono);font-weight:600;font-size:11px;}
+.CFGR{display:flex;justify-content:space-between;padding:6px 0;border-bottom:.5px solid rgba(52,131,250,.1);}
+.FAQ{background:rgba(4,10,28,.85);border:.5px solid rgba(52,131,250,.15);border-radius:10px;padding:15px;margin-bottom:11px;}
+.FQN{width:22px;height:22px;border-radius:50%;background:rgba(52,131,250,.15);border:.5px solid rgba(52,131,250,.3);display:flex;align-items:center;justify-content:center;font-size:9px;font-family:var(--mono);color:var(--b);font-weight:700;flex-shrink:0;margin-top:1px;}
+.FQQ{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:7px;line-height:1.4;}
+.FQA{font-size:11px;color:var(--t2);line-height:1.7;margin-bottom:9px;}
+.FQL{display:inline-flex;align-items:center;font-size:10px;font-family:var(--mono);padding:3px 9px;border-radius:4px;margin:3px 4px 0 0;font-weight:700;cursor:pointer;text-decoration:none;}
+#TOAST{position:fixed;bottom:26px;right:22px;z-index:9999;background:rgba(29,158,117,.96);color:#fff;font-family:var(--mono);font-size:12px;font-weight:700;padding:10px 18px;border-radius:8px;box-shadow:0 4px 20px rgba(29,158,117,.3);opacity:0;transition:opacity .3s;pointer-events:none;}
+
+/* ── HOME GRID ── */
+#gridWrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:28px 28px 18px;z-index:2;}
+#gridViewport{width:100%;overflow:hidden;flex:1;position:relative;}
+#gridTrack{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1);height:100%;}
+.GPAGE{min-width:100%;height:100%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:14px;box-sizing:border-box;}
+.GCARD{background:rgba(4,10,28,.96);border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .25s,box-shadow .2s;display:flex;flex-direction:column;}
+.GCARD:hover{transform:translateY(-4px);}
+.GCBAR{height:4px;}
+.GCH{padding:14px 14px 10px;}
+.GCIC{font-size:24px;margin-bottom:5px;}
+.GCT{font-size:12px;font-weight:700;color:#E8EAED;line-height:1.3;margin-bottom:2px;}
+.GCS{font-size:10px;color:#7A90A8;font-family:var(--mono);}
+.GCB{padding:10px 14px 12px;flex:1;}
+.GCD{font-size:10px;color:#4A6080;line-height:1.55;margin-bottom:8px;}
+.GCBN{font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.25);}
+.gpageNav{display:flex;align-items:center;gap:11px;}
+.gpageBtn{width:34px;height:34px;border-radius:50%;background:rgba(52,131,250,.15);border:1px solid rgba(52,131,250,.3);color:var(--b);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.gpageBtn:hover{background:rgba(52,131,250,.28);}
+.GDOT{height:8px;border-radius:4px;background:rgba(52,131,250,.22);cursor:pointer;transition:all .3s;}
+#gCount{font-size:10px;font-family:var(--mono);color:rgba(52,131,250,.35);letter-spacing:.07em;}
+
+/* ── ZOOM OVERLAY ── */
+#ZOV{position:absolute;inset:0;z-index:30;display:none;align-items:center;justify-content:center;background:rgba(2,8,24,0);transition:background .3s;cursor:pointer;}
+#ZOV.on{display:flex;}
+#ZC{width:300px;max-width:88%;transform:scale(0.4);opacity:0;transition:transform .42s cubic-bezier(.15,1.4,.3,1),opacity .3s;cursor:default;border-radius:16px;overflow:hidden;}
+
+.SRES:hover{background:rgba(52,131,250,.1) !important;}
+.SRES.active{background:rgba(52,131,250,.15) !important;}
+</style>
+</head>
+<body>
+<canvas id="LBG"></canvas>
+
+<!-- LOGIN -->
+<div id="LS">
+  <div class="LC"><div class="LB">
+    <div id="LFRM">
+      <div class="LLOGO" style="margin-bottom:8px;"><svg version="1.2" style="height:80px;width:auto;display:block;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1541 1395">
+	
+	<style>
+		.s0 { fill: #2d3277 } 
+		.s1 { fill: #ffe600 } 
+		.s2 { fill: #ffffff } 
+	</style>
+	<g id="Layer">
+		<g id="Layer">
+			<path id="Layer" class="s0" d="m404.9 1107.2h14.4v287.6h-54.5v-252.7c0-8.2 17.5-34.9 40.1-34.9z"/>
+			<path id="Layer" fill-rule="evenodd" class="s0" d="m789 1284.9c0 71.9-32.8 108.9-100.6 109.9-67.8 0-101.7-32.9-101.7-97.6v-163.3c7.2-12.3 21.6-26.7 48.3-26.7h6.1v97.6q21.6-33.9 61.7-33.9c57.5 2.1 86.2 39 86.2 114zm-55.4-3.1c-2.1-42.1-16.5-62.6-46.2-62.6-29.8 0-44.2 20.5-46.3 62.6-1 43.1 14.4 65.7 45.2 65.7 30.8 0 47.3-21.5 47.3-65.7z"/>
+			<path id="Layer" class="s0" d="m820.9 1281.8c2-69.8 35.9-108.8 108.9-108.8h16.4v56.4h-25.7c-30.8 0-44.1 19.5-44.1 51.4v113h-55.5v-112z"/>
+			<g id="Layer">
+				<path id="Layer" fill-rule="evenodd" class="s0" d="m1032.5 1338.3c9.2 8.2 21.5 12.3 38 12.3 11.3 0 21.6-3.1 29.8-9.2q12.3-9.3 15.4-18.5h51.3c-8.2 25.7-20.5 43.1-38 54.4-17.4 11.3-36.9 16.5-61.6 16.5-16.4 0-31.8-3.1-45.2-8.3-13.3-5.1-24.6-13.3-33.9-22.6-9.2-10.2-16.4-21.5-21.6-34.9-5.1-13.3-7.1-28.7-7.1-45.2 0-15.4 3-30.8 8.2-44.1 5.1-13.4 12.3-25.7 21.5-34.9 9.3-10.3 20.6-17.5 33.9-23.7 13.4-6.1 27.8-8.2 44.2-8.2 17.5 0 33.9 3.1 47.3 10.3 13.3 7.2 24.6 16.4 32.8 27.7q12.3 17 18.5 40.1c4.1 14.4 5.1 30.8 4.1 47.2h-153c2 19.5 7.2 32.9 15.4 41.1zm65.7-110.9c-7.2-7.2-17.4-11.3-31.8-11.3-9.3 0-17.5 2-23.7 5.1-6.1 3.1-11.2 7.2-14.3 11.3-4.1 5.2-6.2 9.3-8.2 14.4-2.1 5.1-2.1 10.3-3.1 14.4h94.5c-1.1-15.4-6.2-26.7-13.4-33.9z"/>
+			</g>
+			<path id="Layer" class="s0" d="m477.8 1107.2h54.5v49.3h-54.5z"/>
+			<path id="Layer" class="s0" d="m477.8 1181.2h54.5v212.6h-54.5z"/>
+		</g>
+		<g id="Layer">
+			<path id="path96_8_" fill-rule="evenodd" class="s0" d="m1540.9 943.9c0 29.8-10.3 56.5-26.7 78.1-16.4 22.6-45.2 32.8-80.1 32.8-36 0-63.7-11.3-80.1-32.8-17.5-20.6-26.7-47.3-26.7-78.1 0-29.8 10.2-56.5 26.7-78 16.4-23.6 45.2-33.9 80.1-33.9 35.9 0 63.7 12.3 80.1 33.9 18.5 22.6 27.7 49.3 26.7 78zm-57.5 1.1c0-19.6-3.1-37-12.3-47.3-9.3-10.3-21.6-16.4-37-16.4-15.4 0-27.7 6.1-37 16.4-8.2 10.3-12.3 25.7-12.3 47.3 0 20.5 3.1 38 12.3 48.2 9.3 10.3 21.6 16.5 37 16.5 15.4 0 27.7-6.2 37-16.5 9.2-12.3 12.3-28.7 12.3-48.2z"/>
+			<path id="path108_8_" fill-rule="evenodd" class="s0" d="m1307.8 968.6c0 0 2 86.2-99.7 86.2-28.7 0-61.6-8.2-78-27.7-17.5-17.4-24.7-44.1-24.7-75 0-36.9 8.2-66.7 24.7-86.2 17.4-20.6 39-30.8 66.7-30.8 12.3 0 24.7 1 33.9 7.2 11.3 7.1 18.5 14.3 24.7 23.6v-58.6c0-44.1 55.4-38 55.4-38zm-47.2-19.5c0-26.7-7.2-47.2-19.5-57.5q-12.4-9.2-27.8-9.2c-16.4 0-27.7 6.1-34.9 18.5-7.2 11.3-10.3 25.6-10.3 44.1 0 20.6 3.1 36 10.3 48.3 6.2 10.3 18.5 16.4 33.9 16.4 15.4 0 27.7-6.1 34.9-16.4 8.3-10.3 10.3-25.7 13.4-44.2z"/>
+			<path id="path98_8_" fill-rule="evenodd" class="s0" d="m1091 897.7v78.1c0 13.3 1.1 81.1-119.1 77-19.5-1-34.9-6.2-47.3-16.4q-18.5-17-18.5-46.3c0-24.6 10.3-45.1 29.8-55.4 11.3-6.2 26.7-10.3 48.3-13.4l18.5-1c9.2-1 17.5-3.1 21.6-4.1q12.3-4.6 12.3-15.4 0-13.9-9.3-18.5c-7.1-3.1-14.3-4.1-26.7-4.1q-18.5 0-27.7 9.2c-3.1 5.2-6.2 11.3-7.2 18.5h-52.4c2.1-17.4 6.2-31.8 15.4-44.1 14.4-18.5 40.1-27.8 75-27.8 23.6 0 43.2 4.1 61.6 13.4 18.5 9.2 26.8 27.7 25.7 50.3zm-52.4 51.4c-3 1-7.1 3-10.2 4.1-5.2 0-9.3 2-15.4 3.1l-12.4 3c-11.3 1.1-20.5 4.1-24.6 7.2-8.2 5.2-12.3 13.4-12.3 23.6 0 9.3 2 14.4 7.1 19.6 5.2 5.1 11.3 6.1 18.5 6.1 11.3 0 22.6-4.1 32.9-10.3 9.3-7.1 15.4-19.5 15.4-38z"/>
+			<path id="path100_8_" class="s0" d="m751 909c-5.1 8.2-6.1 22.6-6.1 38 0 15.4 3.1 27.7 6.1 37 5.2 17.4 19.6 26.7 38 26.7 14.4 0 23.7-4.1 29.8-10.3 6.2-7.2 9.3-16.4 10.3-26.7h58.5c-2 17.5-8.2 32.9-18.4 48.3-18.5 22.6-45.2 34.9-80.2 34.9-34.9 0-61.6-10.3-78-29.8-17.5-19.5-24.7-44.1-24.7-77q0-52.4 27.8-83.2c18.4-20.5 44.1-29.8 77-29.8 27.7 0 51.4 4.1 67.8 16.5 17.5 10.2 27.7 31.8 30.8 61.6h-58.5c0-8.2-3.1-15.4-7.2-21.6q-10.8-12.3-30.8-12.3c-20.6 0-32.9 9.2-42.2 27.7z"/>
+			<path id="path102_8_" class="s0" d="m674 837.1c0 0 1 0 4.1 0v55.5c-3.1-1-6.2-1-9.2-1q-4.7 0-6.2 0c-22.6 0-37 8.2-44.2 21.5-5.1 7.2-6.1 20.6-6.1 37v101.7h-55.5v-108.9c0 0-8.2-107.8 114-107.8 2.1 0 2.1 0 3.1 2z"/>
+			<path id="path104_8_" fill-rule="evenodd" class="s0" d="m530.2 992.2c-2.1 11.3-8.2 22.6-18.5 32.9-17.4 20.5-44.2 30.8-78.1 30.8-27.7 0-52.3-10.3-73.9-26.7-22.6-16.5-32.9-45.2-32.9-83.2 0-36 11.3-63.7 29.8-83.2 18.5-20.5 43.2-29.8 74-29.8 18.5 0 35.9 3.1 49.3 9.3 13.3 6.1 25.6 17.4 34.9 30.8 9.2 12.3 13.3 26.7 16.4 43.1 1.1 8.2 1.1 22.6 1.1 41.1h-152.1c0 19.5 8.3 35.9 21.6 43.1 8.2 6.2 17.5 7.2 29.8 7.2 12.3 0 23.6-1 30.8-7.2 3.1-1 6.2-4.1 7.2-7.2zm-150-69.8h94.5c0-14.4-4.1-25.7-13.3-32.9-9.3-7.2-20.6-10.2-32.9-10.2-14.4 0-25.7 5.1-32.9 12.3-8.2 8.2-12.3 18.5-15.4 30.8z"/>
+			<path id="path106_8_" class="s0" d="m303.2 1050.7h-51.4v-126.3c0-12.3-3-38-36.9-38-21.6 0-38 15.4-38 38v126.3h-51.4v-126.3c0-12.3-3.1-38-37-38-21.5 0-37 15.4-37 38v126.3h-51.3v-125.3c0-52.3 33.9-92.4 87.3-92.4 26.7 0 48.3 10.3 63.7 29.8 15.4-18.5 37-29.8 63.7-29.8 55.4 0 87.3 38 87.3 92.4z"/>
+		</g>
+	</g>
+	<g id="Layer">
+		<path id="Layer" class="s0" d="m1261.5 338c0 186.9-190 337.9-488.9 337.9-297.9 0-488.9-151-488.9-337.9 0-1 0-14.4 0-18.5 0-175.6 218.8-319.4 488.9-319.4 270.1 0 488.9 143.8 488.9 319.4 0 9.3 0 12.3 0 18.5z"/>
+		<ellipse id="Layer" class="s1" cx="774.7" cy="319.5" rx="469.4" ry="299.9"/>
+		<g id="Layer">
+			<path id="Layer" class="s2" d="m658.6 180.9c32.9-32.9 62.7-62.7 133.5-64.7 48.3-1.1 96.6 21.5 96.6 21.5 89.3 43.2 180.8 26.7 254.7-4.1 53.4 43.2 88.3 96.6 97.6 154.1-108.9 24.6-189 58.5-206.5 66.7-22.6-19.5-152-132.5-183.8-156.1-17.5-12.3-27.8-18.5-37-21.5-8.2-2.1-20.5-5.2-40.1 1-18.5 5.1-36.9 20.5-55.4 34.9-16.5 13.3-35 27.7-48.3 30.8-23.6 5.1-46.2 0-53.4-9.2-3.1-4.1 2-9.3 2-9.3z"/>
+			<path id="Layer" class="s2" d="m1039.7 389.3c0 9.3-5.2 16.5-13.4 21.6-22.6 14.4-40 1-41.1 1 0 0-51.3-47.2-70.8-63.6-3.1-2.1-7.2-5.2-9.3-3.1-2 3.1 4.1 8.2 4.1 8.2l59.6 60.6c0 0 8.2 8.2 9.2 18.5 1.1 8.2-2 18.5-15.4 27.7-21.5 14.4-38 4.1-42.1 1-18.5-18.5-38-39-52.4-50.3-3-2-7.2-5.1-9.2-3.1-2.1 2.1 4.1 8.2 4.1 8.2l44.2 49.3c0 0 10.2 12.4 1 24.7-1 2-4.1 4.1-6.2 6.2-9.2 7.1-22.6 8.2-29.8 7.1-8.2-2-10.2-5.1-10.2-5.1 0 0-22.6-23.6-42.1-40-3.1-2.1-7.2-5.2-9.3-3.1-2 2 4.1 8.2 4.1 8.2l38 42.1c2.1 2 0 4.1-1 6.2-2.1 3-7.2 7.1-21.6 9.2-18.5 2.1-38-8.2-46.2-12.3q6.2-10.8 6.2-24.7c0-29.8-23.7-53.4-53.4-53.4-2.1 0-3.1 0-5.2 0 2.1-18.5-2-43.1-26.7-53.4-8.2-3.1-15.4-5.1-22.6-5.1-7.2 0-13.3 2-18.5 4.1-4.1-9.3-11.3-19.5-26.7-24.7-7.2-2-13.3-3-19.5-3-13.3 0-24.6 5.1-31.8 11.3-8.3-11.3-21.6-18.5-36-18.5-13.3 0-24.6 5.1-32.9 14.4-8.2-6.2-49.3-37-182.8-66.8-5.1-1-19.5-5.1-27.7-7.2 11.3-60.6 51.3-115 109.9-159.2 49.3 22.6 82.2 32.9 120.2 43.2 6.1 2 39 7.1 45.2 7.1 14.3 0 28.7-4.1 44.1-8.2 12.4-3.1 24.7-6.1 38-8.2-5.1 5.1-9.2 9.3-14.3 14.4l-41.1 45.2c-1.1 1-9.3 9.2-5.2 19.5 2.1 4.1 5.2 8.2 10.3 11.3 11.3 8.2 37 14.4 58.5 9.2 16.5-3 33.9-17.4 53.5-32.8 18.4-14.4 40-28.8 55.4-32.9 6.2-2 14.4-3.1 20.6-2 11.3 2 22.6 6.1 42.1 20.5 33.9 25.7 184.9 157.1 185.9 158.1 0 0 11.3 9.3 10.3 22.6z"/>
+			<path id="Layer" class="s2" d="m779.8 484.9c0 22.5-18.5 41-41.1 41-21.6 0-40-17.4-41.1-39 0-4.1-1-5.1-4.1-2-6.1 6.1-16.4 13.3-33.9 6.1-23.6-9.2-24.6-25.7-23.6-32.8 0-2.1 0-3.1-3.1-1.1-9.2 6.2-19.5 10.3-31.8 5.2-30.8-11.3-27.8-41.1-26.7-49.3 0-1.1 0-1.1 0-1.1-6.2 6.2-13.4 9.3-22.6 9.3-18.5 0-32.9-14.4-32.9-32.9 0-18.5 14.4-32.8 32.9-32.8 17.4 0 30.8 12.3 32.8 28.7 5.2-7.2 22.6-27.7 51.4-18.5 20.5 6.2 23.6 24.7 23.6 30.8 0 1.1 1 1.1 2.1 0 4.1-5.1 18.5-16.4 41.1-6.1 29.7 13.3 17.4 50.3 16.4 52.3-1 2.1-2.1 6.2-1 6.2 1 0 11.3-5.1 20.5-5.1 22.6 0 41.1 18.5 41.1 41.1z"/>
+		</g>
+		<path id="Layer" fill-rule="evenodd" class="s0" d="m1240 285.6c2 7.2 3 13.4 3 20.6-88.3 20.5-162.2 47.2-195.1 61.6 4.1 8.2 7.2 17.4 6.1 26.7-1 13.3-8.2 24.6-20.5 32.8-9.2 6.2-19.5 9.3-29.8 9.3-3.1 0-7.2 0-10.3-1 0 10.2-3 27.7-22.6 40-10.2 7.2-21.5 10.3-31.8 10.3-3.1 0-7.2 0-10.3-1 0 9.2-7.2 19.5-17.4 26.7-10.3 8.2-20.6 11.3-30.8 11.3-6.2 0-11.3-1.1-15.4-2.1-1.1 1-1.1 2.1-2.1 3.1-4.1 5.1-12.3 13.3-31.8 15.4-2.1 0-4.2 0-7.2 0-19.5 0-38-9.3-47.3-14.4-10.3 11.3-24.6 17.5-40 17.5-22.6 0-43.2-14.4-51.4-35-4.1 2.1-9.2 3.1-14.4 3.1-6.1 0-12.3-1-18.5-4.1-18.5-7.2-26.7-18.5-29.8-27.7-4.1 1-8.2 1-11.3 1-5.1 0-10.2-1-16.4-3.1-19.5-7.1-31.8-21.5-35.9-41-3.1 1-6.2 1-9.3 1-25.7 0-47.2-20.6-47.2-47.3q0-9.2 3-18.4c-7.1-5.2-49.3-35-175.6-62.7-5.1-1-27.7-6.2-27.7-6.2 1-7.1 2-14.3 3.1-20.5 8.2 3.1 21.5 7.2 27.7 8.2 124.3 28.8 170.5 57.5 181.8 66.8 8.2-8.2 20.5-13.4 32.9-13.4 14.3 0 27.7 6.2 36.9 17.5 9.3-7.2 19.6-10.3 30.9-10.3 7.1 0 13.3 1 20.5 3.1 12.3 4.1 21.6 12.3 27.7 23.6 6.2-2 11.3-3.1 17.5-3.1 8.2 0 15.4 2.1 23.6 5.2 27.7 11.3 29.8 38 28.8 52.4 1 0 1 0 2 0 30.8 0 55.5 24.6 55.5 55.4 0 8.2-2.1 16.4-5.1 23.6 8.2 4.1 22.6 11.3 36.9 11.3 2.1 0 3.1 0 5.2 0 13.3-2 18.5-6.1 19.5-8.2 1-2 1-3.1 1-3.1l-38-41c-2-2.1-7.2-8.3-4.1-12.4 1-1 3.1-2 4.1-2 3.1 0 6.2 2 8.2 4.1 18.5 15.4 41.1 37 43.2 40 2 2.1 5.1 3.1 9.2 4.1q3.1 0 6.2 0c4.1 0 14.4-1 21.5-7.1 1.1-1.1 5.2-5.2 6.2-6.2 8.2-9.3-1-20.5-1-20.5l-44.2-49.3c0 0-2-1.1-3.1-3.1-3-5.2-2-8.2-1-9.3 1-2 3.1-2 4.1-2 3.1 0 6.2 3.1 9.3 5.1 12.3 9.3 28.7 25.7 44.1 41.1l9.3 8.2c2 1 8.2 5.1 17.4 5.1 7.2 0 14.4-2 21.6-7.1 10.3-6.2 14.4-14.4 14.4-24.7-1-9.2-8.2-16.4-8.2-16.4l-60.6-60.6c-4.1-3.1-7.2-8.2-4.1-12.3 1-1.1 2-2.1 4.1-2.1 3 0 6.1 2.1 9.2 5.1 18.5 16.5 70.9 63.7 70.9 63.7 0 0 7.2 5.1 17.4 5.1 6.2 0 13.4-2 19.6-6.1 7.2-5.2 12.3-12.3 12.3-19.5 0-14.4-9.3-22.6-9.3-22.6-1-1.1-152-132.5-185.9-158.2-19.5-14.4-29.8-18.5-41.1-19.5-1 0-3 0-4.1 0-5.1 0-10.2 1-15.4 2.1-16.4 5.1-38 20.5-53.4 32.8-18.5 15.4-37 29.8-54.4 33.9-5.2 1-11.3 2.1-17.5 2.1-16.4 0-33.9-5.2-44.2-11.3-5.1-4.1-9.2-8.2-11.3-12.4-4.1-10.2 3.1-19.5 6.2-22.5l41.1-45.2c3.1-3.1 5.1-5.2 8.2-8.3-9.2 2.1-18.5 5.2-27.7 7.2-15.4 4.1-29.8 8.3-45.2 8.3-7.2 0-14.4-1.1-20.6-1.1-22.6-2-95.5-20.5-155.1-45.2 6.2-4.1 11.3-8.2 17.5-12.3 56.5 22.6 128.4 40.1 142.8 40.1 1 0 10.2 0 15.4 0 12.3 0 25.7-3.1 40-7.2 16.5-4.1 35-10.3 56.5-10.3 21.6-18.5 54.5-39 113-40 1.1 0 3.1 0 4.1 0 50.4 0 97.6 22.5 99.7 23.6 38 18.5 77 27.7 116 27.7 39.1 0 78.1-8.2 120.2-26.7 5.1 4.1 11.3 9.2 16.4 13.4-47.2 21.5-92.4 32.8-136.6 32.8-42.1 0-83.2-10.3-124.3-29.8-5.1-2-48.2-21.5-91.4-21.5q-1.5 0-3 0c-69.9 2-99.7 31.8-131.5 63.6l-41.1 44.2c-2.1 2.1-3.1 4.1-2.1 5.1 5.2 6.2 18.5 10.3 32.9 10.3 6.2 0 11.3-1 17.5-2 13.3-3.1 30.8-16.5 47.2-29.8l1-1.1c18.5-14.3 37-28.7 55.5-34.9 8.2-3.1 16.4-4.1 23.6-4.1 8.3 0 14.4 2.1 18.5 3.1 10.3 2.1 21.6 9.2 38 21.6 29.8 21.5 136.6 115 182.9 155 19.5-9.2 98.6-43.1 204.4-65.7zm-464.3 198.2c0-20.5-17.5-38-38-38-5.2 0-10.3 2.1-14.4 3.1-2 1-4.1 1-5.1 1h-2.1c-3.1-2-2-4.1 0-10.2 0-1.1 12.3-36-15.4-48.3-6.2-3.1-11.3-4.1-16.4-4.1-11.3 0-18.5 6.2-21.6 9.2 0 1.1-2.1 2.1-3.1 2.1 0 0-3.1 0-3.1-4.1 0-6.2-3-22.6-20.5-27.8-5.1-1-9.2-2-13.4-2-22.6-1-34.9 17.5-34.9 18.5l-4.1 7.2-1-8.2c-2.1-14.4-15.4-25.7-29.8-25.7-16.4 0-29.8 13.3-29.8 29.8 0 16.4 13.4 29.7 29.8 29.7 7.2 0 14.4-3 20.5-8.2l2.1-2 2 2c1.1 1.1 1.1 2.1 1.1 4.1-2.1 8.3-4.1 35 24.6 46.3 3.1 1 7.2 2 10.3 2q9.2 0 18.5-6.2c2-2 3.1-2 4.1-2h1l1.1 1c1 1 1 2.1 1 4.1-1 6.2 0 20.6 21.5 29.8q6.2 3.1 12.4 3.1c8.2 0 14.4-4.1 18.5-8.2 2-1.1 3-2.1 5.1-2.1 4.1 0 4.1 4.1 4.1 6.2 1 20.5 17.5 37 38 37 20.6 0 38-16.5 37-39.1z"/>
+	</g>
+</svg></div>
+        
+      </div>
+      </div>
+      <div class="LH1">Documentación <b>BI</b></div>
+      <div class="LS2">Espacio interno · Business Intelligence</div>
+      <div class="LBDG">🔒 Solo equipo BI · MX · BR · AR · CL</div>
+      <div class="LL">Correo electrónico</div>
+      <div class="FW"><span class="FI" style="display:flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(52,131,250,.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg></span><input class="LIN" id="lEmail" type="email" placeholder="usuario@mercadolibre.com"></div>
+      <button class="LBT" id="lBtn">Iniciar sesión</button>
+      <div class="LF" style="justify-content:center;margin-top:14px;">
+        <span class="LLK" id="btnSolicitar" onclick="solicitarAcceso()">📩 Solicitar acceso al equipo BI</span>
+      </div>
+    <div id="LLOAD"><div class="SP"></div><div class="ST">Verificando credenciales...</div></div>
+  </div></div>
+</div>
+
+<!-- PORTAL -->
+<div id="P">
+  <div class="TB">
+    <svg version="1.2" style="height:30px;width:auto;display:block;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1541 1395">
+	
+	<style>
+		.s0 { fill: #2d3277 } 
+		.s1 { fill: #ffe600 } 
+		.s2 { fill: #ffffff } 
+	</style>
+	<g id="Layer">
+		<g id="Layer">
+			<path id="Layer" class="s0" d="m404.9 1107.2h14.4v287.6h-54.5v-252.7c0-8.2 17.5-34.9 40.1-34.9z"/>
+			<path id="Layer" fill-rule="evenodd" class="s0" d="m789 1284.9c0 71.9-32.8 108.9-100.6 109.9-67.8 0-101.7-32.9-101.7-97.6v-163.3c7.2-12.3 21.6-26.7 48.3-26.7h6.1v97.6q21.6-33.9 61.7-33.9c57.5 2.1 86.2 39 86.2 114zm-55.4-3.1c-2.1-42.1-16.5-62.6-46.2-62.6-29.8 0-44.2 20.5-46.3 62.6-1 43.1 14.4 65.7 45.2 65.7 30.8 0 47.3-21.5 47.3-65.7z"/>
+			<path id="Layer" class="s0" d="m820.9 1281.8c2-69.8 35.9-108.8 108.9-108.8h16.4v56.4h-25.7c-30.8 0-44.1 19.5-44.1 51.4v113h-55.5v-112z"/>
+			<g id="Layer">
+				<path id="Layer" fill-rule="evenodd" class="s0" d="m1032.5 1338.3c9.2 8.2 21.5 12.3 38 12.3 11.3 0 21.6-3.1 29.8-9.2q12.3-9.3 15.4-18.5h51.3c-8.2 25.7-20.5 43.1-38 54.4-17.4 11.3-36.9 16.5-61.6 16.5-16.4 0-31.8-3.1-45.2-8.3-13.3-5.1-24.6-13.3-33.9-22.6-9.2-10.2-16.4-21.5-21.6-34.9-5.1-13.3-7.1-28.7-7.1-45.2 0-15.4 3-30.8 8.2-44.1 5.1-13.4 12.3-25.7 21.5-34.9 9.3-10.3 20.6-17.5 33.9-23.7 13.4-6.1 27.8-8.2 44.2-8.2 17.5 0 33.9 3.1 47.3 10.3 13.3 7.2 24.6 16.4 32.8 27.7q12.3 17 18.5 40.1c4.1 14.4 5.1 30.8 4.1 47.2h-153c2 19.5 7.2 32.9 15.4 41.1zm65.7-110.9c-7.2-7.2-17.4-11.3-31.8-11.3-9.3 0-17.5 2-23.7 5.1-6.1 3.1-11.2 7.2-14.3 11.3-4.1 5.2-6.2 9.3-8.2 14.4-2.1 5.1-2.1 10.3-3.1 14.4h94.5c-1.1-15.4-6.2-26.7-13.4-33.9z"/>
+			</g>
+			<path id="Layer" class="s0" d="m477.8 1107.2h54.5v49.3h-54.5z"/>
+			<path id="Layer" class="s0" d="m477.8 1181.2h54.5v212.6h-54.5z"/>
+		</g>
+		<g id="Layer">
+			<path id="path96_8_" fill-rule="evenodd" class="s0" d="m1540.9 943.9c0 29.8-10.3 56.5-26.7 78.1-16.4 22.6-45.2 32.8-80.1 32.8-36 0-63.7-11.3-80.1-32.8-17.5-20.6-26.7-47.3-26.7-78.1 0-29.8 10.2-56.5 26.7-78 16.4-23.6 45.2-33.9 80.1-33.9 35.9 0 63.7 12.3 80.1 33.9 18.5 22.6 27.7 49.3 26.7 78zm-57.5 1.1c0-19.6-3.1-37-12.3-47.3-9.3-10.3-21.6-16.4-37-16.4-15.4 0-27.7 6.1-37 16.4-8.2 10.3-12.3 25.7-12.3 47.3 0 20.5 3.1 38 12.3 48.2 9.3 10.3 21.6 16.5 37 16.5 15.4 0 27.7-6.2 37-16.5 9.2-12.3 12.3-28.7 12.3-48.2z"/>
+			<path id="path108_8_" fill-rule="evenodd" class="s0" d="m1307.8 968.6c0 0 2 86.2-99.7 86.2-28.7 0-61.6-8.2-78-27.7-17.5-17.4-24.7-44.1-24.7-75 0-36.9 8.2-66.7 24.7-86.2 17.4-20.6 39-30.8 66.7-30.8 12.3 0 24.7 1 33.9 7.2 11.3 7.1 18.5 14.3 24.7 23.6v-58.6c0-44.1 55.4-38 55.4-38zm-47.2-19.5c0-26.7-7.2-47.2-19.5-57.5q-12.4-9.2-27.8-9.2c-16.4 0-27.7 6.1-34.9 18.5-7.2 11.3-10.3 25.6-10.3 44.1 0 20.6 3.1 36 10.3 48.3 6.2 10.3 18.5 16.4 33.9 16.4 15.4 0 27.7-6.1 34.9-16.4 8.3-10.3 10.3-25.7 13.4-44.2z"/>
+			<path id="path98_8_" fill-rule="evenodd" class="s0" d="m1091 897.7v78.1c0 13.3 1.1 81.1-119.1 77-19.5-1-34.9-6.2-47.3-16.4q-18.5-17-18.5-46.3c0-24.6 10.3-45.1 29.8-55.4 11.3-6.2 26.7-10.3 48.3-13.4l18.5-1c9.2-1 17.5-3.1 21.6-4.1q12.3-4.6 12.3-15.4 0-13.9-9.3-18.5c-7.1-3.1-14.3-4.1-26.7-4.1q-18.5 0-27.7 9.2c-3.1 5.2-6.2 11.3-7.2 18.5h-52.4c2.1-17.4 6.2-31.8 15.4-44.1 14.4-18.5 40.1-27.8 75-27.8 23.6 0 43.2 4.1 61.6 13.4 18.5 9.2 26.8 27.7 25.7 50.3zm-52.4 51.4c-3 1-7.1 3-10.2 4.1-5.2 0-9.3 2-15.4 3.1l-12.4 3c-11.3 1.1-20.5 4.1-24.6 7.2-8.2 5.2-12.3 13.4-12.3 23.6 0 9.3 2 14.4 7.1 19.6 5.2 5.1 11.3 6.1 18.5 6.1 11.3 0 22.6-4.1 32.9-10.3 9.3-7.1 15.4-19.5 15.4-38z"/>
+			<path id="path100_8_" class="s0" d="m751 909c-5.1 8.2-6.1 22.6-6.1 38 0 15.4 3.1 27.7 6.1 37 5.2 17.4 19.6 26.7 38 26.7 14.4 0 23.7-4.1 29.8-10.3 6.2-7.2 9.3-16.4 10.3-26.7h58.5c-2 17.5-8.2 32.9-18.4 48.3-18.5 22.6-45.2 34.9-80.2 34.9-34.9 0-61.6-10.3-78-29.8-17.5-19.5-24.7-44.1-24.7-77q0-52.4 27.8-83.2c18.4-20.5 44.1-29.8 77-29.8 27.7 0 51.4 4.1 67.8 16.5 17.5 10.2 27.7 31.8 30.8 61.6h-58.5c0-8.2-3.1-15.4-7.2-21.6q-10.8-12.3-30.8-12.3c-20.6 0-32.9 9.2-42.2 27.7z"/>
+			<path id="path102_8_" class="s0" d="m674 837.1c0 0 1 0 4.1 0v55.5c-3.1-1-6.2-1-9.2-1q-4.7 0-6.2 0c-22.6 0-37 8.2-44.2 21.5-5.1 7.2-6.1 20.6-6.1 37v101.7h-55.5v-108.9c0 0-8.2-107.8 114-107.8 2.1 0 2.1 0 3.1 2z"/>
+			<path id="path104_8_" fill-rule="evenodd" class="s0" d="m530.2 992.2c-2.1 11.3-8.2 22.6-18.5 32.9-17.4 20.5-44.2 30.8-78.1 30.8-27.7 0-52.3-10.3-73.9-26.7-22.6-16.5-32.9-45.2-32.9-83.2 0-36 11.3-63.7 29.8-83.2 18.5-20.5 43.2-29.8 74-29.8 18.5 0 35.9 3.1 49.3 9.3 13.3 6.1 25.6 17.4 34.9 30.8 9.2 12.3 13.3 26.7 16.4 43.1 1.1 8.2 1.1 22.6 1.1 41.1h-152.1c0 19.5 8.3 35.9 21.6 43.1 8.2 6.2 17.5 7.2 29.8 7.2 12.3 0 23.6-1 30.8-7.2 3.1-1 6.2-4.1 7.2-7.2zm-150-69.8h94.5c0-14.4-4.1-25.7-13.3-32.9-9.3-7.2-20.6-10.2-32.9-10.2-14.4 0-25.7 5.1-32.9 12.3-8.2 8.2-12.3 18.5-15.4 30.8z"/>
+			<path id="path106_8_" class="s0" d="m303.2 1050.7h-51.4v-126.3c0-12.3-3-38-36.9-38-21.6 0-38 15.4-38 38v126.3h-51.4v-126.3c0-12.3-3.1-38-37-38-21.5 0-37 15.4-37 38v126.3h-51.3v-125.3c0-52.3 33.9-92.4 87.3-92.4 26.7 0 48.3 10.3 63.7 29.8 15.4-18.5 37-29.8 63.7-29.8 55.4 0 87.3 38 87.3 92.4z"/>
+		</g>
+	</g>
+	<g id="Layer">
+		<path id="Layer" class="s0" d="m1261.5 338c0 186.9-190 337.9-488.9 337.9-297.9 0-488.9-151-488.9-337.9 0-1 0-14.4 0-18.5 0-175.6 218.8-319.4 488.9-319.4 270.1 0 488.9 143.8 488.9 319.4 0 9.3 0 12.3 0 18.5z"/>
+		<ellipse id="Layer" class="s1" cx="774.7" cy="319.5" rx="469.4" ry="299.9"/>
+		<g id="Layer">
+			<path id="Layer" class="s2" d="m658.6 180.9c32.9-32.9 62.7-62.7 133.5-64.7 48.3-1.1 96.6 21.5 96.6 21.5 89.3 43.2 180.8 26.7 254.7-4.1 53.4 43.2 88.3 96.6 97.6 154.1-108.9 24.6-189 58.5-206.5 66.7-22.6-19.5-152-132.5-183.8-156.1-17.5-12.3-27.8-18.5-37-21.5-8.2-2.1-20.5-5.2-40.1 1-18.5 5.1-36.9 20.5-55.4 34.9-16.5 13.3-35 27.7-48.3 30.8-23.6 5.1-46.2 0-53.4-9.2-3.1-4.1 2-9.3 2-9.3z"/>
+			<path id="Layer" class="s2" d="m1039.7 389.3c0 9.3-5.2 16.5-13.4 21.6-22.6 14.4-40 1-41.1 1 0 0-51.3-47.2-70.8-63.6-3.1-2.1-7.2-5.2-9.3-3.1-2 3.1 4.1 8.2 4.1 8.2l59.6 60.6c0 0 8.2 8.2 9.2 18.5 1.1 8.2-2 18.5-15.4 27.7-21.5 14.4-38 4.1-42.1 1-18.5-18.5-38-39-52.4-50.3-3-2-7.2-5.1-9.2-3.1-2.1 2.1 4.1 8.2 4.1 8.2l44.2 49.3c0 0 10.2 12.4 1 24.7-1 2-4.1 4.1-6.2 6.2-9.2 7.1-22.6 8.2-29.8 7.1-8.2-2-10.2-5.1-10.2-5.1 0 0-22.6-23.6-42.1-40-3.1-2.1-7.2-5.2-9.3-3.1-2 2 4.1 8.2 4.1 8.2l38 42.1c2.1 2 0 4.1-1 6.2-2.1 3-7.2 7.1-21.6 9.2-18.5 2.1-38-8.2-46.2-12.3q6.2-10.8 6.2-24.7c0-29.8-23.7-53.4-53.4-53.4-2.1 0-3.1 0-5.2 0 2.1-18.5-2-43.1-26.7-53.4-8.2-3.1-15.4-5.1-22.6-5.1-7.2 0-13.3 2-18.5 4.1-4.1-9.3-11.3-19.5-26.7-24.7-7.2-2-13.3-3-19.5-3-13.3 0-24.6 5.1-31.8 11.3-8.3-11.3-21.6-18.5-36-18.5-13.3 0-24.6 5.1-32.9 14.4-8.2-6.2-49.3-37-182.8-66.8-5.1-1-19.5-5.1-27.7-7.2 11.3-60.6 51.3-115 109.9-159.2 49.3 22.6 82.2 32.9 120.2 43.2 6.1 2 39 7.1 45.2 7.1 14.3 0 28.7-4.1 44.1-8.2 12.4-3.1 24.7-6.1 38-8.2-5.1 5.1-9.2 9.3-14.3 14.4l-41.1 45.2c-1.1 1-9.3 9.2-5.2 19.5 2.1 4.1 5.2 8.2 10.3 11.3 11.3 8.2 37 14.4 58.5 9.2 16.5-3 33.9-17.4 53.5-32.8 18.4-14.4 40-28.8 55.4-32.9 6.2-2 14.4-3.1 20.6-2 11.3 2 22.6 6.1 42.1 20.5 33.9 25.7 184.9 157.1 185.9 158.1 0 0 11.3 9.3 10.3 22.6z"/>
+			<path id="Layer" class="s2" d="m779.8 484.9c0 22.5-18.5 41-41.1 41-21.6 0-40-17.4-41.1-39 0-4.1-1-5.1-4.1-2-6.1 6.1-16.4 13.3-33.9 6.1-23.6-9.2-24.6-25.7-23.6-32.8 0-2.1 0-3.1-3.1-1.1-9.2 6.2-19.5 10.3-31.8 5.2-30.8-11.3-27.8-41.1-26.7-49.3 0-1.1 0-1.1 0-1.1-6.2 6.2-13.4 9.3-22.6 9.3-18.5 0-32.9-14.4-32.9-32.9 0-18.5 14.4-32.8 32.9-32.8 17.4 0 30.8 12.3 32.8 28.7 5.2-7.2 22.6-27.7 51.4-18.5 20.5 6.2 23.6 24.7 23.6 30.8 0 1.1 1 1.1 2.1 0 4.1-5.1 18.5-16.4 41.1-6.1 29.7 13.3 17.4 50.3 16.4 52.3-1 2.1-2.1 6.2-1 6.2 1 0 11.3-5.1 20.5-5.1 22.6 0 41.1 18.5 41.1 41.1z"/>
+		</g>
+		<path id="Layer" fill-rule="evenodd" class="s0" d="m1240 285.6c2 7.2 3 13.4 3 20.6-88.3 20.5-162.2 47.2-195.1 61.6 4.1 8.2 7.2 17.4 6.1 26.7-1 13.3-8.2 24.6-20.5 32.8-9.2 6.2-19.5 9.3-29.8 9.3-3.1 0-7.2 0-10.3-1 0 10.2-3 27.7-22.6 40-10.2 7.2-21.5 10.3-31.8 10.3-3.1 0-7.2 0-10.3-1 0 9.2-7.2 19.5-17.4 26.7-10.3 8.2-20.6 11.3-30.8 11.3-6.2 0-11.3-1.1-15.4-2.1-1.1 1-1.1 2.1-2.1 3.1-4.1 5.1-12.3 13.3-31.8 15.4-2.1 0-4.2 0-7.2 0-19.5 0-38-9.3-47.3-14.4-10.3 11.3-24.6 17.5-40 17.5-22.6 0-43.2-14.4-51.4-35-4.1 2.1-9.2 3.1-14.4 3.1-6.1 0-12.3-1-18.5-4.1-18.5-7.2-26.7-18.5-29.8-27.7-4.1 1-8.2 1-11.3 1-5.1 0-10.2-1-16.4-3.1-19.5-7.1-31.8-21.5-35.9-41-3.1 1-6.2 1-9.3 1-25.7 0-47.2-20.6-47.2-47.3q0-9.2 3-18.4c-7.1-5.2-49.3-35-175.6-62.7-5.1-1-27.7-6.2-27.7-6.2 1-7.1 2-14.3 3.1-20.5 8.2 3.1 21.5 7.2 27.7 8.2 124.3 28.8 170.5 57.5 181.8 66.8 8.2-8.2 20.5-13.4 32.9-13.4 14.3 0 27.7 6.2 36.9 17.5 9.3-7.2 19.6-10.3 30.9-10.3 7.1 0 13.3 1 20.5 3.1 12.3 4.1 21.6 12.3 27.7 23.6 6.2-2 11.3-3.1 17.5-3.1 8.2 0 15.4 2.1 23.6 5.2 27.7 11.3 29.8 38 28.8 52.4 1 0 1 0 2 0 30.8 0 55.5 24.6 55.5 55.4 0 8.2-2.1 16.4-5.1 23.6 8.2 4.1 22.6 11.3 36.9 11.3 2.1 0 3.1 0 5.2 0 13.3-2 18.5-6.1 19.5-8.2 1-2 1-3.1 1-3.1l-38-41c-2-2.1-7.2-8.3-4.1-12.4 1-1 3.1-2 4.1-2 3.1 0 6.2 2 8.2 4.1 18.5 15.4 41.1 37 43.2 40 2 2.1 5.1 3.1 9.2 4.1q3.1 0 6.2 0c4.1 0 14.4-1 21.5-7.1 1.1-1.1 5.2-5.2 6.2-6.2 8.2-9.3-1-20.5-1-20.5l-44.2-49.3c0 0-2-1.1-3.1-3.1-3-5.2-2-8.2-1-9.3 1-2 3.1-2 4.1-2 3.1 0 6.2 3.1 9.3 5.1 12.3 9.3 28.7 25.7 44.1 41.1l9.3 8.2c2 1 8.2 5.1 17.4 5.1 7.2 0 14.4-2 21.6-7.1 10.3-6.2 14.4-14.4 14.4-24.7-1-9.2-8.2-16.4-8.2-16.4l-60.6-60.6c-4.1-3.1-7.2-8.2-4.1-12.3 1-1.1 2-2.1 4.1-2.1 3 0 6.1 2.1 9.2 5.1 18.5 16.5 70.9 63.7 70.9 63.7 0 0 7.2 5.1 17.4 5.1 6.2 0 13.4-2 19.6-6.1 7.2-5.2 12.3-12.3 12.3-19.5 0-14.4-9.3-22.6-9.3-22.6-1-1.1-152-132.5-185.9-158.2-19.5-14.4-29.8-18.5-41.1-19.5-1 0-3 0-4.1 0-5.1 0-10.2 1-15.4 2.1-16.4 5.1-38 20.5-53.4 32.8-18.5 15.4-37 29.8-54.4 33.9-5.2 1-11.3 2.1-17.5 2.1-16.4 0-33.9-5.2-44.2-11.3-5.1-4.1-9.2-8.2-11.3-12.4-4.1-10.2 3.1-19.5 6.2-22.5l41.1-45.2c3.1-3.1 5.1-5.2 8.2-8.3-9.2 2.1-18.5 5.2-27.7 7.2-15.4 4.1-29.8 8.3-45.2 8.3-7.2 0-14.4-1.1-20.6-1.1-22.6-2-95.5-20.5-155.1-45.2 6.2-4.1 11.3-8.2 17.5-12.3 56.5 22.6 128.4 40.1 142.8 40.1 1 0 10.2 0 15.4 0 12.3 0 25.7-3.1 40-7.2 16.5-4.1 35-10.3 56.5-10.3 21.6-18.5 54.5-39 113-40 1.1 0 3.1 0 4.1 0 50.4 0 97.6 22.5 99.7 23.6 38 18.5 77 27.7 116 27.7 39.1 0 78.1-8.2 120.2-26.7 5.1 4.1 11.3 9.2 16.4 13.4-47.2 21.5-92.4 32.8-136.6 32.8-42.1 0-83.2-10.3-124.3-29.8-5.1-2-48.2-21.5-91.4-21.5q-1.5 0-3 0c-69.9 2-99.7 31.8-131.5 63.6l-41.1 44.2c-2.1 2.1-3.1 4.1-2.1 5.1 5.2 6.2 18.5 10.3 32.9 10.3 6.2 0 11.3-1 17.5-2 13.3-3.1 30.8-16.5 47.2-29.8l1-1.1c18.5-14.3 37-28.7 55.5-34.9 8.2-3.1 16.4-4.1 23.6-4.1 8.3 0 14.4 2.1 18.5 3.1 10.3 2.1 21.6 9.2 38 21.6 29.8 21.5 136.6 115 182.9 155 19.5-9.2 98.6-43.1 204.4-65.7zm-464.3 198.2c0-20.5-17.5-38-38-38-5.2 0-10.3 2.1-14.4 3.1-2 1-4.1 1-5.1 1h-2.1c-3.1-2-2-4.1 0-10.2 0-1.1 12.3-36-15.4-48.3-6.2-3.1-11.3-4.1-16.4-4.1-11.3 0-18.5 6.2-21.6 9.2 0 1.1-2.1 2.1-3.1 2.1 0 0-3.1 0-3.1-4.1 0-6.2-3-22.6-20.5-27.8-5.1-1-9.2-2-13.4-2-22.6-1-34.9 17.5-34.9 18.5l-4.1 7.2-1-8.2c-2.1-14.4-15.4-25.7-29.8-25.7-16.4 0-29.8 13.3-29.8 29.8 0 16.4 13.4 29.7 29.8 29.7 7.2 0 14.4-3 20.5-8.2l2.1-2 2 2c1.1 1.1 1.1 2.1 1.1 4.1-2.1 8.3-4.1 35 24.6 46.3 3.1 1 7.2 2 10.3 2q9.2 0 18.5-6.2c2-2 3.1-2 4.1-2h1l1.1 1c1 1 1 2.1 1 4.1-1 6.2 0 20.6 21.5 29.8q6.2 3.1 12.4 3.1c8.2 0 14.4-4.1 18.5-8.2 2-1.1 3-2.1 5.1-2.1 4.1 0 4.1 4.1 4.1 6.2 1 20.5 17.5 37 38 37 20.6 0 38-16.5 37-39.1z"/>
+	</g>
+</svg>
+    <div class="TBSP"></div>
+    <div class="TBTI">Documentación BI</div>
+    <div class="TBSR" onclick="openSearch()" id="searchBar" style="cursor:pointer;">
+      <span style="font-size:13px;opacity:.6">🔍</span>
+      <span id="searchPlaceholder" style="flex:1">Buscar documentación...</span>
+      <span style="font-size:9px;opacity:.3;font-family:var(--mono)">⌘K</span>
+    </div>
+    <div class="TBR">
+      <button class="TBLG" id="bES" onclick="setLang('es')" style="font-weight:800">ES</button>
+      <div class="TBDV"></div>
+      <button class="TBLG" id="bPT" style="opacity:.45" onclick="setLang('pt')">PT-BR</button>
+      <div class="TBDV"></div>
+      <span style="color:#1A1400;cursor:pointer">🔔</span>
+      <span id="tbUN" style="font-size:11px;font-weight:600;color:#1A1400">usuario</span>
+      <div class="TBAV" id="tbAV">BI</div>
+    </div>
+  </div>
+  <div class="PB">
+    <div class="SB">
+      <div class="SBU">
+        <div class="SBAV" id="sbAV">BI</div>
+        <div><div class="SBUN" id="sbUN">BI Analyst</div><div class="SBBG">● activo</div></div>
+      </div>
+      <div class="NS">Principal</div>
+      <div class="NI on" onclick="go('home')">🏠 Inicio</div>
+      <div class="NI" onclick="go('dm');fDM('all')">🗄 Catálogo de tablas</div>
+      <div class="NSU" onclick="go('dm');fDM('ind')">↳ Tablas individuales</div>
+      <div class="NSU" onclick="go('dm');fDM('agr')">↳ Tablas agregadas</div>
+      <div class="NI" onclick="go('dash');fDash('all')">📊 Dashboards</div>
+      <div class="NSU" onclick="go('dash');fDash('tableau')">↳ Tableau</div>
+      <div class="NSU" onclick="go('dash');fDash('looker')">↳ Looker Studio</div>
+      <div class="NI" onclick="go('man');fMan('all')">📖 Manuales y guías</div>
+      <div class="NSU" onclick="go('man');fMan('tableau')">↳ Acceso Tableau</div>
+      <div class="NSU" onclick="go('man');fMan('n8n')">↳ Guía n8n</div>
+      <div class="NSU" onclick="go('man');fMan('tracker')">↳ Personnel Tracker</div>
+      <div class="NI" onclick="go('flujo')">🔗 Flujo reclutamiento</div>
+      <div class="NI" onclick="go('acc')">🔒 Control de acceso</div>
+      <div class="NSU" onclick="go('acc')">↳ Service Accounts</div>
+      <div class="NSU" onclick="go('acc')">↳ Shield tickets</div>
+      <div class="NI" onclick="go('n8n')">🔄 Flujos n8n</div>
+      <div class="NSU" onclick="go('n8n')">↳ Pegar Semana Actual AJ</div>
+      <div class="NSEP"></div>
+      <div class="NS">Recursos</div>
+      <div class="NI" onclick="window.open('https://drive.google.com/drive/folders/0APxv7SMJk4lPUk9PVA','_blank')">📁 Drive</div>
+      <div class="NI" id="navAdmin" style="display:none;" onclick="go('admin')">🔐 Administración</div>
+      <div class="NI" onclick="go('cfg')">⚙️ Configuración</div>
+      <div class="NI" onclick="go('faq')">❓ FAQ</div>
+      <div class="SBF"><div class="SBFT">BI-DOCS-01 · v1.0 · DRAFT<br>Confidencial · Equipo BI · 2026</div></div>
+    </div>
+    <div class="MA">
+
+      <!-- HOME -->
+      <div class="SEC on" id="S-home">
+        <div id="gridWrap">
+          <div id="gridViewport"><div id="gridTrack"></div></div>
+          <div class="gpageNav">
+            <button class="gpageBtn" onclick="gPage(gCur-1)">&#8249;</button>
+            <div id="gDots"></div>
+            <button class="gpageBtn" onclick="gPage(gCur+1)">&#8250;</button>
+          </div>
+          <div id="gCount">Página 1 de 2</div>
+        </div>
+        <div id="ZOV" onclick="zClose()">
+          <div id="ZC" onclick="event.stopPropagation()"></div>
+        </div>
+      </div>
+
+      <!-- DATA MODEL -->
+      <div class="SEC" id="S-dm">
+        <div class="PT">Catálogo de <span>Tablas</span></div>
+        <div class="PS">6 tablas en <code style="font-family:var(--mono);font-size:11px;color:var(--b)">meli-people.SILVER_PE_SHIPPING</code> · Click en tabla para ver campos</div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;flex-shrink:0;">
+          <span style="font-size:9px;font-family:var(--mono);padding:3px 8px;border-radius:4px;background:rgba(52,131,250,.1);color:var(--b);border:.5px solid rgba(52,131,250,.25);font-weight:700;">● Individual</span>
+          <span style="font-size:9px;font-family:var(--mono);padding:3px 8px;border-radius:4px;background:rgba(29,158,117,.1);color:#1D9E75;border:.5px solid rgba(29,158,117,.25);font-weight:700;">▪ Agregado</span>
+          <span style="font-size:9px;font-family:var(--mono);padding:3px 8px;border-radius:4px;background:rgba(226,75,74,.1);color:#E24B4A;border:.5px solid rgba(226,75,74,.25);font-weight:700;">🔴 PII</span>
+        </div>
+        <div id="dmList"></div>
+        <div style="margin-top:16px;background:rgba(4,10,28,.8);border:.5px solid var(--bdr);border-radius:10px;padding:14px 16px;flex-shrink:0;">
+          <div style="font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.45);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:11px;">Matriz de conectividad</div>
+          <div style="overflow-x:auto;"><table class="MTX" id="dmMtx"></table></div>
+          <button class="BG" style="margin-top:10px;" onclick="cpMatrix()">📋 Copiar para Excel/Sheets</button>
+        </div>
+      </div>
+
+      <!-- DASHBOARDS -->
+      <div class="SEC" id="S-dash">
+        <div class="PT">Dashboards <span>activos</span></div>
+        <div class="PS">Reportes en Tableau y Looker Studio · MX · BR · AR · CL</div>
+        <div class="CG" id="dashGrid"></div>
+      </div>
+
+      <!-- MANUALES -->
+      <div class="SEC" id="S-man">
+        <div class="PT">Manuales y <span>guías</span></div>
+        <div class="PS">Documentación de acceso, configuración y procedimientos del equipo BI</div>
+        <div class="CG" id="manGrid"></div>
+      </div>
+
+      <!-- FLUJO -->
+      <div class="SEC" id="S-flujo">
+        <div class="PT">Flujo de <span>Reclutamiento</span></div>
+        <div class="PS">8 etapas del proceso TA con idle days · EMI_APPLICATION_CONSOLIDATED</div>
+        <div style="background:rgba(4,10,28,.8);border:.5px solid var(--bdr);border-radius:10px;padding:16px;flex-shrink:0;">
+          <div style="overflow-x:auto;"><div class="FL" id="flujoFlow"></div></div>
+          <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;" id="flujoFields"></div>
+        </div>
+      </div>
+
+      <!-- ACCESO -->
+      <div class="SEC" id="S-acc">
+        <div class="PT">Control de <span>Acceso</span></div>
+        <div class="PS">Service Accounts, datasets BigQuery y tickets Shield</div>
+        <div id="accContent"></div>
+      </div>
+
+      <!-- N8N -->
+      <div class="SEC" id="S-n8n">
+        <div class="PT">Flujos <span>n8n</span></div>
+        <div class="PS">Workflows activos · SA: iup-intel-ta-01</div>
+        <div id="n8nContent"></div>
+      </div>
+
+      <!-- TABLE DETAIL -->
+      <div class="SEC" id="S-tdet">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-shrink:0;">
+          <button class="BACK" onclick="go('dm')">← Volver</button>
+          <div class="PT" id="tdetTitle" style="margin-bottom:0">Tabla</div>
+        </div>
+        <div class="PS" id="tdetSub"></div>
+        <div id="tdetContent"></div>
+      </div>
+
+      <!-- RELATION DETAIL -->
+      <div class="SEC" id="S-rel">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-shrink:0;">
+          <button class="BACK" onclick="go('dm')">← Volver</button>
+          <div class="PT" id="relTitle" style="margin-bottom:0">Relaciones</div>
+        </div>
+        <div class="PS" id="relSub"></div>
+        <div id="relContent"></div>
+      </div>
+
+      <!-- CONFIG -->
+      <div class="SEC" id="S-cfg">
+        <div class="PT">⚙️ <span>Configuración</span></div>
+        <div class="PS">Preferencias del portal</div>
+        <div id="cfgContent"></div>
+      </div>
+
+      <!-- MANUAL DETAIL -->
+      <div class="SEC" id="S-mdet">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-shrink:0;">
+          <button class="BACK" onclick="go('man')">← Volver</button>
+          <div class="PT" id="mdetTitle" style="margin-bottom:0">Manual</div>
+        </div>
+        <div class="PS" id="mdetSub" style="flex-shrink:0;"></div>
+        <div id="mdetContent"></div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="SEC" id="S-faq">
+        <div class="PT">❓ <span>FAQ</span></div>
+        <div class="PS">Preguntas frecuentes del equipo BI</div>
+        <div id="faqContent"></div>
+      </div>
+
+
+      <!-- ADMIN — solo Jehasiel -->
+      <div class="SEC" id="S-admin">
+        <div class="PT">🔐 <span>Administración de usuarios</span></div>
+        <div class="PS">Solo visible para administradores · Gestión de accesos al Portal BI</div>
+
+        <!-- Agregar usuario -->
+        <div style="background:rgba(4,10,28,.85);border:.5px solid rgba(52,131,250,.2);border-radius:12px;padding:18px 20px;margin-bottom:18px;max-width:520px;">
+          <div style="font-size:10px;font-family:var(--mono);color:rgba(52,131,250,.5);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:12px;">➕ Agregar nuevo usuario</div>
+          <div style="font-size:12px;color:var(--t2);margin-bottom:12px;line-height:1.6;">Pega el correo de la persona que solicita acceso y haz clic en Agregar. Solo se aceptan correos <code style="font-family:var(--mono);color:var(--b);">@mercadolibre.com</code></div>
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <input id="adminEmailInput" type="email" placeholder="correo@mercadolibre.com"
+              style="flex:1;background:rgba(1,4,16,.9);border:1px solid rgba(52,131,250,.25);border-radius:8px;padding:10px 13px;font-size:12px;color:#E8EAED;font-family:var(--mono);outline:none;"
+              onkeydown="if(event.key==='Enter')adminAddUser()">
+            <button onclick="adminAddUser()" style="background:var(--b);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--sans);white-space:nowrap;">Agregar ✓</button>
+          </div>
+          <div id="adminMsg" style="display:none;font-size:11px;font-family:var(--mono);padding:8px 11px;border-radius:6px;"></div>
+        </div>
+
+        <!-- Lista de usuarios actuales -->
+        <div style="background:rgba(4,10,28,.85);border:.5px solid rgba(52,131,250,.2);border-radius:12px;padding:18px 20px;max-width:520px;">
+          <div style="font-size:10px;font-family:var(--mono);color:rgba(52,131,250,.5);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:12px;">👥 Usuarios con acceso</div>
+          <div id="adminUserList"></div>
+          <div style="margin-top:14px;padding-top:12px;border-top:.5px solid rgba(52,131,250,.1);">
+            <div style="font-size:10px;font-family:var(--mono);color:rgba(52,131,250,.3);">⚠️ Los cambios se aplican en esta sesión. Para hacerlos permanentes, guarda el archivo HTML actualizado.</div>
+            <button onclick="adminExport()" style="margin-top:10px;background:rgba(29,158,117,.1);border:.5px solid rgba(29,158,117,.3);color:#1D9E75;border-radius:7px;padding:7px 14px;font-size:10px;font-family:var(--mono);cursor:pointer;font-weight:700;">📋 Copiar lista actualizada</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- .MA -->
+  </div><!-- .PB -->
+</div><!-- #P -->
+
+<div id="TOAST"></div>
+
+<!-- SEARCH OVERLAY -->
+<div id="SRCH" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(2,8,24,.82);backdrop-filter:blur(8px);align-items:flex-start;justify-content:center;padding-top:80px;" onclick="closeSearch()">
+  <div onclick="event.stopPropagation()" style="width:600px;max-width:92%;background:rgba(3,8,22,.98);border:1px solid rgba(52,131,250,.35);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);">
+    <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:.5px solid rgba(52,131,250,.15);">
+      <span style="font-size:16px;opacity:.5">🔍</span>
+      <input id="searchInput" type="text" placeholder="Buscar tablas, dashboards, manuales..." 
+        style="flex:1;background:none;border:none;outline:none;font-size:14px;color:#E8EAED;font-family:var(--sans);"
+        oninput="doSearch(this.value)" onkeydown="searchKey(event)">
+      <span onclick="closeSearch()" style="font-size:18px;color:rgba(255,255,255,.3);cursor:pointer;line-height:1;">✕</span>
+    </div>
+    <div id="searchResults" style="max-height:420px;overflow-y:auto;padding:8px 0;"></div>
+    <div id="searchFooter" style="padding:8px 16px;font-size:10px;font-family:var(--mono);color:rgba(52,131,250,.3);border-top:.5px solid rgba(52,131,250,.1);">↑↓ para navegar · Enter para abrir · Esc para cerrar</div>
+  </div>
+</div>
+<script>
+var DOCS=[
+  {t:'Manual Accesos Tableau',s:'Acceso y configuración',ic:'📊',cl:'#3483FA',it:'dash',
+   d:'Manual completo para solicitar acceso a Tableau Desktop y Server. Incluye configuración de datasources, conexión a BigQuery, publicación y permisos por país.',
+   tg:['Tableau','Acceso','Dashboard','MX·BR·AR·CL'],up:'17/04/2026',url:'https://drive.google.com/drive/folders/1adyKJhbHmPEpB_fIoo4jErtktKGU9WAx'},
+  {t:'TA Data Model',s:'6 tablas BigQuery documentadas',ic:'🗄️',cl:'#1D9E75',it:'tbl',
+   d:'Diccionario completo de las 6 tablas del modelo de datos TA: HIRES, FUNNEL, EMI_FUNNEL, REQUISITIONS, APPLICATION y EMI_APPLICATION con campos y tipos.',
+   tg:['BigQuery','Diccionario','6 tablas','SILVER_PE_SHIPPING'],up:'08/05/2026',url:'https://docs.google.com/document/d/1clixt-CKfc9smPVjTGskrCHMhQR_b_iZCFOvxyPQs7g'},
+  {t:'Workflow n8n · Semana Actual',s:'Automatización Jueves 6PM',ic:'⚡',cl:'#E8C200',it:'nod',
+   d:'Workflow que automatiza HC Plan S&OP (columna AJ→AL) en Daily Plan TTE 2026. 7 nodos, trigger semanal cron 0 18 * * 4.',
+   tg:['n8n','Automatización','Sheets','Weekly'],up:'08/05/2026',url:'https://docs.google.com/document/d/1Bhxhlt8ZKUgK_XSEx1veSUt2OAGWwh_W0llEKh3vsis'},
+  {t:'Mapeo Columnas Tracker 2026',s:'MX · normalización de datos',ic:'📋',cl:'#7F77DD',it:'tbl',
+   d:'Mapeo de columnas del tracker 2026 para México. Define la correspondencia entre el archivo horizontal y el esquema vertical para Tableau.',
+   tg:['Tracker','MX','Mapeo','Headcount'],up:'04/05/2026',url:'https://drive.google.com/drive/folders/1ssVc3UmZY3-kVJ7ZFX38MLed88x89K1S'},
+  {t:'Listado Trackers BR · MX',s:'Archivos consolidados',ic:'👥',cl:'#E24B4A',it:'ppl',
+   d:'Consolidado de archivos tracker para Brasil y México con headcount semanal reconciliado contra Tableau.',
+   tg:['Tracker','MX','BR','Consolidado'],up:'17/04/2026',url:'https://drive.google.com/drive/folders/15Bx2VUv2ZngdWYfLOfrPtHHjlPQbXpHW'},
+  {t:'Formato Solicitud Dashboard',s:'Formulario oficial para TA',ic:'📝',cl:'#FF8C00',it:'faq',
+   d:'Formato estándar para solicitar creación o modificación de dashboards al equipo BI.',
+   tg:['Dashboard','Solicitud','Formato'],up:'07/05/2026',url:'https://drive.google.com/drive/folders/1sJC3xW32ViCodIx6R4pAr_6yXqA86_MV'},
+  {t:'Script Auditoría BigQuery',s:'Validación datos Shipping MX',ic:'🔍',cl:'#5DCAA5',it:'cht',
+   d:'Query SQL para auditoría Shipping MX. Valida CURP, RFC, email, teléfono, género y +20 campos con flags de error ponderados.',
+   tg:['BigQuery','SQL','Auditoría','Calidad'],up:'24/04/2026',url:'https://drive.google.com/drive/folders/1Q8QC-7r2zW2fCUcw4k76rxIdnZP9AT89'},
+  {t:'Control de Accesos BigQuery',s:'SA · Datasets · Shield tickets',ic:'🔐',cl:'#AFA9EC',it:'lck',
+   d:'Catálogo de Service Accounts, datasets BigQuery con tickets Shield y tablas EMI con campos PII por país.',
+   tg:['Acceso','Shield','PII','SA'],up:'10/05/2026',url:'https://docs.google.com/spreadsheets/d/1NtGDRfzVLnToKZy0DT7sLQ96zOn2GgubNKr6mF-dUw8'},
+  {t:'Cobertura Semanal Shipping',s:'Files 2026',ic:'📦',cl:'#D85A30',it:'dash',
+   d:'Archivos de cobertura semanal para operaciones Shipping 2026. Headcount por site para fill rate y planificación operativa.',
+   tg:['Shipping','Cobertura','Semanal','2026'],up:'20/04/2026',url:'https://drive.google.com/drive/folders/1pRPR9NcYrScKNcqSrW8hh-Fn-wf33c5p'}
+];
+
+var DM=[
+  {n:'HIRES_CONSOLIDATED',fn:'PROD_LATAM_SHIPPING_HIRES_CONSOLIDATED',cl:'#3483FA',tp:'Individual · por empleado',ks:'candidate_id, national_id',
+   ds:'Contrataciones de personal: identificación, ubicación, tipo de contratación, posición, fechas clave y horas trabajadas.',
+   tg:['hire_date','tenure_days','hiring_type'],
+   flds:[
+    {n:'fsc_week',t:'INTEGER',d:'Semana del año en la que se registra la información.',p:false},
+    {n:'fsc_year',t:'INTEGER',d:'Año al que pertenece la semana registrada.',p:false},
+    {n:'country',t:'STRING',d:'País donde trabaja la persona.',p:false},
+    {n:'location',t:'STRING',d:'Nombre simple del Centro de trabajo (MXCD06, SC_Colima).',p:false},
+    {n:'site',t:'STRING',d:'Centro o sede de trabajo asignada.',p:false},
+    {n:'first_name',t:'STRING',d:'Nombre de la persona.',p:true},
+    {n:'last_name',t:'STRING',d:'Apellido de la persona.',p:true},
+    {n:'birthdate',t:'DATE',d:'Fecha de nacimiento.',p:true},
+    {n:'username',t:'STRING',d:'Usuario interno de la persona en el sistema.',p:false},
+    {n:'candidate_id',t:'BYTES',d:'Identificador único de la persona en el sistema.',p:false},
+    {n:'national_id',t:'STRING',d:'Documento de identidad oficial.',p:false},
+    {n:'employee_status',t:'STRING',d:'Estado laboral (Demitido, Activo).',p:false},
+    {n:'hire_date',t:'DATE',d:'Fecha en la que fue contratada la persona.',p:false},
+    {n:'start_date',t:'DATETIME',d:'Fecha en la que inició actividades.',p:false},
+    {n:'end_date',t:'DATETIME',d:'Fecha en la que terminó su relación laboral (si aplica).',p:false},
+    {n:'source_recruitment',t:'STRING',d:'Consultora por la cual se reclutó.',p:false},
+    {n:'hiring_type',t:'STRING',d:'Tipo de contratación (RPO, RPM, Efectivizados).',p:false},
+    {n:'position',t:'STRING',d:'Puesto que ocupa la persona.',p:false},
+    {n:'division',t:'STRING',d:'División de la empresa.',p:false},
+    {n:'department',t:'STRING',d:'Departamento donde trabaja.',p:false},
+    {n:'area',t:'STRING',d:'Área general dentro del departamento.',p:false},
+    {n:'work_schedule',t:'STRING',d:'Turno de trabajo asignado.',p:false},
+    {n:'weekly_working_hours',t:'FLOAT',d:'Total de horas que trabaja a la semana.',p:false},
+    {n:'job_classification',t:'STRING',d:'Clasificación del puesto según la empresa.',p:false},
+    {n:'seniority_agg_1',t:'STRING',d:'Tipo de representante contratado.',p:false},
+    {n:'hire_date',t:'DATE',d:'Fecha original de ingreso a la empresa.',p:false},
+    {n:'termination_date',t:'DATE',d:'Fecha de baja de la persona.',p:false},
+    {n:'hiring_process',t:'STRING',d:'Tipo de proceso (EXT, MELI).',p:false},
+    {n:'flag_hire',t:'STRING',d:'Indica si es nueva contratación o reingreso.',p:false},
+    {n:'event_reason',t:'STRING',d:'Motivo de la baja.',p:false},
+    {n:'total_worked_hours',t:'FLOAT',d:'Total de horas trabajadas acumuladas.',p:false},
+    {n:'tenure_days',t:'INTEGER',d:'Días totales trabajados en la empresa.',p:false}
+   ],
+   jns:[{t:'APPLICATION_CONSOLIDATED',k:'candidate_id / national_id',nt:'Ver aplicaciones del candidato.'},
+        {t:'EMI_APPLICATION_CONSOLIDATED',k:'candidate_id',nt:'Ver tiempos (idle days) por candidato.'},
+        {t:'FUNNEL_CONSOLIDATED',k:'site, fsc_year, fsc_week',nt:'Debes agrupar (COUNT) Hires antes de unir.'}]},
+  {n:'FUNNEL_CONSOLIDATED',fn:'PROD_LATAM_SHIPPING_FUNNEL_CONSOLIDATED',cl:'#1D9E75',tp:'Agregado · site + semana',ks:'site, fsc_year, fsc_week',
+   ds:'Métricas del funnel de atracción y selección. Requisiciones, aplicaciones, contrataciones, no shows y bajas tempranas.',
+   tg:['requisition','hired','no_shows'],
+   flds:[
+    {n:'site',t:'STRING',d:'Site operativo.',p:false},{n:'city',t:'STRING',d:'Ciudad del site.',p:false},
+    {n:'country',t:'STRING',d:'País del site.',p:false},{n:'business_line',t:'STRING',d:'Línea de negocio (SVC, Fulfillment, XD, Sortation).',p:false},
+    {n:'fsc_year',t:'INTEGER',d:'Año fiscal.',p:false},{n:'fsc_week',t:'INTEGER',d:'Semana fiscal.',p:false},
+    {n:'t2_req',t:'FLOAT',d:'Requisición dos semanas antes.',p:false},{n:'t1_req',t:'FLOAT',d:'Requisición una semana antes.',p:false},
+    {n:'requisition',t:'INTEGER',d:'Total de requisiciones.',p:false},{n:'headcount',t:'INTEGER',d:'Headcount planificado.',p:false},
+    {n:'applications',t:'INTEGER',d:'Total de aplicaciones recibidas.',p:false},
+    {n:'worksample_attended',t:'INTEGER',d:'Worksamples asistidos.',p:false},
+    {n:'offered',t:'INTEGER',d:'Ofertas realizadas.',p:false},{n:'hired',t:'INTEGER',d:'Candidatos contratados.',p:false},
+    {n:'no_shows',t:'INTEGER',d:'Candidatos que no se presentaron.',p:false},
+    {n:'early_to_15_days',t:'INTEGER',d:'Bajas dentro de los primeros 15 días.',p:false},
+    {n:'early_to_30_days',t:'INTEGER',d:'Bajas dentro de los primeros 30 días.',p:false}
+   ],
+   jns:[{t:'HIRES_CONSOLIDATED',k:'site, fsc_year, fsc_week',nt:'Agrupar Hires antes de unir.'},
+        {t:'REQUISITIONS_CONSOLIDATED',k:'site, fsc_year, fsc_week',nt:'Calcular Fill Rate (Hired/Requisition).'}]},
+  {n:'EMI_FUNNEL_CONSOLIDATED',fn:'PROD_LATAM_SHIPPING_EMI_FUNNEL_CONSOLIDATED',cl:'#7F77DD',tp:'Agregado · fuente + canal',ks:'attraction_source, attraction_channel, site',
+   ds:'Funnel por fuente y canal de atracción. Etapas con idle days entre conversación, worksample, médico y contratación.',
+   tg:['attraction_source','cnvtn_to_ssff_idle_days'],
+   flds:[
+    {n:'attraction_source_category',t:'STRING',d:'Categoría de la fuente.',p:false},
+    {n:'attraction_channel',t:'STRING',d:'Canal: WHATSAPP, Outbound, MANUAL, Walkins.',p:false},
+    {n:'attraction_source',t:'STRING',d:'Fuente específica de atracción.',p:false},
+    {n:'applications',t:'INTEGER',d:'Total de aplicaciones.',p:false},
+    {n:'conversation_started',t:'INTEGER',d:'Candidatos con conversación iniciada.',p:false},
+    {n:'worksample_attended',t:'INTEGER',d:'Worksamples asistidos.',p:false},
+    {n:'hired',t:'INTEGER',d:'Candidatos contratados.',p:false},
+    {n:'cnvtn_to_ws_idle_days',t:'INTEGER',d:'Días entre conversación y worksample.',p:false},
+    {n:'ws_to_mc_idle_days',t:'INTEGER',d:'Días entre worksample y examen médico.',p:false},
+    {n:'cnvtn_to_ssff_idle_days',t:'INTEGER',d:'Días totales desde conversación hasta contratación.',p:false}
+   ],
+   jns:[{t:'EMI_APPLICATION_CONSOLIDATED',k:'attraction_source, site',nt:'Analizar qué fuente es más lenta.'}]},
+  {n:'REQUISITIONS_CONSOLIDATED',fn:'PROD_LATAM_SHIPPING_REQUISITIONS_CONSOLIDATED',cl:'#D85A30',tp:'Agregado · site + semana',ks:'site, fsc_year, fsc_week',
+   ds:'Requisiciones por site y semana. T1 (1 semana antes) y T2 (2 semanas antes) para planificación de headcount.',
+   tg:['t1_req','t2_req','requisition'],
+   flds:[
+    {n:'fsc_year',t:'INTEGER',d:'Año fiscal.',p:false},{n:'fsc_week',t:'INTEGER',d:'Semana fiscal.',p:false},
+    {n:'country',t:'STRING',d:'País.',p:false},{n:'site',t:'STRING',d:'Site operativo.',p:false},
+    {n:'site_sop',t:'STRING',d:'Nombre del site bajo estructura SOP.',p:false},
+    {n:'t2_req',t:'FLOAT',d:'Requisiciones T2 — dos semanas antes.',p:false},
+    {n:'t1_req',t:'FLOAT',d:'Requisiciones T1 — una semana antes.',p:false},
+    {n:'requisition',t:'FLOAT',d:'Total de requisiciones acordadas con operaciones.',p:false}
+   ],
+   jns:[{t:'FUNNEL_CONSOLIDATED',k:'site, fsc_year, fsc_week',nt:'Calcular Fill Rate.'},
+        {t:'HIRES_CONSOLIDATED',k:'site, fsc_year, fsc_week',nt:'Comparar req vs contrataciones.'}]},
+  {n:'APPLICATION_CONSOLIDATED',fn:'PROD_LATAM_SHIPPING_APPLICATION_CONSOLIDATED',cl:'#E8C200',tp:'Individual · por candidato',ks:'application_id, candidate_id',
+   ds:'Aplicaciones individuales. Stage, state, validaciones (doc, médico, fretado, ABM) y fuente de atracción.',
+   tg:['stage_name','state_name','hire_date'],
+   flds:[
+    {n:'application_id',t:'STRING',d:'Identificador único de la aplicación.',p:false},
+    {n:'candidate_id',t:'BYTES',d:'Identificador único del candidato.',p:false},
+    {n:'candidate_name',t:'STRING',d:'Nombre completo del candidato.',p:true},
+    {n:'national_id',t:'STRING',d:'Documento oficial (RFC en MX, CPF en BR).',p:false},
+    {n:'site',t:'STRING',d:'Site operativo.',p:false},
+    {n:'hire_date',t:'DATE',d:'Fecha de contratación.',p:false},
+    {n:'stage_name',t:'STRING',d:'Etapa actual en el funnel.',p:false},
+    {n:'state_name',t:'STRING',d:'Estado específico dentro de la etapa.',p:false},
+    {n:'attraction_channel',t:'STRING',d:'Canal de atracción.',p:false},
+    {n:'hiring_type',t:'STRING',d:'Tipo de contratación (RPO, RPM, EXT).',p:false},
+    {n:'documentation_validation_status',t:'STRING',d:'Estado de validación de documentación.',p:false},
+    {n:'medical_check_status',t:'STRING',d:'Estado del examen médico.',p:false},
+    {n:'rejected_reason',t:'STRING',d:'Motivo de rechazo (si aplica).',p:false},
+    {n:'datasource',t:'STRING',d:'Sistema origen (GSHEETS, EMI).',p:false}
+   ],
+   jns:[{t:'HIRES_CONSOLIDATED',k:'candidate_id / hire_date',nt:'Ver contratación del candidato.'},
+        {t:'EMI_APPLICATION_CONSOLIDATED',k:'candidate_id, application_id',nt:'Detalle de tiempos por candidato.'}]},
+  {n:'EMI_APPLICATION_CONSOLIDATED',fn:'PROD_LATAM_SHIPPING_EMI_APPLICATION_CONSOLIDATED',cl:'#E24B4A',tp:'Granular · PII incluido',ks:'application_id, candidate_id',
+   ds:'Seguimiento granular por candidato. Fechas por etapa, idle days, datos PII y reclutadores responsables.',
+   tg:['idle_days','PII','recruiter'],
+   flds:[
+    {n:'application_id',t:'INTEGER',d:'Identificador único de la aplicación.',p:false},
+    {n:'candidate_id',t:'BYTES',d:'Identificador único del candidato.',p:false},
+    {n:'candidate_name',t:'STRING',d:'Nombre completo del candidato.',p:true},
+    {n:'candidate_birthdate',t:'DATE',d:'Fecha de nacimiento.',p:true},
+    {n:'candidate_email',t:'STRING',d:'Correo electrónico.',p:true},
+    {n:'candidate_phone',t:'STRING',d:'Número de teléfono.',p:true},
+    {n:'candidate_identity_documents_national_id',t:'STRING',d:'RFC / CPF.',p:true},
+    {n:'site',t:'STRING',d:'Site operativo.',p:false},
+    {n:'attraction_source',t:'STRING',d:'Fuente de atracción.',p:false},
+    {n:'recruiter_screening',t:'STRING',d:'Reclutador de preselección.',p:false},
+    {n:'application_stage',t:'STRING',d:'Etapa actual en el proceso.',p:false},
+    {n:'hire_date',t:'DATE',d:'Fecha de contratación efectiva.',p:false},
+    {n:'conversation_started_date',t:'DATETIME',d:'Inicio de conversación.',p:false},
+    {n:'worksample_effective_date',t:'DATETIME',d:'Fecha en que el worksample fue aprobado.',p:false},
+    {n:'medical_check_approval_date',t:'DATETIME',d:'Fecha de aprobación del examen médico.',p:false},
+    {n:'cnvtn_to_ws_idle_days',t:'INTEGER',d:'Días entre conversación y worksample.',p:false},
+    {n:'ws_to_mc_idle_days',t:'INTEGER',d:'Días entre worksample y examen médico.',p:false},
+    {n:'cnvtn_to_ssff_idle_days',t:'INTEGER',d:'Días totales desde conversación hasta contratación.',p:false}
+   ],
+   jns:[{t:'HIRES_CONSOLIDATED',k:'candidate_id',nt:'Ver contratación efectiva.'},
+        {t:'APPLICATION_CONSOLIDATED',k:'candidate_id, application_id',nt:'Complementar con stage/state.'},
+        {t:'EMI_FUNNEL_CONSOLIDATED',k:'attraction_source, site',nt:'Analizar velocidad por fuente.'}]}
+];
+
+var MTX_DATA=[
+  {t:'HIRES_CONSOLIDATED',g:'Por empleado',k:'candidate_id, national_id, username',r:'APPLICATION_CONSOLIDATED y EMI_APPLICATION_CONSOLIDATED por candidate_id. Agrupar por site+fsc_week para FUNNEL y REQUISITIONS.'},
+  {t:'APPLICATION_CONSOLIDATED',g:'Por aplicación',k:'application_id, candidate_id',r:'HIRES por candidate_id o hire_date. EMI_APPLICATION por candidate_id y application_id.'},
+  {t:'EMI_APPLICATION_CONSOLIDATED',g:'Por aplicación',k:'application_id, candidate_id',r:'HIRES y APPLICATION por candidate_id. Idle days agregar por site para FUNNEL.'},
+  {t:'FUNNEL_CONSOLIDATED',g:'Agregado site+semana',k:'site, fsc_year, fsc_week',r:'HIRES agregando por site+fsc_week. También REQUISITIONS por las mismas columnas.'},
+  {t:'REQUISITIONS_CONSOLIDATED',g:'Agregado site+semana',k:'site, fsc_year, fsc_week',r:'FUNNEL y HIRES por site+fsc_year+fsc_week.'},
+  {t:'EMI_FUNNEL_CONSOLIDATED',g:'Agregado fuente+canal',k:'attraction_source, attraction_channel, site',r:'EMI_APPLICATION por attraction_source+site. Analiza efectividad de atracción.'}
+];
+
+var TYPE_CL={'INTEGER':'#3483FA','INT64':'#3483FA','STRING':'#1D9E75','DATE':'#E8C200','DATETIME':'#7F77DD','FLOAT':'#D85A30','BYTES':'#E24B4A','BOOLEAN':'#5DCAA5','TIMESTAMP':'#FF8C00'};
+// ── UTILS ──
+function hRGB(h){return{r:parseInt(h.slice(1,3),16),g:parseInt(h.slice(3,5),16),b:parseInt(h.slice(5,7),16)};}
+function toast(m){var t=document.getElementById('TOAST');t.textContent=m;t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(function(){t.style.opacity='0';},2200);}
+function cpText(txt){navigator.clipboard.writeText(txt).then(function(){toast('✓ Contenido copiado correctamente');}).catch(function(){var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('✓ Copiado');});}
+
+// ── NAVIGATION ──
+var curSec='home';
+function go(id){
+  document.querySelectorAll('.SEC').forEach(function(s){s.classList.remove('on');});
+  document.querySelectorAll('.NI').forEach(function(n){n.classList.remove('on');});
+  var el=document.getElementById('S-'+id);
+  if(!el)return;
+  el.classList.add('on');
+  curSec=id;
+  document.querySelectorAll('.NI').forEach(function(n){
+    var oc=n.getAttribute('onclick')||'';
+    if(oc.indexOf("'"+id+"'")>=0)n.classList.add('on');
+  });
+}
+window.go=go;
+
+// ── FILTERS ──
+function fDash(t){setTimeout(function(){document.querySelectorAll('#dashGrid .DC').forEach(function(c){if(t==='all'){c.style.display='';return;}var tg=c.querySelector('.DCTG');c.style.display=(tg&&tg.textContent.toLowerCase().indexOf(t)>=0)?'':'none';});},30);}
+function fMan(t){setTimeout(function(){document.querySelectorAll('#manGrid .DC').forEach(function(c){if(t==='all'){c.style.display='';return;}var tt=c.querySelector('.DCT');if(!tt){c.style.display='';return;}var tx=tt.textContent.toLowerCase();c.style.display=((t==='tableau'&&(tx.indexOf('tableau')>=0||tx.indexOf('acceso')>=0))||(t==='n8n'&&tx.indexOf('n8n')>=0)||(t==='tracker'&&(tx.indexOf('tracker')>=0||tx.indexOf('mapeo')>=0||tx.indexOf('listado')>=0)))?'':'none';});},30);}
+function fDM(t){setTimeout(function(){document.querySelectorAll('#dmList .TR').forEach(function(r){if(t==='all'){r.style.display='';return;}var ty=r.querySelector('.TTY');if(!ty){r.style.display='';return;}var tx=ty.textContent.toLowerCase();r.style.display=((t==='ind'&&tx.indexOf('individual')>=0)||(t==='agr'&&tx.indexOf('agregado')>=0))?'':'none';});},30);}
+window.fDash=fDash;window.fMan=fMan;window.fDM=fDM;
+
+// ── LOGIN CANVAS ──
+(function(){
+  var cv=document.getElementById('LBG');
+  if(!cv)return;
+  var ctx=cv.getContext('2d');
+  if(!ctx)return;
+  var W,H,lines=[],nodes=[],packets=[],texts=[],t=0;
+  var HX=['0xFF','0xAB','DATA','ACK','SYN','01','10','0xE4','TX','RX','0xF0','PKT'];
+  function r(){return Math.random();}
+  function sz(){W=window.innerWidth||1280;H=window.innerHeight||800;cv.width=W;cv.height=H;build();}
+  function build(){
+    nodes=[];for(var i=0;i<90;i++)nodes.push({x:r()*W,y:r()*H,rad:r()*2.2+.2,p:r()*6.28,sp:.013+r()*.025,yw:r()<.12});
+    lines=[];for(var j=0;j<50;j++){var sx=r()*W,sy=r()*H,pts=[{x:sx,y:sy}],cx=sx,cy=sy;for(var s=0;s<3+~~(r()*5);s++){if(r()>.5)cx+=(r()>.5?1:-1)*(25+r()*110);else cy+=(r()>.5?1:-1)*(25+r()*90);pts.push({x:cx,y:cy});}lines.push({pts:pts,pr:r(),sp:.001+r()*.0038,trl:[],yw:r()<.08});}
+    packets=[];for(var p=0;p<130;p++)packets.push({x:r()*W,y:r()*H,vx:(r()-.5)*.35,vy:(r()-.5)*.35,rad:r()*1.2+.2,p:r()*6.28});
+    texts=[];for(var d=0;d<35;d++)texts.push({x:r()*W,y:r()*H,sp:.25+r()*.5,al:.08+r()*.25,tx:HX[~~(r()*HX.length)]});
+  }
+  function draw(){
+    requestAnimationFrame(draw);t+=.008;
+    ctx.fillStyle='#020818';ctx.fillRect(0,0,W,H);
+    var g=ctx.createRadialGradient(W*.5,H*.5,10,W*.5,H*.5,W*.65);g.addColorStop(0,'rgba(8,22,60,.55)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    function wv(yb,amp,freq,ph,col,lw,al){ctx.save();ctx.globalAlpha=al;ctx.strokeStyle=col;ctx.lineWidth=lw;ctx.shadowColor=col;ctx.shadowBlur=lw*10;ctx.beginPath();for(var xi=0;xi<=W;xi+=2){var yi=yb+Math.sin(xi*freq+ph+t)*amp;xi===0?ctx.moveTo(xi,yi):ctx.lineTo(xi,yi);}ctx.stroke();ctx.restore();}
+    wv(H*.09,22,.012,0,'#1A5FD8',3,.42);wv(H*.12,14,.016,.6,'#3483FA',1.5,.27);wv(H*.88,20,.011,1,'#1A5FD8',2.5,.37);wv(H*.91,12,.015,1.8,'#3483FA',1.2,.22);
+    ctx.strokeStyle='rgba(52,131,250,.08)';ctx.lineWidth=.7;
+    lines.forEach(function(l){ctx.beginPath();l.pts.forEach(function(p,i){i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);});ctx.stroke();l.pts.forEach(function(p){ctx.beginPath();ctx.arc(p.x,p.y,2,0,Math.PI*2);ctx.fillStyle='rgba(52,131,250,.2)';ctx.fill();});});
+    lines.forEach(function(l){
+      l.pr+=l.sp;if(l.pr>1.3)l.pr=-0.2;if(l.pr<0||l.pr>1)return;
+      var tot=0;for(var i=0;i<l.pts.length-1;i++){var dx=l.pts[i+1].x-l.pts[i].x,dy=l.pts[i+1].y-l.pts[i].y;tot+=Math.sqrt(dx*dx+dy*dy);}
+      var td=l.pr*tot,acc=0,px,py,ok=false;
+      for(var i=0;i<l.pts.length-1;i++){var dx=l.pts[i+1].x-l.pts[i].x,dy=l.pts[i+1].y-l.pts[i].y,sl=Math.sqrt(dx*dx+dy*dy);if(!ok&&acc+sl>=td){var fr=(td-acc)/sl;px=l.pts[i].x+dx*fr;py=l.pts[i].y+dy*fr;ok=true;}acc+=sl;}
+      if(!ok)return;
+      l.trl.push({x:px,y:py});if(l.trl.length>20)l.trl.shift();
+      if(l.trl.length>1){for(var ti=1;ti<l.trl.length;ti++){ctx.beginPath();ctx.moveTo(l.trl[ti-1].x,l.trl[ti-1].y);ctx.lineTo(l.trl[ti].x,l.trl[ti].y);ctx.strokeStyle=l.yw?'rgba(255,230,0,'+(ti/l.trl.length*.5)+')':'rgba(52,131,250,'+(ti/l.trl.length*.5)+')';ctx.lineWidth=(ti/l.trl.length)*2;ctx.stroke();}}
+      ctx.beginPath();ctx.arc(px,py,3.5,0,Math.PI*2);ctx.fillStyle=l.yw?'rgba(255,230,0,.9)':'rgba(52,131,250,.88)';ctx.shadowColor=l.yw?'#FFE600':'#3483FA';ctx.shadowBlur=12;ctx.fill();ctx.shadowBlur=0;
+      ctx.beginPath();ctx.arc(px,py,1.3,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
+    });
+    nodes.forEach(function(n){n.p+=n.sp;var a=Math.sin(n.p)*.42+.52;ctx.beginPath();ctx.arc(n.x,n.y,n.rad,0,Math.PI*2);ctx.fillStyle=n.yw?'rgba(255,230,0,'+a+')':'rgba(52,131,250,'+a+')';if(n.rad>1.8){ctx.shadowColor=n.yw?'#FFE600':'#3483FA';ctx.shadowBlur=n.rad*3.5;}ctx.fill();ctx.shadowBlur=0;});
+    packets.forEach(function(pk){pk.x+=pk.vx;pk.y+=pk.vy;if(pk.x<0)pk.x=W;if(pk.x>W)pk.x=0;if(pk.y<0)pk.y=H;if(pk.y>H)pk.y=0;pk.p+=.035;ctx.beginPath();ctx.arc(pk.x,pk.y,pk.rad,0,Math.PI*2);ctx.fillStyle='rgba(52,131,250,'+(Math.sin(pk.p)*.3+.38)+')';ctx.fill();});
+    texts.forEach(function(tx){tx.y-=tx.sp;tx.al-=.0015;if(tx.al<=0){tx.al=.1+r()*.22;tx.y=H+8;tx.x=r()*W;}ctx.save();ctx.globalAlpha=tx.al;ctx.font='9px monospace';ctx.fillStyle='#3483FA';ctx.fillText(tx.tx,tx.x,tx.y);ctx.restore();});
+  }
+  sz();window.addEventListener('resize',sz);draw();
+})();
+
+// ── LOGIN ──
+// ── WHITELIST equipo BI ──
+var BI_TEAM = [
+  {email:'erick.blanquetsanchez@mercadolibre.com.mx', role:'usuario'},
+  {email:'helder.moretti@mercadolivre.com',           role:'usuario'},
+  {email:'ext_jehasiel@mercadolibre.com.mx',          role:'admin'},
+  {email:'ext_camaclau@mercadolibre.com',             role:'usuario'},
+  {email:'maximiliano.segoviamartinez@mercadolibre.com.mx', role:'usuario'},
+  {email:'ext_pauleram@mercadolibre.com.mx',          role:'usuario'}
+];
+function teamEmails(){ return BI_TEAM.map(function(u){return u.email;}); }
+function isAdmin(email){ return BI_TEAM.some(function(u){return u.email===email&&u.role==='admin';}); }
+
+function enterPortal(email){
+  var nm = email.split('@')[0].replace(/[._]/g,' ');
+  var ini = nm.split(' ').filter(Boolean).map(function(w){return w[0].toUpperCase();}).join('').slice(0,2)||'BI';
+  ['tbUN','sbUN'].forEach(function(id){document.getElementById(id).textContent=nm;});
+  ['tbAV','sbAV'].forEach(function(id){document.getElementById(id).textContent=ini;});
+  document.getElementById('LS').classList.add('hide');
+  document.getElementById('P').classList.add('on');
+  initPortal();
+  // Si es admin, mostrar módulo de administración
+  if(isAdmin(email.toLowerCase())) adminInit();
+  setTimeout(function(){document.getElementById('LS').style.display='none';},700);
+}
+
+function checkAccess(email){
+  email = (email||'').toLowerCase().trim();
+  if(!email){showLoginError('Ingresa tu correo electrónico.');return;}
+  var isMeli = email.endsWith('@mercadolibre.com')||email.endsWith('@mercadolibre.com.mx')||email.endsWith('@mercadolivre.com');
+  if(!isMeli){showLoginError('Solo se permiten correos de Mercado Libre (@mercadolibre.com).');return;}
+  var allowed = teamEmails().some(function(e){return e.toLowerCase()===email;});
+  if(!allowed){
+    var el=document.getElementById('loginError');
+    if(!el){
+      el=document.createElement('div');
+      el.id='loginError';
+      el.style.cssText='background:rgba(226,75,74,.12);border:.5px solid rgba(226,75,74,.4);border-radius:8px;padding:11px 13px;font-size:11px;color:#E24B4A;font-family:var(--mono);margin-bottom:12px;line-height:1.6;display:block;';
+      var frm=document.getElementById('LFRM');
+      frm.insertBefore(el,frm.firstChild);
+    }
+    el.innerHTML='';
+    var line1=document.createElement('div');
+    line1.textContent='⚠️ Tu cuenta no tiene acceso al Portal BI.';
+    line1.style.marginBottom='6px';
+    var line2=document.createElement('div');
+    line2.style.color='#7A90A8';
+    line2.textContent='¿Eres del equipo BI? ';
+    var link=document.createElement('span');
+    link.textContent='Solicitar acceso →';
+    link.style.cssText='color:#3483FA;cursor:pointer;text-decoration:underline;font-weight:700;';
+    var emCopy=email;
+    link.onclick=function(){solicitarAcceso(emCopy);};
+    line2.appendChild(link);
+    el.appendChild(line1);
+    el.appendChild(line2);
+    el.style.display='block';
+    // Auto-abrir mailto
+    setTimeout(function(){ solicitarAcceso(email); }, 800);
+    return;
+  }
+  document.getElementById('LFRM').style.display='none';
+  document.getElementById('LLOAD').classList.add('on');
+  setTimeout(function(){ enterPortal(email); }, 1600);
+}
+
+function showLoginError(msg){
+  var el = document.getElementById('loginError');
+  if(!el){
+    el = document.createElement('div');
+    el.id = 'loginError';
+    el.style.cssText = 'background:rgba(226,75,74,.12);border:.5px solid rgba(226,75,74,.4);border-radius:8px;padding:11px 13px;font-size:11px;color:#E24B4A;font-family:var(--mono);margin-bottom:12px;line-height:1.6;display:block;';
+    // Insert at top of LFRM, before everything
+    var frm = document.getElementById('LFRM');
+    frm.insertBefore(el, frm.firstChild);
+  }
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function doLogin(){
+  var em = document.getElementById('lEmail').value||'';
+  checkAccess(em);
+}
+
+function doSSO(){
+  var em = document.getElementById('lEmail').value||'';
+  if(!em){
+    showLoginError('Ingresa tu correo @mercadolibre.com para continuar con SSO.');
+    document.getElementById('lEmail').focus();
+    return;
+  }
+  checkAccess(em);
+}
+
+function solicitarAcceso(emailParam){
+  var em = emailParam || document.getElementById('lEmail').value || '';
+  var to = 'ext_jehasiel@mercadolibre.com.mx';
+  var subject = encodeURIComponent('Solicitud de acceso — Portal BI Talent Acquisition');
+  var body = encodeURIComponent('Hola,\n\nSolicito acceso al Portal BI de Talent Acquisition.\n\nCorreo: '+(em||'[tu correo]')+'\nNombre: [tu nombre]\nÁrea: [tu área]\n\nGracias.');
+  // Gmail web — abre directo en el navegador sin popup de app
+  var gmailUrl = 'https://mail.google.com/mail/?view=cm&to='+to+'&su='+subject+'&body='+body;
+  window.open(gmailUrl, '_blank');
+}
+window.solicitarAcceso = solicitarAcceso;
+window.doSSO = doSSO;
+document.getElementById('lBtn').addEventListener('click',doLogin);
+document.getElementById('lEmail').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+document.getElementById('lEmail').addEventListener('input',function(){var el=document.getElementById('loginError');if(el)el.style.display='none';});
+document.getElementById('lEmail').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+
+// ── HOME GRID ──
+var gCur=0,gAuto=null;
+function buildGrid(){
+  var track=document.getElementById('gridTrack');
+  var dotsEl=document.getElementById('gDots');
+  if(!track)return;
+  var PER=6,n=DOCS.length,nP=Math.ceil(n/PER);
+  track.innerHTML='';
+  dotsEl.innerHTML='';
+  for(var p=0;p<nP;p++){
+    var page=document.createElement('div');
+    page.className='GPAGE';
+    for(var i=p*PER;i<Math.min(p*PER+PER,n);i++){
+      page.appendChild(makeCard(DOCS[i],i));
+    }
+    track.appendChild(page);
+    // dot
+    (function(pp){
+      var d=document.createElement('div');
+      d.className='GDOT';d.id='gd'+pp;
+      d.style.width=(pp===0?'20px':'8px');
+      d.style.background='rgba(52,131,250,'+(pp===0?'.85':'.22')+')';
+      d.onclick=function(){gPage(pp);};
+      dotsEl.appendChild(d);
+    })(p);
+  }
+  gPage(0);
+  if(gAuto)clearInterval(gAuto);
+  gAuto=setInterval(function(){
+    var ov=document.getElementById('ZOV');
+    if(document.getElementById('S-home').classList.contains('on')&&!ov.classList.contains('on')){
+      var nP2=Math.ceil(DOCS.length/6);
+      gPage((gCur+1)%nP2);
+    }
+  },5000);
+}
+function makeCard(d,i){
+  var rgb=hRGB(d.cl);
+  var abg='rgba('+rgb.r+','+rgb.g+','+rgb.b+',.1)';
+  var abr='rgba('+rgb.r+','+rgb.g+','+rgb.b+',.28)';
+  var div=document.createElement('div');
+  div.className='GCARD';
+  div.style.border='1px solid '+abr;
+  div.style.boxShadow='0 4px 20px rgba('+rgb.r+','+rgb.g+','+rgb.b+',.1)';
+  div.innerHTML='<div class="GCBAR" style="background:'+d.cl+'"></div>'
+    +'<div class="GCH" style="background:'+abg+';border-bottom:.5px solid '+abr+'"><div class="GCIC">'+d.ic+'</div><div class="GCT">'+d.t+'</div><div class="GCS">'+d.s+'</div></div>'
+    +'<div class="GCB"><div class="GCD">'+d.d.slice(0,80)+'...</div>'
+    +'<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px;">'
+    +d.tg.slice(0,2).map(function(tg){return '<span style="font-size:9px;font-family:var(--mono);padding:2px 6px;border-radius:3px;background:'+abg+';color:'+d.cl+';border:.5px solid '+abr+';font-weight:700;">'+tg+'</span>';}).join('')
+    +'</div>'
+    +'<div class="GCBN">🕐 '+d.up+'</div></div>';
+  div.addEventListener('mouseenter',function(){this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 32px rgba('+rgb.r+','+rgb.g+','+rgb.b+',.22)';});
+  div.addEventListener('mouseleave',function(){this.style.transform='';this.style.boxShadow='0 4px 20px rgba('+rgb.r+','+rgb.g+','+rgb.b+',.1)';});
+  div.addEventListener('click',function(){zOpen(i);});
+  return div;
+}
+function gPage(p){
+  var nP=Math.ceil(DOCS.length/6);
+  gCur=((p%nP)+nP)%nP;
+  var track=document.getElementById('gridTrack');
+  if(track)track.style.transform='translateX(-'+(gCur*100)+'%)';
+  for(var i=0;i<nP;i++){
+    var d=document.getElementById('gd'+i);
+    if(d){d.style.background='rgba(52,131,250,'+(i===gCur?'.85':'.22')+')';d.style.width=(i===gCur?'20px':'8px');}
+  }
+  var gc=document.getElementById('gCount');
+  if(gc)gc.textContent='Página '+(gCur+1)+' de '+nP;
+}
+window.gPage=gPage;
+
+// ── ZOOM ──
+function zOpen(idx){
+  var d=DOCS[idx];
+  var rgb=hRGB(d.cl);
+  var abg='rgba('+rgb.r+','+rgb.g+','+rgb.b+',.1)';
+  var abr='rgba('+rgb.r+','+rgb.g+','+rgb.b+',.3)';
+  var MOD={'TA Data Model':'dm','Workflow n8n · Semana Actual':'n8n','Script Auditoría BigQuery':'acc','Control de Accesos BigQuery':'acc','Mapeo Columnas Tracker 2026':'dm','Listado Trackers BR · MX':'dm','Formato Solicitud Dashboard':'dash','Cobertura Semanal Shipping':'dash','Manual Accesos Tableau':'man'};
+  var MLBL={'dm':'→ Ver Catálogo de Tablas','n8n':'→ Ver Flujos n8n','acc':'→ Ver Control de Acceso','dash':'→ Ver Dashboards','man':'→ Ver Manuales'};
+  var ms=MOD[d.t];
+  var zc=document.getElementById('ZC');
+  zc.style.cssText='width:300px;max-width:88%;transform:scale(0.4);opacity:0;transition:transform .42s cubic-bezier(.15,1.4,.3,1),opacity .3s;cursor:default;border-radius:16px;overflow:hidden;border:1.5px solid '+d.cl+';background:rgba(3,8,22,.98);box-shadow:0 0 60px rgba('+rgb.r+','+rgb.g+','+rgb.b+',.22);';
+  // Build content with DOM (no string onclick issues)
+  zc.innerHTML='<div style="height:4px;background:'+d.cl+'"></div>'
+    +'<div style="background:'+abg+';padding:18px 18px 14px;border-bottom:.5px solid '+abr+'">'
+      +'<div style="font-size:30px;margin-bottom:6px">'+d.ic+'</div>'
+      +'<div style="font-size:15px;font-weight:800;color:#E8EAED;margin-bottom:3px">'+d.t+'</div>'
+      +'<div style="font-size:11px;color:#7A90A8;font-family:var(--mono)">'+d.s+'</div>'
+    +'</div>'
+    +'<div style="padding:14px 18px 4px">'
+      +'<div style="font-size:9px;font-family:var(--mono);color:'+d.cl+';text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:4px">Descripción</div>'
+      +'<div style="font-size:11px;color:#5A7090;line-height:1.65;margin-bottom:10px">'+d.d+'</div>'
+      +'<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px">'
+        +d.tg.map(function(tg){return '<span style="font-size:9px;font-family:var(--mono);padding:3px 8px;border-radius:3px;background:'+abg+';color:'+d.cl+';border:.5px solid '+abr+';font-weight:700">'+tg+'</span>';}).join('')
+      +'</div>'
+      +'<div style="font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.28);margin-bottom:12px">🕐 '+d.up+'</div>'
+    +'</div>'
+    +'<div id="zbtnArea" style="padding:0 18px 18px"></div>';
+  // Add buttons via DOM
+  var area=zc.querySelector('#zbtnArea');
+  if(ms){
+    var bmod=document.createElement('button');
+    bmod.textContent=MLBL[ms];
+    bmod.style.cssText='width:100%;background:rgba(29,158,117,.12);border:.5px solid rgba(29,158,117,.35);color:#1D9E75;border-radius:8px;padding:9px;font-size:11px;font-family:var(--mono);cursor:pointer;font-weight:700;margin-bottom:8px;display:block;';
+    var ms2=ms;
+    bmod.onclick=function(){zClose();go(ms2);};
+    area.appendChild(bmod);
+  }
+  var row=document.createElement('div');
+  row.style.cssText='display:flex;gap:8px;';
+  var b1=document.createElement('button');
+  b1.textContent='Abrir documento →';
+  b1.style.cssText='flex:1;background:#3483FA;color:#fff;border:none;border-radius:8px;padding:11px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--sans);';
+  b1.onclick=function(){window.open(d.url,'_blank');};
+  var b2=document.createElement('button');
+  b2.textContent='🗂 Drive';
+  b2.style.cssText='flex:1;background:transparent;color:#3483FA;border:1px solid rgba(52,131,250,.3);border-radius:8px;padding:11px;font-size:12px;cursor:pointer;font-family:var(--sans);';
+  b2.onclick=function(){window.open('https://drive.google.com/drive/folders/0APxv7SMJk4lPUk9PVA','_blank');};
+  row.appendChild(b1);row.appendChild(b2);
+  area.appendChild(row);
+  var ov=document.getElementById('ZOV');
+  ov.classList.add('on');
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+    ov.style.background='rgba(2,8,24,.78)';
+    ov.style.backdropFilter='blur(6px)';
+    zc.style.transform='scale(1)';
+    zc.style.opacity='1';
+  });});
+}
+function zClose(){
+  var ov=document.getElementById('ZOV');
+  var zc=document.getElementById('ZC');
+  ov.style.background='rgba(2,8,24,0)';
+  ov.style.backdropFilter='none';
+  zc.style.transform='scale(0.4)';zc.style.opacity='0';
+  setTimeout(function(){ov.classList.remove('on');},350);
+}
+window.zClose=zClose;
+// ═══════════════ SECTION POPULATORS ═══════════════
+function popDM(){
+  var h='';
+  DM.forEach(function(t){
+    var rgb=hRGB(t.cl);
+    h+='<div class="TR" onclick="showTDet(\''+t.n+'\')" style="cursor:pointer;">'
+      +'<div class="TD" style="background:'+t.cl+'"></div>'
+      +'<div style="flex:1;">'
+        +'<div class="TN">'+t.n+'</div>'
+        +'<div class="TFN">'+t.fn+'</div>'
+        +'<div class="TTY" style="color:'+t.cl+';">'+t.tp+'</div>'
+        +'<div class="TDE">'+t.ds+'</div>'
+        +'<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;">'
+          +t.tg.map(function(tg){return '<span class="BTG" style="background:rgba('+rgb.r+','+rgb.g+','+rgb.b+',.1);color:'+t.cl+';border:.5px solid rgba('+rgb.r+','+rgb.g+','+rgb.b+',.25);">'+tg+'</span>';}).join('')
+        +'</div>'
+      +'</div>'
+      +'<div style="display:flex;flex-direction:column;gap:5px;align-items:flex-end;padding-left:8px;flex-shrink:0;">'
+        +'<div style="font-size:9px;font-family:var(--mono);color:var(--t3);">Keys</div>'
+        +'<div style="font-size:9px;font-family:var(--mono);color:'+t.cl+';margin-bottom:4px;">'+t.ks.split(',')[0].trim()+'</div>'
+        +'<button class="BG" onclick="event.stopPropagation();showTDet(\''+t.n+'\')">Campos →</button>'
+        +'<button class="BB" onclick="event.stopPropagation();showRel(\''+t.n+'\')">Joins →</button>'
+      +'</div>'
+    +'</div>';
+  });
+  document.getElementById('dmList').innerHTML=h;
+  // Matrix
+  var mh='<thead><tr><th>Tabla</th><th>Granularidad</th><th>Keys</th><th>Relaciones</th><th></th></tr></thead><tbody>';
+  MTX_DATA.forEach(function(m){
+    var dm=DM.find(function(d){return d.n===m.t;})||{cl:'#3483FA'};
+    var short=m.t.replace('_CONSOLIDATED','');
+    mh+='<tr>'
+      +'<td style="font-family:var(--mono);color:'+dm.cl+';font-weight:700;font-size:10px;white-space:nowrap;">'+short+'</td>'
+      +'<td style="color:var(--t2);">'+m.g+'</td>'
+      +'<td style="font-family:var(--mono);color:#E8C200;font-size:9px;">'+m.k+'</td>'
+      +'<td style="color:var(--t2);max-width:260px;line-height:1.5;">'+m.r+'</td>'
+      +'<td style="white-space:nowrap;"><div style="display:flex;gap:5px;">'
+        +'<button class="BG" onclick="showTDet(\''+m.t+'\')">Campos</button>'
+        +'<button class="BB" onclick="showRel(\''+m.t+'\')">Joins</button>'
+      +'</div></td>'
+    +'</tr>';
+  });
+  mh+='</tbody>';
+  document.getElementById('dmMtx').innerHTML=mh;
+}
+window.cpMatrix=function(){var t='Tabla\tGranularidad\tClaves\tRelaciones\n';MTX_DATA.forEach(function(m){t+=m.t+'\t'+m.g+'\t'+m.k+'\t'+m.r+'\n';});cpText(t);};
+
+function showTDet(name){
+  var t=DM.find(function(d){return d.n===name;});if(!t)return;
+  go('tdet');
+  document.getElementById('tdetTitle').innerHTML='<span style="color:'+t.cl+'">'+name+'</span>';
+  document.getElementById('tdetSub').textContent='meli-people.SILVER_PE_SHIPPING · '+t.fn;
+  var rgb=hRGB(t.cl);
+  var h='<div style="background:rgba('+rgb.r+','+rgb.g+','+rgb.b+',.07);border:.5px solid rgba('+rgb.r+','+rgb.g+','+rgb.b+',.2);border-radius:9px;padding:12px 14px;margin-bottom:14px;">'
+    +'<div style="font-size:9px;font-family:var(--mono);color:'+t.cl+';text-transform:uppercase;font-weight:700;letter-spacing:.08em;margin-bottom:5px;">Propósito</div>'
+    +'<div style="font-size:11px;color:var(--t2);line-height:1.65;">'+t.ds+'</div>'
+    +'</div>';
+  // Keys
+  h+='<div style="margin-bottom:14px;">'
+    +'<div style="font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.45);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:7px;">Claves</div>'
+    +'<div style="display:flex;gap:6px;flex-wrap:wrap;">'
+    +t.ks.split(',').map(function(k){return '<span style="font-size:10px;font-family:var(--mono);padding:3px 9px;border-radius:4px;background:rgba('+rgb.r+','+rgb.g+','+rgb.b+',.1);color:'+t.cl+';border:.5px solid rgba('+rgb.r+','+rgb.g+','+rgb.b+',.3);font-weight:700;">🔑 '+k.trim()+'</span>';}).join('')
+    +'</div></div>';
+  // Fields table
+  var selQ='SELECT\n  '+t.flds.map(function(f){return f.n+'  -- '+f.t+(f.p?' -- PII':'');}).join(',\n  ')+'\nFROM `meli-people.SILVER_PE_SHIPPING.'+t.fn+'`';
+  h+='<div style="margin-bottom:14px;">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">'
+      +'<div style="font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.45);text-transform:uppercase;letter-spacing:.1em;font-weight:700;">Campos ('+t.flds.length+')</div>'
+      +'<div style="display:flex;gap:6px;">'
+        +'<button class="BG" onclick="cpText(\''+selQ.replace(/'/g,"\\'").replace(/\n/g,'\\n')+'\')">📋 Copiar SELECT</button>'
+        +'<button class="BB" onclick="cpFields(\''+name+'\')">📊 Copiar para Excel</button>'
+      +'</div>'
+    +'</div>'
+    +'<div style="background:rgba(2,6,16,.8);border:.5px solid var(--bdr);border-radius:8px;overflow:hidden;">'
+      +'<div class="FTR FTH"><span>Campo</span><span>Tipo</span><span>Descripción</span><span>PII</span></div>'
+      +t.flds.map(function(f){
+        var tc=TYPE_CL[f.t]||'#7A90A8';var tcRGB=hRGB(tc);
+        return '<div class="FTR">'
+          +'<span class="FN">'+f.n+'</span>'
+          +'<span class="FTP" style="background:rgba('+tcRGB.r+','+tcRGB.g+','+tcRGB.b+',.12);color:'+tc+';border:.5px solid rgba('+tcRGB.r+','+tcRGB.g+','+tcRGB.b+',.25);">'+f.t+'</span>'
+          +'<span class="FDE">'+f.d+'</span>'
+          +'<span class="FPII" style="color:'+(f.p?'#E24B4A':'rgba(52,131,250,.28)')+'">'+(f.p?'🔴':'—')+'</span>'
+          +'</div>';
+      }).join('')
+    +'</div></div>';
+  document.getElementById('tdetContent').innerHTML=h;
+  window._curFields=t.flds;window._curSelQ=selQ;
+}
+window.showTDet=showTDet;
+window.cpFields=function(name){var t=DM.find(function(d){return d.n===name;});if(!t)return;var tx='Campo\tTipo\tDescripción\tPII\n';t.flds.forEach(function(f){tx+=f.n+'\t'+f.t+'\t'+f.d+'\t'+(f.p?'PII':'')+'\n';});cpText(tx);};
+
+function showRel(name){
+  var t=DM.find(function(d){return d.n===name;});if(!t)return;
+  go('rel');
+  var RDESC={
+    'HIRES_CONSOLIDATED':'Por empleado · candidate_id, national_id, username · Se une con APPLICATION y EMI_APPLICATION por candidate_id. Agrupar por site+fsc_week para FUNNEL y REQUISITIONS.',
+    'APPLICATION_CONSOLIDATED':'Por aplicación · application_id, candidate_id · Se une con HIRES por candidate_id o hire_date. Con EMI_APPLICATION por candidate_id y application_id.',
+    'EMI_APPLICATION_CONSOLIDATED':'Por aplicación · application_id, candidate_id · Se une con HIRES y APPLICATION por candidate_id. Idle days se agregan por site para FUNNEL.',
+    'FUNNEL_CONSOLIDATED':'Agregado site+semana · site, fsc_year, fsc_week · Se une con HIRES agregando por site+fsc_week. También con REQUISITIONS.',
+    'REQUISITIONS_CONSOLIDATED':'Agregado site+semana · site, fsc_year, fsc_week · Se une con FUNNEL y HIRES por site+fsc_year+fsc_week.',
+    'EMI_FUNNEL_CONSOLIDATED':'Agregado fuente+canal · attraction_source, attraction_channel, site · Se une con EMI_APPLICATION por attraction_source+site.'
+  };
+  document.getElementById('relTitle').innerHTML='Relaciones: <span style="color:'+t.cl+'">'+name+'</span>';
+  document.getElementById('relSub').textContent='meli-people.SILVER_PE_SHIPPING · Granularidad: '+t.tp;
+  var rgb=hRGB(t.cl);
+  var h='<div style="background:rgba('+rgb.r+','+rgb.g+','+rgb.b+',.07);border:.5px solid rgba('+rgb.r+','+rgb.g+','+rgb.b+',.2);border-radius:9px;padding:12px 14px;margin-bottom:16px;">'
+    +'<div style="font-size:11px;color:var(--t2);line-height:1.6;">'+(RDESC[name]||t.ds)+'</div>'
+    +'</div>';
+  h+='<div style="font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.45);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:10px;">Joins disponibles</div>';
+  t.jns.forEach(function(j){
+    var jt=DM.find(function(d){return d.n===j.t;})||{cl:'#3483FA'};
+    var jrgb=hRGB(jt.cl);
+    var sql='SELECT\n  a.*,\n  b.*\nFROM `meli-people.SILVER_PE_SHIPPING.PROD_LATAM_SHIPPING_'+name+'` a\nLEFT JOIN `meli-people.SILVER_PE_SHIPPING.PROD_LATAM_SHIPPING_'+j.t+'` b\n  ON a.'+j.k.split(',')[0].trim()+' = b.'+j.k.split(',')[0].trim();
+    h+='<div style="background:rgba(2,6,16,.85);border:.5px solid rgba(52,131,250,.15);border-radius:10px;padding:13px;margin-bottom:10px;">'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">'
+        +'<div style="width:8px;height:8px;border-radius:50%;background:'+jt.cl+'"></div>'
+        +'<div style="font-size:12px;font-weight:700;font-family:var(--mono);color:'+jt.cl+';">'+j.t+'</div>'
+      +'</div>'
+      +'<div style="font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.45);margin-bottom:3px;">KEY</div>'
+      +'<div style="font-size:11px;font-family:var(--mono);color:#E8C200;margin-bottom:5px;">'+j.k+'</div>'
+      +'<div style="font-size:11px;color:var(--t2);line-height:1.5;margin-bottom:9px;">'+j.nt+'</div>'
+      +'<div style="background:rgba(2,6,14,.9);border:.5px solid rgba(52,131,250,.15);border-radius:7px;padding:10px;position:relative;">'
+        +'<pre style="font-family:var(--mono);font-size:10px;color:#E8EAED;margin:0;overflow-x:auto;white-space:pre-wrap;">'+sql+'</pre>'
+        +'<button class="BB" style="position:absolute;top:6px;right:6px;font-size:8px;padding:2px 7px;" onclick="cpText(\''+sql.replace(/\n/g,'\\n').replace(/'/g,"\\'")+'\')">📋</button>'
+      +'</div>'
+      +'<div style="margin-top:7px;"><button class="BG" onclick="showTDet(\''+j.t+'\')">Ver campos → '+j.t+'</button></div>'
+      +'</div>';
+  });
+  document.getElementById('relContent').innerHTML=h;
+}
+window.showRel=showRel;
+
+function popDash(){
+  var DDATA=[
+    {t:'Funnel Management',s:'Tableau · melipeople',ic:'📈',cl:'#3483FA',tg:'Tableau',url:'https://us-east-1.online.tableau.com/#/site/melipeople/views/TA-FunnelManagement/Overview'},
+    {t:'Contact Hub',s:'Tableau · contactos TA',ic:'📞',cl:'#1D9E75',tg:'Tableau',url:'https://us-east-1.online.tableau.com/#/site/melipeople/views/TA_CONTACTHUB/ContactHub'},
+    {t:'Early Attrition + No Show',s:'Looker Studio',ic:'📉',cl:'#E24B4A',tg:'Looker',url:'https://lookerstudio.google.com/reporting/280f21e8-6174-4e30-8d32-7e2a5d16679c'},
+    {t:'HC Transporte MX',s:'Looker Studio',ic:'🚌',cl:'#FF8C00',tg:'Looker',url:'https://lookerstudio.google.com/reporting/0d2b0362-a6a8-4e1b-a00e-b4471346c2a7'},
+    {t:'TAT México',s:'Looker Studio',ic:'🇲🇽',cl:'#7F77DD',tg:'Looker',url:'https://lookerstudio.google.com/reporting/e7dbdc8f-1d70-41e2-9e82-3c606d59811f'},
+    {t:'Zonas Críticas',s:'Tableau · demográfico',ic:'📍',cl:'#5DCAA5',tg:'Tableau',url:'https://us-east-1.online.tableau.com/#/site/melipeople/views/Demograficos/ZonasCrticas'}
+  ];
+  document.getElementById('dashGrid').innerHTML=DDATA.map(function(d){
+    var rgb=hRGB(d.cl);
+    return '<div class="DC" onclick="window.open(\''+d.url+'\',\'_blank\')">'
+      +'<div class="DCB2" style="background:'+d.cl+'"></div>'
+      +'<div class="DCB"><div class="DCI">'+d.ic+'</div><div class="DCT">'+d.t+'</div>'
+      +'<div class="DCS">'+d.s+'</div>'
+      +'<span class="DCTG" style="background:rgba('+rgb.r+','+rgb.g+','+rgb.b+',.12);color:'+d.cl+';border:.5px solid rgba('+rgb.r+','+rgb.g+','+rgb.b+',.3);">'+d.tg+'</span>'
+      +'</div></div>';
+  }).join('');
+}
+
+function popMan(){
+  document.getElementById('manGrid').innerHTML=DOCS.map(function(d,i){
+    var rgb=hRGB(d.cl);
+    return '<div class="DC" onclick="showManDetail(DOCS['+i+'].t)">'
+      +'<div class="DCB2" style="background:'+d.cl+'"></div>'
+      +'<div class="DCB"><div class="DCI">'+d.ic+'</div><div class="DCT">'+d.t+'</div>'
+      +'<div class="DCS">'+d.s+'</div>'
+      +'<span class="DCTG" style="background:rgba('+rgb.r+','+rgb.g+','+rgb.b+',.12);color:'+d.cl+';border:.5px solid rgba('+rgb.r+','+rgb.g+','+rgb.b+',.3);">'+d.tg[0]+'</span>'
+      +'<div style="font-size:10px;color:var(--t3);font-family:var(--mono);margin-top:6px;">'+d.up+'</div>'
+      +'</div></div>';
+  }).join('');
+}
+
+function popFlujo(){
+  var etapas=[
+    {n:'01',nm:'Aplicación',f:'applications',cl:'#3483FA',id:'conv_idle'},
+    {n:'02',nm:'Conversación',f:'conv_started',cl:'#7F77DD',id:'cnvtn_to_ws'},
+    {n:'03',nm:'Worksample',f:'ws_attended',cl:'#E8C200',id:'ws_to_mc'},
+    {n:'04',nm:'Médico',f:'medical_check',cl:'#5DCAA5',id:'mc_to_dc'},
+    {n:'05',nm:'Documentación',f:'doc_validated',cl:'#D85A30',id:'dc_to_fv'},
+    {n:'06',nm:'Val. Final',f:'final_validation',cl:'#AFA9EC',id:'fv_to_offer'},
+    {n:'07',nm:'Oferta',f:'offered',cl:'#FF8C00',id:'offer_to_ssff'},
+    {n:'08',nm:'Contratación',f:'hire_date',cl:'#1D9E75',id:''}
+  ];
+  var h=etapas.map(function(s,i){
+    var rgb=hRGB(s.cl);
+    var box='<div class="FLS"><div class="FLSC" style="background:rgba('+rgb.r+','+rgb.g+','+rgb.b+',.12);border:.5px solid rgba('+rgb.r+','+rgb.g+','+rgb.b+',.4);">'
+      +'<div style="font-size:9px;font-family:var(--mono);color:'+s.cl+';font-weight:700;margin-bottom:2px;">'+s.n+'</div>'
+      +'<div style="font-size:11px;font-weight:700;color:#E8EAED;margin-bottom:2px;">'+s.nm+'</div>'
+      +'<div style="font-size:9px;font-family:var(--mono);color:'+s.cl+';opacity:.7;">'+s.f+'</div>'
+      +'</div></div>';
+    if(i<etapas.length-1){
+      box+='<div class="FLARR"><div style="height:1.5px;width:100%;background:rgba('+rgb.r+','+rgb.g+','+rgb.b+',.4);position:relative;">'
+        +'<div style="position:absolute;right:-1px;top:-3.5px;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:7px solid rgba('+rgb.r+','+rgb.g+','+rgb.b+',.6);"></div></div>'
+        +'<div style="font-size:7px;font-family:var(--mono);color:'+s.cl+';margin-top:3px;white-space:nowrap;background:rgba('+rgb.r+','+rgb.g+','+rgb.b+',.1);padding:1px 3px;border-radius:2px;">'+s.id+'</div>'
+        +'</div>';
+    }
+    return box;
+  }).join('');
+  document.getElementById('flujoFlow').innerHTML=h;
+  document.getElementById('flujoFields').innerHTML=[
+    ['#3483FA','Conv→Contratación','cnvtn_to_ssff_idle_days'],
+    ['#E8C200','WS→Contratación','ws_to_ssff_idle_days'],
+    ['#5DCAA5','Médico→Contratación','mc_to_ssff_idle_days']
+  ].map(function(f){var rgb=hRGB(f[0]);return '<div style="flex:1;min-width:130px;background:rgba('+rgb.r+','+rgb.g+','+rgb.b+',.07);border:.5px solid rgba('+rgb.r+','+rgb.g+','+rgb.b+',.2);border-radius:7px;padding:8px 10px;"><div style="font-size:9px;font-family:var(--mono);color:rgba('+rgb.r+','+rgb.g+','+rgb.b+',.5);text-transform:uppercase;margin-bottom:3px;">'+f[1]+'</div><div style="font-size:10px;font-family:var(--mono);color:'+f[0]+';font-weight:700;">'+f[2]+'</div></div>';}).join('');
+}
+
+function popAcc(){
+  var h='<div class="SAB"><div style="font-size:10px;font-family:var(--mono);color:rgba(29,158,117,.7);font-weight:700;margin-bottom:5px;">● SA PROD — BigQuery</div><div class="SAE">pdme000609-dmedf@pdme000609-a8fhqfc5nq2-furyid.iam.gserviceaccount.com</div></div>'
+    +'<div class="SAB"><div style="font-size:10px;font-family:var(--mono);color:rgba(232,194,0,.7);font-weight:700;margin-bottom:5px;">◎ SA DEV — n8n / Google Sheets</div><div class="SAE">iup-intel-ta-01@service-accounts-gcp.iam.gserviceaccount.com</div></div>'
+    +'<div class="PW">⚠️<div class="PWT">Los campos PII (CANDIDATE_NAME, EMAIL, BIRTHDATE) requieren ticket adicional aprobado por el <strong>Data Steward</strong>.</div></div>'
+    +'<div style="font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;font-weight:700;">Datasets y tickets Shield</div>'
+    +[
+      {n:'WHOWNER',p:'meli-bi-data',t:'#4458',u:'https://shield.adminml.com/account?c=4458',pt:'#1769',pu:'https://shield.adminml.com/account?c=1769'},
+      {n:'SILVER_PE_SHIPPING',p:'meli-people',t:'#860',u:'https://shield.adminml.com/account?c=860'},
+      {n:'DW_COMMERCE',p:'meli-people',t:'#860',u:'https://shield.adminml.com/account?c=860'},
+      {n:'STG_COMMERCE',p:'meli-people',t:'#860',u:'https://shield.adminml.com/account?c=860'},
+      {n:'SBOX_SHIPPINGSOP (READER)',p:'sandbox',t:'#3487',u:'https://shield.adminml.com/account?c=3487'}
+    ].map(function(ds){return '<div class="ATR"><div style="flex:1;"><div class="ATN">'+ds.n+'</div><div class="ATD">'+ds.p+'</div></div><a class="AL" href="'+ds.u+'" target="_blank">🎟 '+ds.t+'</a>'+(ds.pt?'<a class="AL ALR" href="'+ds.pu+'" target="_blank">🔴 PII '+ds.pt+'</a>':'')+'</div>';}).join('');
+  document.getElementById('accContent').innerHTML=h;
+}
+
+function popN8n(){
+  var nodes=[
+    {n:1,t:'Schedule Trigger',d:'Cada jueves 6PM · cron: 0 18 * * 4',cl:'#3483FA'},
+    {n:2,t:'Leer Semana Actual AK',d:'Google Sheets · Get Row · rango AK1:AK2',cl:'#1D9E75'},
+    {n:3,t:'Wait 5 segundos',d:'Evita quota exceeded en Google Sheets.',cl:'#7F77DD'},
+    {n:4,t:'Leer Todas las Filas',d:'Rango A:AZ · Execute Once activado.',cl:'#E8C200'},
+    {n:5,t:'Filtrar por Semana',d:'WEEK = semana actual AND WEEK ≠ vacío.',cl:'#D85A30'},
+    {n:6,t:'Edit Fields',d:'Extrae row_number + HC Plan Valores (col AJ).',cl:'#FF8C00'},
+    {n:7,t:'Escribir Valor en AL',d:'Google Sheets · Update Row por row_number.',cl:'#1D9E75'}
+  ];
+  var errors=[
+    {e:'Encabezados combinados',s:'n8n no lee bien encabezados combinados. Cada columna debe tener encabezado único.'},
+    {e:'Schema cacheado — escribe en columna incorrecta',s:'Recrear la credencial de Google Sheets para forzar relectura del schema.'},
+    {e:'Columnas ocultas causan desfase',s:'Mostrar todas las columnas ocultas antes de que n8n lea el schema.'},
+    {e:'Quota exceeded',s:'Esperar 1-2 min entre ejecuciones o agregar nodo Wait.'},
+    {e:'Nodo ejecuta múltiples veces',s:'Activar Execute Once en los ajustes del nodo.'},
+    {e:'Filtro no encuentra coincidencias',s:'Verificar que el nombre del campo WEEK coincida exactamente con el encabezado.'},
+    {e:'Error de celda protegida',s:'Quitar protecciones de rango en Datos → Proteger hojas y rangos.'},
+    {e:'row_number llega como 0',s:'Asegurarse de que row_number sea tipo Number en Edit Fields.'}
+  ];
+  var h='<div style="background:rgba(4,10,28,.85);border:.5px solid rgba(52,131,250,.18);border-radius:12px;padding:18px;">'
+    +'<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;">'
+      +'<span style="font-size:30px;">⚡</span>'
+      +'<div style="flex:1;">'
+        +'<div style="font-size:14px;font-weight:700;color:#E8EAED;margin-bottom:3px;">Pegar Semana Actual AJ — Jueves 6PM</div>'
+        +'<div style="font-size:10px;font-family:var(--mono);color:#E8C200;margin-bottom:5px;">● Activo en producción · cron: 0 18 * * 4</div>'
+        +'<div style="display:flex;gap:6px;flex-wrap:wrap;">'
+          +'<span style="font-size:9px;font-family:var(--mono);padding:2px 7px;border-radius:3px;background:rgba(52,131,250,.1);color:var(--b);">Área: BI — Mercado Libre</span>'
+          +'<span style="font-size:9px;font-family:var(--mono);padding:2px 7px;border-radius:3px;background:rgba(52,131,250,.06);color:var(--t2);">Autor: Jesee Morales · v1.0</span>'
+          +'<a href="https://docs.google.com/document/d/1Bhxhlt8ZKUgK_XSEx1veSUt2OAGWwh_W0llEKh3vsis/edit" target="_blank" style="font-size:9px;font-family:var(--mono);padding:2px 7px;border-radius:3px;background:rgba(29,158,117,.1);color:#1D9E75;border:.5px solid rgba(29,158,117,.3);text-decoration:none;font-weight:700;">📄 Ver doc completo</a>'
+        +'</div>'
+      +'</div>'
+    +'</div>'
+    +'<div style="height:.5px;background:rgba(52,131,250,.12);margin-bottom:14px;"></div>'
+    +'<div style="display:grid;grid-template-columns:130px 1fr;gap:4px 10px;font-size:10px;background:rgba(2,6,14,.8);border:.5px solid rgba(52,131,250,.12);border-radius:8px;padding:10px 12px;margin-bottom:14px;">'
+    +[['Archivo','Plan de ingresos TTE 2026'],['Hoja','Daily Plan TTE 2026'],['Columna origen','AJ — HC Plan S&OP (fórmula BUSCARX)'],['Columna destino','AL — HC Plan Valores (valor plano)'],['SA','iup-intel-ta-01@service-accounts-gcp.iam.gserviceaccount.com']].map(function(r){return '<span style="color:var(--t3);font-family:var(--mono);">'+r[0]+'</span><span style="color:#E8EAED;font-family:var(--mono);">'+r[1]+'</span>';}).join('')
+    +'</div>'
+    +'<div style="font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.45);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:10px;">Nodos del workflow</div>'
+    +'<div class="NG">'
+    +nodes.map(function(nd){var rgb=hRGB(nd.cl);return '<div class="NN" style="border-color:rgba('+rgb.r+','+rgb.g+','+rgb.b+',.25);"><div class="NNN" style="color:'+nd.cl+'">Nodo '+nd.n+'</div><div class="NT">'+nd.t+'</div><div class="ND">'+nd.d+'</div></div>';}).join('')
+    +'</div>'
+    +'<div style="font-size:9px;font-family:var(--mono);color:rgba(226,75,74,.55);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px;">🐛 Errores conocidos</div>'
+    +'<div style="display:flex;flex-direction:column;gap:5px;">'
+    +errors.map(function(er){return '<div style="background:rgba(2,6,14,.8);border:.5px solid rgba(52,131,250,.1);border-left:2px solid rgba(226,75,74,.4);border-radius:0 6px 6px 0;padding:7px 10px;"><div style="font-size:10px;font-weight:700;color:#E24B4A;margin-bottom:2px;">'+er.e+'</div><div style="font-size:10px;color:var(--t2);">'+er.s+'</div></div>';}).join('')
+    +'</div></div>';
+  document.getElementById('n8nContent').innerHTML=h;
+}
+
+function popCfg(){
+  document.getElementById('cfgContent').innerHTML='<div class="CFG">'
+    +'<div class="CFGC"><div class="CFGT">🎨 Apariencia</div><div style="display:flex;gap:8px;"><button class="TGB on" id="bDK" onclick="setTheme(\'dark\')">🌙 Oscuro</button><button class="TGB" id="bLT" onclick="setTheme(\'light\')">☀️ Claro</button></div></div>'
+    +'<div class="CFGC"><div class="CFGT">🌎 Idioma</div><div style="display:flex;gap:8px;"><button class="TGB on" onclick="setLang(\'es\')">ES Español</button><button class="TGB" onclick="setLang(\'pt\')">PT-BR Português</button></div></div>'
+    +'<div class="CFGC" style="grid-column:span 2"><div class="CFGT">ℹ️ Información del portal</div>'
+    +[['Versión','v1.0 · DRAFT'],['Estado','En construcción'],['Países','MX · BR · AR · CL'],['Herramientas','Tableau · Looker · n8n'],['Actualizado','10/05/2026']].map(function(r){return '<div class="CFGR"><span class="CFGRK">'+r[0]+'</span><span class="CFGRV">'+r[1]+'</span></div>';}).join('')
+    +'</div>'
+    +'<div class="CFGC"><div class="CFGT">📁 Google Drive</div>'
+    +'<div style="font-size:11px;color:var(--t2);margin-bottom:9px;line-height:1.6;">Carpeta compartida del equipo BI con todos los documentos.</div>'
+    +'<a href="https://drive.google.com/drive/folders/0APxv7SMJk4lPUk9PVA" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(52,131,250,.1);border:.5px solid rgba(52,131,250,.25);border-radius:7px;padding:9px;font-size:11px;font-family:var(--mono);color:var(--b);text-decoration:none;font-weight:700;">📂 Abrir Drive compartido</a>'
+    +'</div>'
+    +'</div>';
+}
+
+function popFAQ(){
+  var faqs=[
+    {q:'¿Cómo solicito acceso a las tablas de BigQuery?',
+     a:'Debes abrir un ticket en Shield según el dataset. Para SILVER_PE_SHIPPING, DW_COMMERCE y STG_COMMERCE usa #860. Para WHOWNER usa #4458. Si necesitas campos PII (nombres, emails, RFC/CPF), requieres un ticket adicional aprobado por el Data Steward.',
+     links:[{txt:'→ Control de Acceso',ac:"go('acc')"},
+            {txt:'→ Shield #860',url:'https://shield.adminml.com/account?c=860'},
+            {txt:'→ Shield #4458',url:'https://shield.adminml.com/account?c=4458'},
+            {txt:'→ PII #1769',url:'https://shield.adminml.com/account?c=1769'}]},
+    {q:'¿Cómo accedo a los dashboards de Tableau?',
+     a:'Necesitas acceso a Tableau Server (melipeople). Solicítalo siguiendo el Manual de Accesos Tableau en el Drive. El ticket se gestiona en Shield. Una vez con acceso puedes ver Funnel Management, Contact Hub y Zonas Críticas.',
+     links:[{txt:'→ Manuales y guías',ac:"go('man');fMan('tableau')"},
+            {txt:'→ Manual Tableau en Drive',url:'https://drive.google.com/drive/folders/1adyKJhbHmPEpB_fIoo4jErtktKGU9WAx'},
+            {txt:'→ Shield #4458',url:'https://shield.adminml.com/account?c=4458'},
+            {txt:'→ Funnel Dashboard',url:'https://us-east-1.online.tableau.com/#/site/melipeople/views/TA-FunnelManagement/Overview'}]}
+  ];
+  document.getElementById('faqContent').innerHTML=faqs.map(function(f,i){
+    var lh=f.links.map(function(l){
+      if(l.ac)return '<span onclick="'+l.ac+'" class="FQL" style="background:rgba(52,131,250,.1);color:var(--b);border:.5px solid rgba(52,131,250,.25);">'+l.txt+'</span>';
+      return '<a href="'+l.url+'" target="_blank" class="FQL" style="background:rgba(52,131,250,.07);color:rgba(52,131,250,.65);border:.5px solid rgba(52,131,250,.18);">'+l.txt+'</a>';
+    }).join('');
+    return '<div class="FAQ"><div style="display:flex;align-items:flex-start;gap:11px;"><div class="FQN">'+(i+1)+'</div><div style="flex:1;"><div class="FQQ">'+f.q+'</div><div class="FQA">'+f.a+'</div><div>'+lh+'</div></div></div></div>';
+  }).join('');
+}
+window.cpMatrix=function(){var t='Tabla\tGranularidad\tClaves\tRelaciones\n';MTX_DATA.forEach(function(m){t+=m.t+'\t'+m.g+'\t'+m.k+'\t'+m.r+'\n';});cpText(t);};
+window.cpFields=function(name){var t=DM.find(function(d){return d.n===name;});if(!t)return;var tx='Campo\tTipo\tDescripción\tPII\n';t.flds.forEach(function(f){tx+=f.n+'\t'+f.t+'\t'+f.d+'\t'+(f.p?'PII':'')+'\n';});cpText(tx);};
+
+
+// ── MANUAL DATA (from Google Drive) ──
+var MANUAL_DATA = {
+  'Manual Accesos Tableau': {
+    title: 'Manual Accesos a Tableau',
+    subtitle: 'Área: BI · Herramienta: Tableau · Última actualización: Febrero 2026',
+    url: 'https://docs.google.com/document/d/1F6zFcbpybQEPK6AFVNKM8k8AEFm4-w6IVLIWOOqGzLg/edit',
+    sections: [
+      {
+        icon: '🧭', title: 'Guía rápida',
+        content: '<div style="background:rgba(52,131,250,.07);border:.5px solid rgba(52,131,250,.2);border-radius:8px;padding:12px 14px;"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11px;"><div><span style="color:var(--t3);font-family:var(--mono);">Área</span><br><span style="color:var(--t1);font-weight:600;">BI</span></div><div><span style="color:var(--t3);font-family:var(--mono);">Herramienta</span><br><span style="color:var(--t1);font-weight:600;">Tableau</span></div><div><span style="color:var(--t3);font-family:var(--mono);">Audiencia</span><br><span style="color:var(--t1);font-weight:600;">Usuarios que requieren visualizar dashboards</span></div><div><span style="color:var(--t3);font-family:var(--mono);">Última actualización</span><br><span style="color:var(--t1);font-weight:600;">Febrero 2026</span></div></div></div>'
+      },
+      {
+        icon: '🎯', title: 'Objetivo del manual',
+        content: '<p style="font-size:12px;color:var(--t2);line-height:1.7;">Este manual sirve como guía para solicitar los accesos, licencias y tickets necesarios para poder visualizar tableros y dashboards en Tableau dentro de MELI.</p>'
+      },
+      {
+        icon: '🧩', title: '1. Solicitud de licencia de Tableau',
+        content: '<div style="font-size:12px;color:var(--t2);line-height:1.7;">'
+          + '<p style="margin-bottom:10px;">Para consultar las vistas en Tableau, es indispensable contar con una licencia activa.</p>'
+          + '<div style="background:rgba(4,10,28,.8);border:.5px solid var(--bdr);border-radius:8px;padding:12px 14px;margin-bottom:10px;">'
+          + '<div style="font-size:10px;font-family:var(--mono);color:var(--b);font-weight:700;margin-bottom:8px;">🔐 1.1 Acceso a la plataforma de licencias</div>'
+          + '<ol style="padding-left:18px;display:flex;flex-direction:column;gap:6px;">'
+          + '<li>Ingresa a <a href="https://azir.adminml.com/" target="_blank" style="color:var(--b);">https://azir.adminml.com/</a></li>'
+          + '<li>Accede con tu usuario y contraseña de MELI.</li>'
+          + '<li>Verás tu nombre de usuario, acciones pendientes y licencias asignadas.</li>'
+          + '</ol></div>'
+          + '<div style="background:rgba(4,10,28,.8);border:.5px solid var(--bdr);border-radius:8px;padding:12px 14px;margin-bottom:10px;">'
+          + '<div style="font-size:10px;font-family:var(--mono);color:var(--b);font-weight:700;margin-bottom:8px;">📝 1.3 Solicitud de licencia</div>'
+          + '<ol style="padding-left:18px;display:flex;flex-direction:column;gap:6px;">'
+          + '<li>En la sección <strong>License</strong>, en el recuadro <strong>Search</strong>, escribe: <code style="background:rgba(52,131,250,.1);padding:1px 5px;border-radius:3px;font-family:var(--mono);">Tableau</code></li>'
+          + '<li>En <strong>My License</strong> aparecerá el recuadro con la aplicación y el botón <code style="background:rgba(52,131,250,.1);padding:1px 5px;border-radius:3px;font-family:var(--mono);">Request License</code></li>'
+          + '<li>Da clic en <strong>Request License</strong>, selecciona la opción <strong>Viewer</strong> y acepta los términos.</li>'
+          + '</ol></div>'
+          + '<div style="background:rgba(232,194,0,.07);border:.5px solid rgba(232,194,0,.2);border-radius:8px;padding:10px 12px;">'
+          + '<div style="font-size:10px;font-family:var(--mono);color:#E8C200;font-weight:700;margin-bottom:4px;">📧 1.4 Confirmación</div>'
+          + '<p>Revisa tu correo electrónico para confirmar que la licencia fue aprobada. Este proceso puede tardar algunos minutos.</p>'
+          + '</div></div>'
+      },
+      {
+        icon: '🛡️', title: '2. Solicitud de accesos en Tableau (Shield)',
+        content: '<div style="font-size:12px;color:var(--t2);line-height:1.7;">'
+          + '<p style="margin-bottom:10px;">Una vez aprobada la licencia, es necesario levantar un ticket en Shield para los permisos de visualización.</p>'
+          + '<div style="background:rgba(4,10,28,.8);border:.5px solid var(--bdr);border-radius:8px;padding:12px 14px;margin-bottom:10px;">'
+          + '<div style="font-size:10px;font-family:var(--mono);color:var(--b);font-weight:700;margin-bottom:8px;">🎫 2.1 Creación del ticket</div>'
+          + '<ol style="padding-left:18px;display:flex;flex-direction:column;gap:6px;">'
+          + '<li>Ingresa a <a href="https://shield.adminml.com/account?c=2768" target="_blank" style="color:var(--b);">Shield · Ticket Tableau</a></li>'
+          + '<li>Busca el ticket correspondiente a accesos de Tableau.</li>'
+          + '<li>Selecciona el ticket y procede a llenarlo.</li>'
+          + '</ol></div>'
+          + '<div style="background:rgba(226,75,74,.07);border:.5px solid rgba(226,75,74,.2);border-radius:8px;padding:12px 14px;">'
+          + '<div style="font-size:10px;font-family:var(--mono);color:#E24B4A;font-weight:700;margin-bottom:8px;">⚠️ 2.2 Información OBLIGATORIA del ticket</div>'
+          + '<p style="margin-bottom:8px;">Es muy importante que se llenen exactamente como se muestran, respetando mayúsculas y minúsculas:</p>'
+          + '<div style="display:flex;flex-direction:column;gap:6px;">'
+          + '<div style="background:rgba(2,6,14,.8);border-radius:6px;padding:8px 12px;display:flex;justify-content:space-between;"><span style="color:var(--t3);font-family:var(--mono);">Tableau Server Site</span><code style="color:#E8C200;font-family:var(--mono);font-weight:700;">melipeople</code></div>'
+          + '<div style="background:rgba(2,6,14,.8);border-radius:6px;padding:8px 12px;display:flex;justify-content:space-between;"><span style="color:var(--t3);font-family:var(--mono);">Proyecto</span><code style="color:#E8C200;font-family:var(--mono);font-weight:700;">Commerce</code></div>'
+          + '<div style="background:rgba(2,6,14,.8);border-radius:6px;padding:8px 12px;display:flex;justify-content:space-between;"><span style="color:var(--t3);font-family:var(--mono);">Permiso</span><code style="color:#E8C200;font-family:var(--mono);font-weight:700;">Viewer</code></div>'
+          + '</div></div></div>'
+      },
+      {
+        icon: '✅', title: '3. Confirmación final',
+        content: '<div style="background:rgba(29,158,117,.07);border:.5px solid rgba(29,158,117,.2);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--t2);line-height:1.7;">'
+          + '<p style="margin-bottom:8px;">Una vez que el ticket sea aprobado, ya no deberías tener problemas para la visualización de tableros y dashboards en Tableau.</p>'
+          + '<p style="font-weight:600;color:#1D9E75;margin-bottom:6px;">Si presentas algún inconveniente, valida:</p>'
+          + '<ul style="padding-left:18px;display:flex;flex-direction:column;gap:4px;">'
+          + '<li>Que tu licencia esté activa</li>'
+          + '<li>Que el ticket esté aprobado</li>'
+          + '<li>Que los datos del ticket se hayan ingresado correctamente</li>'
+          + '</ul></div>'
+      }
+    ]
+  }
+};
+
+function showManDetail(title){
+  var m = MANUAL_DATA[title];
+  if(!m){ window.open(DOCS.find(function(d){return d.t===title;}).url,'_blank'); return; }
+  go('mdet');
+  document.getElementById('mdetTitle').innerHTML = '<span style="color:var(--b)">' + m.title + '</span>';
+  document.getElementById('mdetSub').textContent = m.subtitle;
+  var html = '';
+  m.sections.forEach(function(s){
+    html += '<div style="background:rgba(4,10,28,.85);border:.5px solid var(--bdr);border-radius:10px;padding:14px 16px;margin-bottom:12px;">'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">'
+        +'<span style="font-size:18px;">'+s.icon+'</span>'
+        +'<div style="font-size:13px;font-weight:700;color:var(--t1);">'+s.title+'</div>'
+      +'</div>'
+      +s.content
+      +'</div>';
+  });
+  // Add link to full doc
+  html += '<a href="'+m.url+'" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(52,131,250,.1);border:.5px solid rgba(52,131,250,.25);border-radius:8px;padding:11px;font-size:12px;font-family:var(--mono);color:var(--b);text-decoration:none;font-weight:700;margin-top:4px;">📄 Ver documento completo en Drive</a>';
+  document.getElementById('mdetContent').innerHTML = html;
+}
+window.showManDetail = showManDetail;
+
+
+
+// ── ADMIN ──
+var ADMIN_EMAIL = 'ext_jehasiel@mercadolibre.com.mx';
+
+function adminInit(){
+  // Mostrar nav solo si es admin
+  var nav = document.getElementById('navAdmin');
+  if(nav) nav.style.display = '';
+  adminRenderList();
+}
+
+function adminRenderList(){
+  var ul = document.getElementById('adminUserList');
+  if(!ul) return;
+  ul.innerHTML = '';
+  BI_TEAM.forEach(function(u, i){
+    var isMe = u.email === ADMIN_EMAIL;
+    var row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:8px;background:rgba(2,6,16,.8);border:.5px solid rgba(52,131,250,'+(u.role==='admin'?'.25':'.1')+');margin-bottom:6px;transition:border-color .2s;';
+
+    // Dot
+    var dot = document.createElement('div');
+    dot.style.cssText = 'width:7px;height:7px;border-radius:50%;flex-shrink:0;background:'+(u.role==='admin'?'#E8C200':'#1D9E75')+';';
+
+    // Email
+    var txt = document.createElement('div');
+    txt.style.cssText = 'flex:1;font-size:11px;font-family:var(--mono);color:#E8EAED;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;';
+    txt.textContent = u.email;
+
+    // Role badge — clickable to toggle (except self)
+    var badge = document.createElement('button');
+    var isAdminRole = u.role === 'admin';
+    badge.textContent = isAdminRole ? '🔐 admin' : '👤 usuario';
+    badge.style.cssText = 'font-size:9px;font-family:var(--mono);padding:3px 8px;border-radius:4px;cursor:'+(isMe?'default':'pointer')+';font-weight:700;border:.5px solid '+(isAdminRole?'rgba(232,194,0,.35)':'rgba(52,131,250,.3)')+';background:'+(isAdminRole?'rgba(232,194,0,.1)':'rgba(52,131,250,.08)')+';color:'+(isAdminRole?'#E8C200':'rgba(52,131,250,.8)')+';';
+    badge.title = isMe ? 'Tu propio rol' : (isAdminRole ? 'Clic para convertir en usuario' : 'Clic para hacer administrador');
+    if(!isMe){
+      (function(idx){ badge.onclick = function(){ adminToggleRole(idx); }; })(i);
+    }
+
+    // Delete button
+    var btnDel = document.createElement('button');
+    btnDel.textContent = '✕';
+    btnDel.style.cssText = 'background:rgba(226,75,74,.1);border:.5px solid rgba(226,75,74,.25);color:#E24B4A;border-radius:4px;padding:3px 8px;font-size:11px;cursor:pointer;flex-shrink:0;';
+    if(isMe){
+      btnDel.disabled = true;
+      btnDel.style.opacity = '0.25';
+      btnDel.title = 'No puedes eliminarte';
+    } else {
+      (function(idx){ btnDel.onclick = function(){ adminRemoveUser(idx); }; })(i);
+    }
+
+    row.appendChild(dot);
+    row.appendChild(txt);
+    row.appendChild(badge);
+    row.appendChild(btnDel);
+    ul.appendChild(row);
+  });
+
+  // Counter
+  var counter = document.createElement('div');
+  counter.style.cssText = 'font-size:10px;font-family:var(--mono);color:rgba(52,131,250,.35);margin-top:8px;';
+  var admins = BI_TEAM.filter(function(u){return u.role==='admin';}).length;
+  counter.textContent = BI_TEAM.length + ' usuario(s) · ' + admins + ' admin(s)';
+  ul.appendChild(counter);
+}
+
+function adminAddUser(){
+  var input = document.getElementById('adminEmailInput');
+  var msg = document.getElementById('adminMsg');
+  var email = (input.value||'').toLowerCase().trim();
+  if(!email){
+    adminShowMsg('Ingresa un correo.', 'error'); return;
+  }
+  var isMeli = email.endsWith('@mercadolibre.com')||email.endsWith('@mercadolibre.com.mx')||email.endsWith('@mercadolivre.com');
+  if(!isMeli){
+    adminShowMsg('Solo se aceptan correos @mercadolibre.com', 'error'); return;
+  }
+  if(BI_TEAM.some(function(e){return e===email;})){
+    adminShowMsg('Este correo ya tiene acceso.', 'warn'); return;
+  }
+  BI_TEAM.push({email:email, role:'usuario'});
+  input.value = '';
+  adminRenderList();
+  adminShowMsg('✓ ' + email + ' agregado correctamente.', 'ok');
+}
+window.adminAddUser = adminAddUser;
+
+function adminToggleRole(idx){
+  var u = BI_TEAM[idx];
+  if(!u || u.email === ADMIN_EMAIL) return;
+  var newRole = u.role === 'admin' ? 'usuario' : 'admin';
+  var label = newRole === 'admin' ? '🔐 administrador' : '👤 usuario';
+  if(!confirm('¿Cambiar el rol de ' + u.email + ' a ' + label + '?')) return;
+  BI_TEAM[idx].role = newRole;
+  adminRenderList();
+  adminShowMsg('✓ ' + u.email + ' ahora es ' + label + '.', 'ok');
+}
+
+function adminRemoveUser(idx){
+  var u = BI_TEAM[idx];
+  if(!u || u.email === ADMIN_EMAIL) return;
+  if(!confirm('¿Quitar acceso a ' + u.email + '?')) return;
+  BI_TEAM.splice(idx, 1);
+  adminRenderList();
+  adminShowMsg('✓ ' + u.email + ' eliminado.', 'ok');
+}
+
+function adminShowMsg(txt, type){
+  var el = document.getElementById('adminMsg');
+  if(!el) return;
+  var colors = {
+    ok:   {bg:'rgba(29,158,117,.12)', bd:'rgba(29,158,117,.3)', tx:'#1D9E75'},
+    error:{bg:'rgba(226,75,74,.12)',  bd:'rgba(226,75,74,.3)',  tx:'#E24B4A'},
+    warn: {bg:'rgba(232,194,0,.12)',  bd:'rgba(232,194,0,.3)',  tx:'#E8C200'}
+  };
+  var c = colors[type]||colors.ok;
+  el.style.cssText = 'display:block;font-size:11px;font-family:var(--mono);padding:8px 11px;border-radius:6px;background:'+c.bg+';border:.5px solid '+c.bd+';color:'+c.tx+';';
+  el.textContent = txt;
+  setTimeout(function(){el.style.display='none';}, 3500);
+}
+
+function adminExport(){
+  var sep = ',\n';
+  var list = BI_TEAM.map(function(u){return "  {email:'"+u.email+"', role:'"+u.role+"'}"}).join(sep);
+  var txt = 'var BI_TEAM = [' + sep + list + sep + '];';
+  // (replaced)
+  // (replaced)
+  navigator.clipboard.writeText(txt).then(function(){
+    adminShowMsg('✓ Lista copiada. Pégala en el archivo HTML para hacerla permanente.', 'ok');
+  });
+}
+window.adminExport = adminExport;
+
+// ── SEARCH ──
+var searchIdx = -1;
+var searchResults = [];
+
+var SEARCH_INDEX = [
+  // Sections
+  {k:['inicio','home','cards','panel principal'],lbl:'Inicio',sub:'Panel principal con documentos',sec:'home',ic:'🏠'},
+  {k:['catalogo','tablas','bigquery','hires','funnel','requisitions','application','emi','silver','dataset','schema','diccionario','modelo de datos','ta data model'],lbl:'Catálogo de Tablas',sub:'6 tablas en meli-people.SILVER_PE_SHIPPING',sec:'dm',ic:'🗄'},
+  {k:['hires','hires_consolidated','contrataciones','empleado','tenure','hire_date','candidate_id'],lbl:'HIRES_CONSOLIDATED',sub:'Tabla individual · por empleado',sec:'dm',ic:'🔵',extra:function(){fDM("ind");}},
+  {k:['funnel','funnel_consolidated','atraccion','seleccion','no_shows','requisition','headcount','hired'],lbl:'FUNNEL_CONSOLIDATED',sub:'Tabla agregada · site + semana',sec:'dm',ic:'🟢',extra:function(){fDM("agr");}},
+  {k:['emi funnel','emi_funnel','fuente','canal','attraction_source','idle_days','conversion'],lbl:'EMI_FUNNEL_CONSOLIDATED',sub:'Tabla agregada · fuente + canal',sec:'dm',ic:'🟣',extra:function(){fDM("agr");}},
+  {k:['requisiciones','requisitions_consolidated','t1_req','t2_req','planning','site_sop'],lbl:'REQUISITIONS_CONSOLIDATED',sub:'Tabla agregada · site + semana',sec:'dm',ic:'🟠',extra:function(){fDM("agr");}},
+  {k:['application','application_consolidated','candidato','stage','state','abm','fretado','documentacion'],lbl:'APPLICATION_CONSOLIDATED',sub:'Tabla individual · por candidato',sec:'dm',ic:'🟡',extra:function(){fDM("ind");}},
+  {k:['emi application','emi_application','pii','idle days','recruiter','reclutador','datos personales'],lbl:'EMI_APPLICATION_CONSOLIDATED',sub:'Tabla granular · incluye PII',sec:'dm',ic:'🔴',extra:function(){fDM("ind");}},
+  {k:['dashboard','dashboards','tableau','looker','reportes','funnel management','contact hub','attrition','no show','transporte','tat mexico','zonas criticas'],lbl:'Dashboards',sub:'Tableau y Looker Studio · MX · BR · AR · CL',sec:'dash',ic:'📊'},
+  {k:['manuales','guias','acceso tableau','n8n workflow','tracker','mapeo','solicitud','formato'],lbl:'Manuales y guías',sub:'Documentación de acceso y procedimientos',sec:'man',ic:'📖'},
+  {k:['tableau','manual tableau','licencia tableau','shield tableau','acceso tableau','viewer','melipeople'],lbl:'Manual Accesos Tableau',sub:'Cómo solicitar licencia y acceso en Shield',sec:'man',ic:'📊',extra:function(){showManDetail("Manual Accesos Tableau");}},
+  {k:['flujo','reclutamiento','etapas','worksample','medico','documentacion','oferta','contratacion','cnvtn','ws_to_mc'],lbl:'Flujo de Reclutamiento',sub:'8 etapas del proceso TA con idle days',sec:'flujo',ic:'🔗'},
+  {k:['acceso','bigquery','service account','shield','pii','ticket','silver_pe','whowner','860','4458','1769','3487','sa prod','sa dev'],lbl:'Control de Acceso',sub:'SA, datasets BigQuery y tickets Shield',sec:'acc',ic:'🔒'},
+  {k:['n8n','workflow','automatizacion','pegar semana','jueves 6pm','cron','sheets','buscarx','hc plan','daily plan'],lbl:'Flujos n8n',sub:'Workflow Pegar Semana Actual AJ · Jueves 6PM',sec:'n8n',ic:'🔄'},
+  {k:['configuracion','config','tema','idioma','version','apariencia'],lbl:'Configuración',sub:'Preferencias del portal',sec:'cfg',ic:'⚙️'},
+  {k:['faq','preguntas','frecuentes','como solicitar','bigquery acceso'],lbl:'FAQ',sub:'Preguntas frecuentes del equipo BI',sec:'faq',ic:'❓'},
+  // Docs
+  {k:['ta data model','data model','6 tablas','bigquery doc'],lbl:'TA Data Model (Doc)',sub:'Documento de referencia en Drive',sec:null,ic:'📄',url:'https://docs.google.com/document/d/1clixt-CKfc9smPVjTGskrCHMhQR_b_iZCFOvxyPQs7g'},
+  {k:['n8n doc','workflow doc','pegar semana doc'],lbl:'Workflow n8n · Documentación',sub:'Doc de referencia en Drive',sec:null,ic:'📄',url:'https://docs.google.com/document/d/1Bhxhlt8ZKUgK_XSEx1veSUt2OAGWwh_W0llEKh3vsis'},
+  {k:['control accesos','spreadsheet accesos','service account spreadsheet'],lbl:'Control de Accesos (Spreadsheet)',sub:'Archivo de accesos en Drive',sec:null,ic:'📄',url:'https://docs.google.com/spreadsheets/d/1NtGDRfzVLnToKZy0DT7sLQ96zOn2GgubNKr6mF-dUw8'},
+];
+
+function openSearch(){
+  var ov=document.getElementById('SRCH');
+  ov.style.display='flex';
+  setTimeout(function(){document.getElementById('searchInput').focus();},50);
+  doSearch('');
+}
+function closeSearch(){
+  document.getElementById('SRCH').style.display='none';
+  document.getElementById('searchInput').value='';
+  searchIdx=-1;
+}
+window.openSearch=openSearch;window.closeSearch=closeSearch;
+
+function doSearch(q){
+  q=q.toLowerCase().trim();
+  var res=document.getElementById('searchResults');
+  searchIdx=-1;
+  if(q.length===0){
+    searchResults=SEARCH_INDEX.slice(0,8);
+    res.innerHTML='<div style="padding:6px 16px 4px;font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.4);text-transform:uppercase;letter-spacing:.08em;">Secciones principales</div>'
+      +searchResults.map(renderResult).join('');
+    return;
+  }
+  // Search static index
+  var fromIdx=SEARCH_INDEX.filter(function(item){
+    return item.k.some(function(kw){return kw.indexOf(q)>=0||q.indexOf(kw)>=0;})
+      || item.lbl.toLowerCase().indexOf(q)>=0
+      || (item.sub&&item.sub.toLowerCase().indexOf(q)>=0);
+  });
+  // Also search DOCS dynamically
+  var fromDocs=[];
+  DOCS.forEach(function(d,i){
+    var match=d.t.toLowerCase().indexOf(q)>=0||d.s.toLowerCase().indexOf(q)>=0
+      ||d.d.toLowerCase().indexOf(q)>=0
+      ||d.tg.some(function(tg){return tg.toLowerCase().indexOf(q)>=0;});
+    if(match){
+      // Avoid duplicates already in index
+      var already=fromIdx.some(function(r){return r.lbl===d.t;});
+      if(!already) fromDocs.push({k:[],lbl:d.t,sub:d.s,sec:null,ic:d.ic,url:d.url,docIdx:i});
+    }
+  });
+  // Search DM tables
+  var fromDM=[];
+  DM.forEach(function(t){
+    var match=t.n.toLowerCase().indexOf(q)>=0||t.ds.toLowerCase().indexOf(q)>=0
+      ||t.tp.toLowerCase().indexOf(q)>=0
+      ||t.flds.some(function(f){return f.n.toLowerCase().indexOf(q)>=0||f.d.toLowerCase().indexOf(q)>=0;});
+    if(match){
+      var already=fromIdx.some(function(r){return r.lbl.indexOf(t.n)>=0;});
+      if(!already) fromDM.push({k:[],lbl:t.n,sub:t.tp+' · '+t.ds.slice(0,50),sec:'dm',ic:'🗄',extra:function(tn){return function(){showTDet(tn);};}(t.n)});
+    }
+  });
+  searchResults=fromIdx.concat(fromDM).concat(fromDocs);
+  if(searchResults.length===0){
+    res.innerHTML='<div style="padding:20px;text-align:center;font-size:12px;color:rgba(52,131,250,.4);font-family:var(--mono);">Sin resultados para "'+q+'"<br><span style="font-size:10px;opacity:.6">Prueba: hires, tableau, shield, n8n, funnel</span></div>';
+    return;
+  }
+  res.innerHTML='<div style="padding:6px 16px 4px;font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.4);text-transform:uppercase;letter-spacing:.08em;">'+searchResults.length+' resultado(s) para "'+q+'"</div>'
+    +searchResults.map(renderResult).join('');
+}
+
+function renderResult(r,i){
+  return '<div class="SRES" data-i="'+i+'" onclick="execResult('+i+')" style="display:flex;align-items:center;gap:12px;padding:10px 16px;cursor:pointer;border-radius:0;transition:background .12s;"'
+    +'<span style="font-size:18px;flex-shrink:0">'+r.ic+'</span>'
+    +'<div style="flex:1;min-width:0;">'
+      +'<div style="font-size:13px;font-weight:600;color:#E8EAED;margin-bottom:2px;">'+r.lbl+'</div>'
+      +'<div style="font-size:11px;color:rgba(52,131,250,.6);font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+r.sub+'</div>'
+    +'</div>'
+    +(r.sec?'<span style="font-size:9px;font-family:var(--mono);padding:2px 8px;border-radius:4px;background:rgba(52,131,250,.1);color:rgba(52,131,250,.6);">'+r.sec+'</span>':'<span style="font-size:9px;font-family:var(--mono);color:rgba(52,131,250,.4);">Drive ↗</span>')
+    +'</div>';
+}
+
+function execResult(i){
+  var r=searchResults[i];
+  if(!r)return;
+  closeSearch();
+  if(r.url){window.open(r.url,'_blank');return;}
+  if(r.sec)go(r.sec);
+  if(r.extra)setTimeout(r.extra,100);
+}
+window.execResult=execResult;
+
+function searchKey(e){
+  var n=searchResults.length;
+  if(e.key==='Escape'){closeSearch();return;}
+  if(e.key==='ArrowDown'){searchIdx=Math.min(searchIdx+1,n-1);highlightResult();return;}
+  if(e.key==='ArrowUp'){searchIdx=Math.max(searchIdx-1,0);highlightResult();return;}
+  if(e.key==='Enter'&&searchIdx>=0){execResult(searchIdx);return;}
+  if(e.key==='Enter'&&searchIdx<0&&searchResults.length>0){execResult(0);}
+}
+function highlightResult(){
+  document.querySelectorAll('.SRES').forEach(function(el,i){
+    el.classList.toggle('active', i===searchIdx);
+  });
+}
+// Keyboard shortcut
+document.addEventListener('keydown',function(e){
+  if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}
+  if(e.key==='Escape'&&document.getElementById('SRCH').style.display!=='none'){closeSearch();}
+});
+
+// ── LANGUAGE ──
+var currentLang = 'es';
+var TRANS = {
+  es: {
+    home:'Inicio', dm:'Catálogo de tablas', dash:'Dashboards', man:'Manuales y guías',
+    flujo:'Flujo reclutamiento', acc:'Control de acceso', n8n:'Flujos n8n',
+    cfg:'Configuración', faq:'FAQ', drive:'Drive',
+    search:'Buscar documentación...', docBI:'Documentación BI', activo:'activo',
+    hint:'arrastra para rotar · scroll para avanzar · click en card para abrir'
+  },
+  pt: {
+    home:'Início', dm:'Catálogo de tabelas', dash:'Dashboards', man:'Manuais e guias',
+    flujo:'Fluxo de recrutamento', acc:'Controle de acesso', n8n:'Fluxos n8n',
+    cfg:'Configuração', faq:'FAQ', drive:'Drive',
+    search:'Buscar documentação...', docBI:'Documentação BI', activo:'ativo',
+    hint:'arraste para girar · scroll para avançar · clique no card para abrir'
+  }
+};
+
+function setLang(l){
+  currentLang = l;
+  var T = TRANS[l];
+  // Topbar title
+  var tt = document.querySelector('.TBTI');
+  if(tt) tt.textContent = T.docBI;
+  // Search placeholder
+  var sp = document.getElementById('searchPlaceholder');
+  if(sp) sp.textContent = T.search;
+  var si = document.getElementById('searchInput');
+  if(si) si.placeholder = T.search;
+  // Nav items
+  var navMap = [
+    ["go('home')",T.home,'🏠'],
+    ["go('dm')",T.dm,'🗄'],
+    ["go('dash')",T.dash,'📊'],
+    ["go('man')",T.man,'📖'],
+    ["go('flujo')",T.flujo,'🔗'],
+    ["go('acc')",T.acc,'🔒'],
+    ["go('n8n')",T.n8n,'🔄'],
+    ["go('cfg')",T.cfg,'⚙️'],
+    ["go('faq')",T.faq,'❓'],
+  ];
+  document.querySelectorAll('.NI').forEach(function(n){
+    var oc = n.getAttribute('onclick')||'';
+    navMap.forEach(function(m){
+      if(oc.indexOf(m[0])>=0){n.textContent = m[1]+' '+m[2];}
+    });
+  });
+  // Drive link
+  document.querySelectorAll('.NI').forEach(function(n){
+    if(n.getAttribute('onclick')&&n.getAttribute('onclick').indexOf('drive.google.com')>=0){
+      n.textContent = '📁 '+T.drive;
+    }
+  });
+  // Active badge
+  var badge = document.querySelector('.SBBG');
+  if(badge) badge.textContent = '● '+T.activo;
+  // Lang buttons
+  document.getElementById('bES').style.opacity = l==='es'?'1':'.45';
+  document.getElementById('bPT').style.opacity = l==='pt'?'1':'.45';
+  // Section titles (update PT if main panels visible)
+  var titleMap = {
+    'S-dm': {es:'Catálogo de <span style="color:var(--b)">Tablas</span>', pt:'Catálogo de <span style="color:var(--b)">Tabelas</span>'},
+    'S-dash': {es:'Dashboards <span style="color:var(--b)">activos</span>', pt:'Dashboards <span style="color:var(--b)">ativos</span>'},
+    'S-man': {es:'Manuales y <span style="color:var(--b)">guías</span>', pt:'Manuais e <span style="color:var(--b)">guias</span>'},
+    'S-flujo': {es:'Flujo de <span style="color:var(--b)">Reclutamiento</span>', pt:'Fluxo de <span style="color:var(--b)">Recrutamento</span>'},
+    'S-acc': {es:'Control de <span style="color:var(--b)">Acceso</span>', pt:'Controle de <span style="color:var(--b)">Acesso</span>'},
+    'S-n8n': {es:'Flujos <span style="color:var(--b)">n8n</span>', pt:'Fluxos <span style="color:var(--b)">n8n</span>'},
+    'S-cfg': {es:'⚙️ <span style="color:var(--b)">Configuración</span>', pt:'⚙️ <span style="color:var(--b)">Configuração</span>'},
+    'S-faq': {es:'❓ <span style="color:var(--b)">FAQ</span>', pt:'❓ <span style="color:var(--b)">FAQ</span>'},
+  };
+  Object.keys(titleMap).forEach(function(id){
+    var sec = document.getElementById(id);
+    if(sec){
+      var pt = sec.querySelector('.PT');
+      if(pt) pt.innerHTML = titleMap[id][l];
+    }
+  });
+  toast(l==='es'?'Idioma: Español':'Idioma: Português (BR)');
+}
+window.setLang = setLang;
+
+// ── THEME / LANG ──
+function setTheme(t){
+  var r=document.documentElement;
+  if(t==='light'){
+    r.style.setProperty('--dk','#F0F4FA');
+    r.style.setProperty('--t1','#0D1B2E');
+    r.style.setProperty('--t2','#2A4060');
+    r.style.setProperty('--t3','#4A6080');
+    r.style.setProperty('--bdr','rgba(52,131,250,.25)');
+    document.getElementById('P').style.background='#F0F4FA';
+    document.getElementById('P').style.color='#0D1B2E';
+    document.querySelectorAll('.SEC').forEach(function(s){s.style.background='#EEF2FA';});
+    document.querySelector('.SB').style.background='#E0E8F5';
+    document.querySelector('.MA').style.background='#EEF2FA';
+  } else {
+    r.style.setProperty('--dk','#020818');
+    r.style.setProperty('--t1','#E8EAED');
+    r.style.setProperty('--t2','#7A90A8');
+    r.style.setProperty('--t3','#3A5070');
+    r.style.setProperty('--bdr','rgba(52,131,250,.18)');
+    document.getElementById('P').style.background='#020818';
+    document.getElementById('P').style.color='#E8EAED';
+    document.querySelectorAll('.SEC').forEach(function(s){s.style.background='#020818';});
+    document.querySelector('.SB').style.background='rgba(2,5,16,.97)';
+    document.querySelector('.MA').style.background='#020818';
+  }
+  // Update config buttons state
+  var bd=document.getElementById('cfgBDK');
+  var bl=document.getElementById('cfgBLT');
+  if(bd){bd.style.background=t==='dark'?'rgba(52,131,250,.15)':'transparent';bd.style.color=t==='dark'?'var(--b)':'var(--t3)';}
+  if(bl){bl.style.background=t==='light'?'rgba(52,131,250,.15)':'transparent';bl.style.color=t==='light'?'var(--b)':'var(--t3)';}
+  toast('Tema: '+(t==='light'?'☀️ Claro':'🌙 Oscuro'));
+}
+window.setTheme=setTheme;
+
+// ── INIT ──
+function initPortal(){
+  buildGrid();
+  popDM();popDash();popMan();popFlujo();popAcc();popN8n();popCfg();popFAQ();
+}
+</script>
+</body>
+</html>
